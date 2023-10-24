@@ -2,7 +2,7 @@ package Command;/* Help command
  */
 
 import java.util.Arrays;
-
+import Context.Context;
 public class CommandHelp extends BaseCommand implements Command {
   Registry registry;
   

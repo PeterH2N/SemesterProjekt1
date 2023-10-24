@@ -1,6 +1,6 @@
 package Command;/* Command.Command for transitioning between spaces
  */
-
+import Context.Context;
 public class CommandGo extends BaseCommand implements Command {
   public CommandGo() {
     description = "Follow an exit";
