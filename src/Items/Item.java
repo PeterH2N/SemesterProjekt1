@@ -7,7 +7,7 @@ public class Item extends Entity
     static
     {
         Material.init();
-        WasteItemType.init();
+        WasteType.init();
     }
 
     protected String name;

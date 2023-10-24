@@ -18,7 +18,7 @@ public class WasteItem extends Item
     {
         super(64, pos);
         this.wasteItemTypeKey = wasteItemTypeKey;
-        WasteItemType wt = WasteItemType.getType(wasteItemTypeKey);
+        WasteType wt = WasteType.getType(wasteItemTypeKey);
         name = wt.name;
         description = wt.description;
     }
@@ -35,18 +35,18 @@ public class WasteItem extends Item
 
     String getMaterialName()
     {
-        return WasteItemType.getType(wasteItemTypeKey).material().name;
+        return WasteType.getType(wasteItemTypeKey).material().name;
     }
 }
 
-class WasteItemType
+class WasteType
 {
     String name;
     String description;
     String materialKey;
     double volume;
 
-    WasteItemType(String name, String description, String materialKey, double volume)
+    WasteType(String name, String description, String materialKey, double volume)
     {
         this.name = name;
         this.description = description;
@@ -69,9 +69,9 @@ class WasteItemType
         return (int) ((double) material().pricePerKg * getWeight());
     }
 
-    static Map<String, WasteItemType> wasteItemTypes;
+    static Map<String, WasteType> wasteItemTypes;
 
-    static WasteItemType getType(String key)
+    static WasteType getType(String key)
     {
         return wasteItemTypes.get(key);
     }
@@ -81,9 +81,9 @@ class WasteItemType
         try
         {
             Gson gson = new Gson();
-            Path filePath = Path.of(Globals.JSONpath + "wasteItemTypes.json");
+            Path filePath = Path.of(Globals.JSONpath + "wasteTypes.json");
             String json = Files.readString(filePath);
-            wasteItemTypes = gson.fromJson(json, new TypeToken<HashMap<String, WasteItemType>>(){}.getType());
+            wasteItemTypes = gson.fromJson(json, new TypeToken<HashMap<String, WasteType>>(){}.getType());
         }
         catch (Exception e) {e.printStackTrace();}
     }

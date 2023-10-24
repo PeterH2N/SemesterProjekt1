@@ -4,32 +4,38 @@
 import Command.*;
 import Context.Context;
 import World.World;
+import Items.*;
 
 import java.util.Scanner;
 
 class Game {
-  static World    world    = new World();
-  static Context context  = new Context(world.getEntry());
+  //static World    world    = new World();
+  static Context context  = new Context();
   static Command fallback = new CommandUnknown();
   static Registry registry = new Registry(context, fallback);
   static Scanner  scanner  = new Scanner(System.in);
   
   private static void initRegistry () {
-    Command cmdExit = new CommandExit();
-    registry.register("exit", cmdExit);
-    registry.register("quit", cmdExit);
-    registry.register("bye", cmdExit);
-    registry.register("go", new CommandGo());
+    registry.register("quit", new CommandExit());
+    registry.register("goto", new CommandGoTo());
+    registry.register("ascend", new CommandAscend());
+    registry.register("descend", new CommandDescend());
+    registry.register("show", new CommandShow());
+    registry.register("buy", new CommandBuy());
+    registry.register("sell", new CommandSell());
+    registry.register("smelt", new CommandSmelt());
+    registry.register("upgrade", new CommandUpgrade());
     registry.register("help", new CommandHelp(registry));
   }
   
-  public static void main (String args[]) {
+  public static void main (String[] args) {
+    Item item = new WasteItem("Glass Bottle");
+    System.out.println(item.getDescription());
     System.out.println("Welcome to the World.World of Zuul!");
     
     initRegistry();
-    context.getCurrent().welcome();
     
-    while (context.isDone()==false) {
+    while (!context.isDone()) {
       System.out.print("> ");
       String line = scanner.nextLine();
       registry.dispatch(line);
