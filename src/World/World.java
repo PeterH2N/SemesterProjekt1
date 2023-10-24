@@ -1,10 +1,10 @@
-/* World class for modeling the entire in-game world
+package World;/* World.World class for modeling the entire in-game world
  */
 
-class World {
+public class World {
   Space entry;
   
-  World () {
+  public World () {
     Space entry    = new Space("Entry");
     Space corridor = new Space("Corridor");
     Space cave     = new Space("Cave");
@@ -21,7 +21,7 @@ class World {
     this.entry = entry;
   }
   
-  Space getEntry () {
+  public Space getEntry() {
     return entry;
   }
 }

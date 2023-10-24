@@ -1,12 +1,12 @@
-/* Help command
+package Command;/* Help command
  */
 
 import java.util.Arrays;
 
-class CommandHelp extends BaseCommand implements Command {
+public class CommandHelp extends BaseCommand implements Command {
   Registry registry;
   
-  CommandHelp (Registry registry) {
+  public CommandHelp(Registry registry) {
     this.registry = registry;
     this.description = "Display a help message";
   }

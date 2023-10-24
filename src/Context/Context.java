@@ -1,11 +1,12 @@
-/* Context class to hold all context relevant to a session.
+package Context;/* Context.Context class to hold all context relevant to a session.
  */
+import World.*;
 
-class Context {
+public class Context {
   Space current;
   boolean done = false;
   
-  Context (Space node) {
+  public Context(Space node) {
     current = node;
   }
   

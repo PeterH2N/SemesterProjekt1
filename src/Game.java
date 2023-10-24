@@ -1,12 +1,16 @@
 /* Main class for launching the game
  */
 
+import Command.*;
+import Context.Context;
+import World.World;
+
 import java.util.Scanner;
 
 class Game {
   static World    world    = new World();
-  static Context  context  = new Context(world.getEntry());
-  static Command  fallback = new CommandUnknown();
+  static Context context  = new Context(world.getEntry());
+  static Command fallback = new CommandUnknown();
   static Registry registry = new Registry(context, fallback);
   static Scanner  scanner  = new Scanner(System.in);
   
@@ -20,7 +24,7 @@ class Game {
   }
   
   public static void main (String args[]) {
-    System.out.println("Welcome to the World of Zuul!");
+    System.out.println("Welcome to the World.World of Zuul!");
     
     initRegistry();
     context.getCurrent().welcome();

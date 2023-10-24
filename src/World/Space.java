@@ -1,9 +1,9 @@
-/* Space class for modeling spaces (rooms, caves, ...)
+package World;/* World.Space class for modeling spaces (rooms, caves, ...)
  */
 
 import java.util.Set;
 
-class Space extends Node {
+public class Space extends Node {
   Space (String name) {
     super(name);
   }

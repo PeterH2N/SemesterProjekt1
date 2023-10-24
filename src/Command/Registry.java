@@ -1,15 +1,18 @@
-/* Command registry
+package Command;/* Command.Command registry
  */
+
+import Command.Command;
+import Context.Context;
 
 import java.util.HashMap;
 import java.util.Map;
 
-class Registry {
+public class Registry {
   Context context;
   Command fallback;
   Map<String, Command> commands = new HashMap<String, Command>();
   
-  Registry (Context context, Command fallback) {
+  public Registry(Context context, Command fallback) {
     this.context = context;
     this.fallback = fallback;
   }

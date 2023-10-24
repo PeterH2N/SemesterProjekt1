@@ -1,4 +1,4 @@
-/* Node class for modeling graphs
+package World;/* World.Node class for modeling graphs
  */
 
 import java.util.HashMap;
