@@ -9,37 +9,37 @@ import Items.*;
 import java.util.Scanner;
 
 class Game {
-  //static World    world    = new World();
-  static Context context  = new Context();
-  static Command fallback = new CommandUnknown();
-  static Registry registry = new Registry(context, fallback);
-  static Scanner  scanner  = new Scanner(System.in);
-  
-  private static void initRegistry () {
-    registry.register("quit", new CommandExit());
-    registry.register("goto", new CommandGoTo());
-    registry.register("ascend", new CommandAscend());
-    registry.register("descend", new CommandDescend());
-    registry.register("show", new CommandShow());
-    registry.register("buy", new CommandBuy());
-    registry.register("sell", new CommandSell());
-    registry.register("smelt", new CommandSmelt());
-    registry.register("upgrade", new CommandUpgrade());
-    registry.register("help", new CommandHelp(registry));
-  }
-  
-  public static void main (String[] args) {
-    Item item = new WasteItem("Glass Bottle");
-    System.out.println(item.getDescription());
-    System.out.println("Welcome to the World.World of Zuul!");
-    
-    initRegistry();
-    
-    while (!context.isDone()) {
-      System.out.print("> ");
-      String line = scanner.nextLine();
-      registry.dispatch(line);
+    //static World    world    = new World();
+    static Context context = new Context();
+    static Command fallback = new CommandUnknown();
+    static Registry registry = new Registry(context, fallback);
+    static Scanner scanner = new Scanner(System.in);
+
+    private static void initRegistry() {
+        registry.register("quit", new CommandExit());
+        registry.register("goto", new CommandGoTo());
+        registry.register("ascend", new CommandAscend());
+        registry.register("descend", new CommandDescend());
+        registry.register("show", new CommandShow());
+        registry.register("buy", new CommandBuy());
+        registry.register("sell", new CommandSell());
+        registry.register("smelt", new CommandSmelt());
+        registry.register("upgrade", new CommandUpgrade());
+        registry.register("help", new CommandHelp(registry));
     }
-    System.out.println("Game Over 😥");
-  }
+
+    public static void main(String[] args) {
+        Item item = new WasteItem("Glass Bottle");
+        System.out.println(item.getDescription());
+        System.out.println("Welcome to the World.World of Zuul!");
+
+        initRegistry();
+
+        while (!context.isDone()) {
+            System.out.print("> ");
+            String line = scanner.nextLine();
+            registry.dispatch(line);
+        }
+        System.out.println("Game Over 😥");
+    }
 }

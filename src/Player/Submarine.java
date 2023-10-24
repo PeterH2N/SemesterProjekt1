@@ -2,8 +2,7 @@ package Player;
 
 import Entity.*;
 
-public class Submarine extends Entity
-{
+public class Submarine extends Entity {
     Inventory inventory;
     double fuel;
     double oxygen;
@@ -12,68 +11,59 @@ public class Submarine extends Entity
     int oxygenCapacityLevel = 0;
     int pickupRadiusLevel = 0;
     int inventoryCapacityLevel = 0;
-    Submarine()
-    {
+
+    Submarine() {
         super(new Point(0, 0));
         fuel = UpgradeState.fuelUpgrades[fuelCapacityLevel];
         oxygen = UpgradeState.oxygenUpgrades[oxygenCapacityLevel];
         inventory = new Inventory(UpgradeState.inventoryUpgrades[inventoryCapacityLevel]);
     }
 
-    public int upgradeInventorylevel()
-    {
+    public int upgradeInventorylevel() {
         return ++inventoryCapacityLevel;
     }
-    public int upgradeFuelLevel()
-    {
+
+    public int upgradeFuelLevel() {
         return ++fuelCapacityLevel;
     }
 
-    public int upgradeOxygenLevel()
-    {
+    public int upgradeOxygenLevel() {
         return ++oxygenCapacityLevel;
     }
 
-    public int upgradePickupRadius()
-    {
+    public int upgradePickupRadius() {
         return ++pickupRadiusLevel;
     }
 
-    int getInventoryCapacity()
-    {
+    int getInventoryCapacity() {
         return UpgradeState.inventoryUpgrades[inventoryCapacityLevel];
     }
-    double getFuelCapacity()
-    {
+
+    double getFuelCapacity() {
         return UpgradeState.fuelUpgrades[fuelCapacityLevel];
     }
 
-    double getOxygenCapacity()
-    {
+    double getOxygenCapacity() {
         return UpgradeState.oxygenUpgrades[oxygenCapacityLevel];
     }
 
-    double pickUpRadius()
-    {
+    double pickUpRadius() {
         return UpgradeState.pickupRadiusUpgrades[pickupRadiusLevel];
     }
 
     // picks up all the items in range, and adds them to inventory, unless inventory is full
-    void pickupItems()
-    {
+    void pickupItems() {
 
     }
 
     // moves the submarines and spends the fuel necessary
-    void moveTo(Point p)
-    {
+    void moveTo(Point p) {
 
     }
 
 }
 
-class UpgradeState
-{
+class UpgradeState {
     static int[] inventoryUpgrades = {6, 8, 10, 12, 14, 16};
     static double[] fuelUpgrades = {1000, 1200, 1400, 1600, 1800, 2000};
     static double[] oxygenUpgrades = {2000, 2500, 3000, 3500, 4000, 4500};

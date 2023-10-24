@@ -1,6 +1,5 @@
 package Items;
 
-public class MaterialItem
-{
+public class MaterialItem {
 
 }
