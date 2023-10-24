@@ -1,0 +1,38 @@
+{
+  "default": {
+    "name": "default",
+    "density": -1.0,
+    "pricePerKg": -1,
+    "decayTime": -1
+  },
+  "Glass": {
+    "name": "Glass",
+    "density": 2500.0,
+    "pricePerKg": 1000,
+    "decayTime": 500
+  },
+  "ALU": {
+    "name": "Aluminum",
+    "density": 2710.0,
+    "pricePerKg": 550,
+    "decayTime": 100
+  },
+  "PVC": {
+    "name": "Polyvinyl chloride",
+    "density": 1380.0,
+    "pricePerKg": 200,
+    "decayTime": 150
+  },
+  "PET": {
+    "name": "Polyethylene Terephthalate",
+    "density": 1370.0,
+    "pricePerKg": 150,
+    "decayTime": 100
+  },
+  "HDPE": {
+    "name": "High Density Polyethylene",
+    "density": 1500.0,
+    "pricePerKg": 100,
+    "decayTime": 200
+  }
+}

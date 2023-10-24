@@ -1,0 +1,32 @@
+{
+  "default": {
+    "name": "default",
+    "description": "default",
+    "materialKey": "default",
+    "volume": -1.0
+  },
+  "0.5 PET Bottle": {
+    "name": "0.5 PET Bottle",
+    "description": "Half litre Bottle for beverages",
+    "materialKey": "PET",
+    "volume": 1.3E-5
+  },
+  "Glass Bottle": {
+    "name": "Glass Bottle",
+    "description": "Half litre glass bottle for beverages",
+    "materialKey": "Glass",
+    "volume": 5.3E-5
+  },
+  "ALU Can": {
+    "name": "ALU Can",
+    "description": "Aluminum can for beverages",
+    "materialKey": "ALU",
+    "volume": 5.0E-6
+  },
+  "0.5 HDPE Bottle": {
+    "name": "0.5 HDPE Bottle",
+    "description": "Half litre HDPE Bottle for beverages",
+    "materialKey": "HDPE",
+    "volume": 1.3E-5
+  }
+}
