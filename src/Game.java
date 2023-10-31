@@ -29,9 +29,7 @@ class Game {
     }
 
     public static void main(String[] args) {
-        Item item = new WasteItem("Glass Bottle");
-        System.out.println(item.getDescription());
-        System.out.println("Welcome to the World.World of Zuul!");
+        System.out.println("Welcome to our game!");
 
         initRegistry();
 
