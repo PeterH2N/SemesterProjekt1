@@ -6,9 +6,9 @@ import Player.*;
 
 public class Context {
 
-    Player player;
+    public Player player = new Player();
 
-    World world;
+    public World world = new World();
     boolean done = false;
 
     public Context() {

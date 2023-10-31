@@ -1,9 +1,12 @@
 package Player;
 
 import Entity.*;
+import Items.Item;
+import World.*;
+import Globals.Globals;
 
 public class Submarine extends Entity {
-    Inventory inventory;
+    public Inventory inventory;
     double fuel;
     double oxygen;
 
@@ -11,6 +14,10 @@ public class Submarine extends Entity {
     int oxygenCapacityLevel = 0;
     int pickupRadiusLevel = 0;
     int inventoryCapacityLevel = 0;
+
+    int x = (Globals.worldSize / 2);
+    int y = (Globals.worldSize  / 2);
+    int z = 0;
 
     Submarine() {
         super(new Point(0, 0));
@@ -51,21 +58,79 @@ public class Submarine extends Entity {
         return UpgradeState.pickupRadiusUpgrades[pickupRadiusLevel];
     }
 
-    // picks up all the items in range, and adds them to inventory, unless inventory is full
-    void pickupItems() {
+    public double getFuelLevel() {
+        return fuel;
+    }
+    double getOxygenLevel() {
+        return oxygen;
+    }
 
+    // picks up all the items in range, and adds them to inventory, unless inventory is full
+    void pickupItems(Space space) {
+        for (int i = 0; i < space.entities.size(); i++) {
+            if (space.entities.get(i) instanceof Item) {
+                inventory.addItem((Item)space.entities.get(i));
+
+                space.entities.remove(i);
+                i--;
+            }
+
+        }
     }
 
     // moves the submarines and spends the fuel necessary
-    void moveTo(Point p) {
+    boolean move(String dir) {
+        if (dir.equals("east")) {
+            if (x >= Globals.worldSize - 1)
+                return false;
 
+            x++;
+            return true;
+        }
+        else if (dir.equals("west")) {
+            if (x <= 0)
+                return false;
+
+            x--;
+            return true;
+        }
+        if (dir.equals("north")) {
+            if (y <= 0)
+                return false;
+
+            y--;
+            return true;
+        }
+        else if (dir.equals("south")) {
+            if (y >= Globals.worldSize - 1)
+                return false;
+
+            y++;
+            return true;
+        }
+        if (dir.equals("down")) {
+            if (z >= Globals.layers - 1)
+                return false;
+
+            z++;
+            return true;
+        }
+        else if (dir.equals("up")) {
+            if (z <= 0)
+                return false;
+
+            z--;
+            return true;
+        }
+
+        return false;
     }
 
 }
 
 class UpgradeState {
     static int[] inventoryUpgrades = {6, 8, 10, 12, 14, 16};
-    static double[] fuelUpgrades = {1000, 1200, 1400, 1600, 1800, 2000};
+    static double[] fuelUpgrades = {100, 120, 140, 160, 180, 200};
     static double[] oxygenUpgrades = {2000, 2500, 3000, 3500, 4000, 4500};
     static double[] pickupRadiusUpgrades = {0.5, 0.75, 1.0, 1.25, 1.5, 1.75};
 }

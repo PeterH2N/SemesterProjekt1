@@ -1,13 +1,14 @@
 package Player;
 
-import Entity.Point;
+import Globals.Globals;
+import World.*;
 
 public class Player {
-    Submarine sub = new Submarine();
+    public Submarine sub = new Submarine();
 
     int balance = 0; // in cents
 
-    Player() {
+    public Player() {
         balance = 10000; // 100 dollars
     }
 
@@ -19,11 +20,31 @@ public class Player {
         return (balance -= m);
     }
 
-    void moveTo(Point p) {
-        sub.moveTo(p);
+    public boolean move(String dir) {
+        if (sub.move(dir)) {
+            sub.fuel -= Globals.fuelConsumptionPerMove;
+            return true;
+        }
+         return false;
     }
 
-    void pickup() {
-        sub.pickupItems();
+    public void pickUp(Space space) {
+        sub.pickupItems(space);
+        sub.fuel -= Globals.fuelConsumptionPerPickUp;
+    }
+
+    public int[] getPosition() {
+        int[] p = new int[3];
+        p[0] = sub.x;
+        p[1] = sub.y;
+        p[2] = sub.z;
+
+        return p;
+    }
+
+    public void printPosition()
+    {
+        System.out.println("Position: (" + sub.x + "," + sub.y + ")");
+        System.out.println("Layer: " + sub.z);
     }
 }

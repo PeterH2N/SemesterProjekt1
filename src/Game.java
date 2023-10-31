@@ -3,8 +3,6 @@
 
 import Command.*;
 import Context.Context;
-import World.World;
-import Items.*;
 
 import java.util.Scanner;
 
@@ -17,15 +15,15 @@ class Game {
 
     private static void initRegistry() {
         registry.register("quit", new CommandExit());
-        registry.register("goto", new CommandGoTo());
-        registry.register("ascend", new CommandAscend());
-        registry.register("descend", new CommandDescend());
+        registry.register("go", new CommandGo());
         registry.register("show", new CommandShow());
         registry.register("buy", new CommandBuy());
         registry.register("sell", new CommandSell());
         registry.register("smelt", new CommandSmelt());
         registry.register("upgrade", new CommandUpgrade());
+        registry.register("pickup", new CommandPickUp());
         registry.register("help", new CommandHelp(registry));
+
     }
 
     public static void main(String[] args) {
