@@ -8,3 +8,5 @@ Der er blevet lavet en masse tomme funktioner efter manjana princippet, så vi n
 ### Hele gruppen
 I dag har vi implementeret world, og har lavet en spiller som kan bevæge sig, og samle skrald op.
 Vi kan også display inventory og brændstof niveau.
+### Peter
+Gået i gang med at implementere terræn, men det er lidt problemer

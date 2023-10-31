@@ -79,48 +79,54 @@ public class Submarine extends Entity {
     }
 
     // moves the submarines and spends the fuel necessary
-    boolean move(String dir) {
+    boolean move(String dir, World world) {
         if (dir.equals("east")) {
             if (x >= Globals.worldSize - 1)
                 return false;
-
-            x++;
-            return true;
+            if (world.map[y][x+1][z].available) {
+                x++;
+                return true;
+            }
         }
         else if (dir.equals("west")) {
             if (x <= 0)
                 return false;
-
-            x--;
-            return true;
+            if (world.map[y][x-1][z].available) {
+                x--;
+                return true;
+            }
         }
         if (dir.equals("north")) {
             if (y <= 0)
                 return false;
-
-            y--;
-            return true;
+            if (world.map[y-1][x][z].available) {
+                y--;
+                return true;
+            }
         }
         else if (dir.equals("south")) {
             if (y >= Globals.worldSize - 1)
                 return false;
-
-            y++;
-            return true;
+            if (world.map[y+1][x][z].available) {
+                y++;
+                return true;
+            }
         }
         if (dir.equals("down")) {
             if (z >= Globals.layers - 1)
                 return false;
-
-            z++;
-            return true;
+            if (world.map[y][x][z+1].available) {
+                z++;
+                return true;
+            }
         }
         else if (dir.equals("up")) {
             if (z <= 0)
                 return false;
-
-            z--;
-            return true;
+            if (world.map[y][x][z-1].available) {
+                z--;
+                return true;
+            }
         }
 
         return false;

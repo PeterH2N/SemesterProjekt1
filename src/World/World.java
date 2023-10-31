@@ -2,12 +2,11 @@ package World;
 /* World class for modeling the entire in-game world
  */
 
-import Entity.*;
 import Globals.Globals;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import MapGeneration.*;
 
 public class World {
 
@@ -26,16 +25,29 @@ public class World {
                     current.createWaste(amount);
                 }
 
-    }
-
-    // adds an entity to the world, and also appends the ID to the list of the appropriate tile.
-    void addEntity() {
+        setTerrain(MapGenerator.makeLayerImage(MapGenerator.makeNoiseImage(1, 1), "layer"));
 
     }
 
-    // creates an amount of wasteitems and places them randomly throughout the ocean. this should be done periodically
-    void createWaste(int amount) {
-
+    private void setTerrain(BufferedImage img) {
+        // this image contains the same amounts of shades of grey as layers in the world, that represent where the height of the terrain.
+        double increment = 1.0 / (double)Globals.layers;
+        for (int i = Globals.layers; i > 0; i--) {
+            float e = (float)increment * i;
+            Color color = new Color(e, e, e);
+            for (int y = 0; y < Globals.worldSize; y++) {
+                for (int x = 0; x < Globals.worldSize; x++) {
+                    // if the color matches the layer
+                    int rgb = img.getRGB(x, y);
+                    if (img.getRGB(x, y) == color.getRGB()) {
+                        // make the space, and all spaces underneath it unavailable
+                        for (int d = Globals.layers - i; d < Globals.layers; d++) {
+                            map[y][x][d].available = false;
+                        }
+                    }
+                }
+            }
+        }
     }
 
 }
