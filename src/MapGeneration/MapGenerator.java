@@ -21,6 +21,9 @@ public class MapGenerator
     static double amp1 = 1.5;
     static double amp2 = 0.25;
     static double amp3 = 0.125;
+
+    public static Color[] layerColor = new Color[Globals.layers + 1];
+    static double increment;
     static double noise(double xin, double yin) {
         return (SimplexNoise.noise(xin, yin) + 1.0) * 0.5;
     }
@@ -53,7 +56,6 @@ public class MapGenerator
                 n /= (amp1 + amp2 + amp3);
                 //n = Math.pow(n, 1);
                 float e = (float)n;
-                //e = (float)Math.pow(n, 0.5);
                 Color color = new Color(e, e, e);
                 temp.setRGB(x - xStart * width, y - yStart * height, color.getRGB());
             }
@@ -69,36 +71,54 @@ public class MapGenerator
         return temp;
     }
 
+    static void setLayerColors(BufferedImage img) {
+        int highest = 0;
+        int lowest = 255;
+        // get highest and lowest greyscale value in image
+        for (int y = 0; y < img.getHeight(); y++) {
+            for (int x = 0; x < img.getWidth(); x++) {
+                int c = -img.getRGB(x, y) >> 16;
+                highest = Math.max(c, highest);
+                lowest = Math.min(c, lowest);
+            }
+        }
+
+        // adjustments
+        highest -= 10;
+        lowest += 5;
+
+        int layers = Globals.layers + 1;
+        increment = (double)(highest - lowest) / (double)(layers - 1);
+
+        for (int i = layerColor.length - 1; i >= 0; i--) {
+            int c = (int)(lowest + increment * i);
+            layerColor[i] = new Color(c, c, c);
+        }
+    }
     static public BufferedImage makeLayerImage(BufferedImage img, String path) {
         if (img.getHeight() != Globals.worldSize || img.getWidth() != Globals.worldSize) {
             System.out.println("Image not of correct size!");
             return null;
         }
 
+        setLayerColors(img);
         BufferedImage tmp = new BufferedImage(Globals.worldSize, Globals.worldSize, BufferedImage.TYPE_INT_RGB);
-        double increment = 1.0 / (double)Globals.layers;
-        double lastInc = 0;
-        double inc = 0;
 
-        for (int i = 0; i <= Globals.layers; i++) {
-            inc  = increment * (i+1);
-            // loop through pixels in image
-            for (int y = 0; y < img.getHeight(); y++) {
-                for (int x = 0;  x < img.getWidth(); x++) {
-                    int rgb = img.getRGB(x, y);
-                    int r = -rgb >> 16;
-                    float e = (float)r / 255.0f;
-                    // now we clamp the elevation
-                    if (e > lastInc && e < inc) {
-                        e = 1.0f - (float)lastInc;
-                        Color color = new Color(e, e, e);
-                        tmp.setRGB(x, y, color.getRGB());
-                    }
+         // loop through pixels in image
+         for (int y = 0; y < img.getHeight(); y++) {
+             for (int x = 0;  x < img.getWidth(); x++) {
+                 for (Color lc : layerColor) {
+                     int ic = -img.getRGB(x, y) >> 16;
+                     int ilc = -lc.getRGB() >> 16;
+                     if (Math.abs(ic - ilc) < increment) {
+                         tmp.setRGB(x, y, lc.getRGB());
+                         break;
+                     }
+                 }
+             }
+         }
 
-                }
-            }
-            lastInc = inc;
-        }
+
 
         File of = new File(Globals.MapGenPath + "/images/" + path + ".png");
         try {

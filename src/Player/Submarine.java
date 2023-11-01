@@ -27,7 +27,9 @@ public class Submarine extends Entity {
     }
 
     public int upgradeInventorylevel() {
-        return ++inventoryCapacityLevel;
+        inventoryCapacityLevel++;
+        inventory.increaseCapacity(getInventoryCapacity());
+        return inventoryCapacityLevel;
     }
 
     public int upgradeFuelLevel() {

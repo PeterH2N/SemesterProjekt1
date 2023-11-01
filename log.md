@@ -10,3 +10,6 @@ I dag har vi implementeret world, og har lavet en spiller som kan bevæge sig, o
 Vi kan også display inventory og brændstof niveau.
 ### Peter
 Gået i gang med at implementere terræn, men det er lidt problemer
+## 01-11-23
+### Peter
+Terræn generation virker nu, også når man ændrer i worldsize eller mængde lag

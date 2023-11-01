@@ -19,31 +19,40 @@ public class World {
             for (int j = 0; j < Globals.worldSize; j++)
                 for (int k = 0; k < Globals.layers; k++) {
                     map[i][j][k] = new Space(true);
-                    Space current =  map[i][j][k];
-                    // place waste items inside space
-                    int amount = (int)(Math.random() * 10/*between 0 and 9*/);
-                    current.createWaste(amount);
+
                 }
 
-        setTerrain(MapGenerator.makeLayerImage(MapGenerator.makeNoiseImage(1, 1), "layer"));
+        setTerrain(MapGenerator.makeLayerImage(MapGenerator.makeNoiseImage(3, 7), "layer1"));
+        createWaste(10);
 
+    }
+
+    void createWaste(int maxPerSpace) {
+        for (int i = 0; i < Globals.worldSize; i++)
+            for (int j = 0; j < Globals.worldSize; j++)
+                for (int k = 0; k < Globals.layers; k++) {
+                    Space current =  map[i][j][k];
+                    // place waste items inside space
+                    if (current.available) {
+                        int amount = (int) (Math.random() * (maxPerSpace + 1));
+                        current.createWaste(amount);
+                    }
+                }
     }
 
     private void setTerrain(BufferedImage img) {
         // this image contains the same amounts of shades of grey as layers in the world, that represent where the height of the terrain.
-        double increment = 1.0 / (double)Globals.layers;
-        for (int i = Globals.layers; i > 0; i--) {
-            float e = (float)increment * i;
-            Color color = new Color(e, e, e);
-            for (int y = 0; y < Globals.worldSize; y++) {
-                for (int x = 0; x < Globals.worldSize; x++) {
-                    // if the color matches the layer
-                    int rgb = img.getRGB(x, y);
-                    if (img.getRGB(x, y) == color.getRGB()) {
-                        // make the space, and all spaces underneath it unavailable
-                        for (int d = Globals.layers - i; d < Globals.layers; d++) {
-                            map[y][x][d].available = false;
+
+        for (int y = 0; y < Globals.worldSize; y++) {
+            for (int x = 0; x < Globals.worldSize; x++) {
+                // if the color matches the layer
+                for (int l = 0; l < Globals.layers; l++) {
+                    if (img.getRGB(x, y) == MapGenerator.layerColor[l].getRGB()) {
+                        // set this layer and all under it to unavailable
+                        for (int i = l; i < Globals.layers; i++) {
+                            map[y][x][i].available = false;
                         }
+                        break;
                     }
                 }
             }
