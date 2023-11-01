@@ -1,7 +1,6 @@
 package Player;
 
 import Items.Item;
-import Items.WasteItem;
 
 public class Inventory {
     InventorySlot[] slots;
@@ -74,8 +73,15 @@ public class Inventory {
     public int addItem(Item item) {
         return addItem(item, 1);
     }
-}
 
+    public Item getItem(int i){
+        return slots[i].item;
+    }
+
+    public int getInventoryCapacity(){
+        return slots.length;
+    }
+}
 class InventorySlot {
     Item item;
     int amount;

@@ -36,6 +36,10 @@ public class WasteItem extends Item {
     String getMaterialName() {
         return WasteType.getType(wasteItemTypeKey).material().name;
     }
+
+    public String getWasteItemInfo(){
+        return  WasteType.getType(wasteItemTypeKey).getInfo();
+    }
 }
 
 

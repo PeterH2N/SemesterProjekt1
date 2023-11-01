@@ -22,7 +22,9 @@ class Game {
         registry.register("smelt", new CommandSmelt());
         registry.register("upgrade", new CommandUpgrade());
         registry.register("pickup", new CommandPickUp());
+        registry.register("info", new CommandInfo());
         registry.register("help", new CommandHelp(registry));
+
 
     }
 
