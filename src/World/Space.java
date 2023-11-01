@@ -1,4 +1,5 @@
 package World;
+import Buildings.WorkShop;
 import Entity.*;
 import Items.*;
 
@@ -31,4 +32,10 @@ public class Space
         }
 
     }
+    void createWorkShop(){
+        Entity w = new WorkShop();
+        entities.add(w);
+    }
+
+
 }
