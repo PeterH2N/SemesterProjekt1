@@ -25,6 +25,9 @@ public class World {
         setTerrain(MapGenerator.makeLayerImage(MapGenerator.makeNoiseImage(3, 7), "layer1"));
         createWaste(10);
 
+        // make terrain
+        
+
     }
 
     void createWaste(int maxPerSpace) {
