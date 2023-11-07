@@ -15,19 +15,21 @@ public class World {
 
     public World() {
         // init all spaces
-        for (int i = 0; i < Globals.worldSize; i++)
-            for (int j = 0; j < Globals.worldSize; j++)
+        for (int i = 0; i < Globals.worldSize; i++) {
+            for (int j = 0; j < Globals.worldSize; j++) {
                 for (int k = 0; k < Globals.layers; k++) {
                     map[i][j][k] = new Space(true);
 
                 }
-
-        setTerrain(MapGenerator.makeLayerImage(MapGenerator.makeNoiseImage(0, 0), "layer1"));
-        createWaste(10);
+            }
+        }
 
         // make terrain
-        
+        //setTerrain(MapGenerator.makeLayerImage(MapGenerator.makeNoiseImage(0, 0), "layer1"));
+        createWaste(10);
 
+        Space spawn = map[Globals.worldSize / 2][Globals.worldSize / 2][0];
+        spawn.createWorkShop();
     }
 
     void createWaste(int maxPerSpace) {
