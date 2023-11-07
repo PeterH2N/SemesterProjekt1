@@ -2,18 +2,6 @@ package Items;
 
 import Entity.Point;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import Globals.Globals;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.nio.file.Files;
-import java.nio.file.Path;
-
 public class WasteItem extends Item {
     String wasteItemTypeKey;
 
@@ -33,8 +21,8 @@ public class WasteItem extends Item {
         this("default", new Point());
     }
 
-    String getMaterialName() {
-        return WasteType.getType(wasteItemTypeKey).material().name;
+    String getMaterialKey() {
+        return WasteType.getType(wasteItemTypeKey).materialKey;
     }
 }
 
