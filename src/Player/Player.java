@@ -44,8 +44,7 @@ public class Player {
 
     public void printPosition()
     {
-        System.out.println("Position: (" + sub.x + "," + sub.y + ")");
-        System.out.println("Layer: " + sub.z);
+        System.out.println("(" + sub.x + "," + sub.y + "), Layer " + sub.z);
     }
 
 }

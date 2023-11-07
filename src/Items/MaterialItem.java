@@ -1,11 +1,12 @@
 package Items;
 import Entity.Point;
+import Globals.Globals;
 
 public class MaterialItem extends Item {
     String materialKey;
 
     public MaterialItem(String materialKey, Point pos) {
-        super(5, pos);
+        super(Globals.defaultItemStackSize, pos);
         this.materialKey = materialKey;
         Material mat = Material.materials.get(materialKey);
         this.name = mat.name;

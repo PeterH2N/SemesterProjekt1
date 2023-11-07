@@ -1,12 +1,13 @@
 package Items;
 
 import Entity.Point;
+import Globals.Globals;
 
 public class WasteItem extends Item {
     String wasteTypeKey;
 
     public WasteItem(String wasteItemTypeKey, Point pos) {
-        super(5, pos);
+        super(Globals.defaultItemStackSize, pos);
         this.wasteTypeKey = wasteItemTypeKey;
         WasteType wt = WasteType.getType(wasteItemTypeKey);
         name = wt.name;

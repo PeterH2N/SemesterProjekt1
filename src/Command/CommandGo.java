@@ -1,6 +1,12 @@
 package Command;
 
+import Buildings.Building;
 import Context.Context;
+import Entity.Entity;
+import Items.Item;
+import World.Space;
+
+import java.util.ArrayList;
 
 public class CommandGo extends BaseCommand implements Command {
 
@@ -15,15 +21,30 @@ public class CommandGo extends BaseCommand implements Command {
             return;
         }
         if (context.player.move(parameters[0], context.world)) {
-            System.out.println("Moved to");
+            System.out.print("Moved to ");
             context.player.printPosition();
         }
         else
             System.out.println("Could not move " + parameters[0]);
         // after having moved, we print the number of items in the space
-        int[] p = context.player.getPosition();
-        int wasteAmount = context.world.map[p[1]][p[0]][p[2]].entities.size(); // todo: subtract entities that are not items
-        System.out.println("There are " + wasteAmount + " pieces of waste here");
+        Space current = context.getCurrentSpace();
+        int itemAmount = 0;
+        ArrayList<Building> buildings = new ArrayList<>();
+        for (Entity entity : current.entities) {
+            if (entity instanceof Item) {
+                itemAmount++;
+            }
+            if (entity instanceof Building) {
+                buildings.add((Building)entity);
+            }
+        }
+
+        System.out.println("\nThere are " + itemAmount + " items here");
+
+        // if the space contains a building, we print a description
+        for (Building building : buildings) {
+            System.out.println("There is a " + building.getName() + " here");
+        }
 
     }
 }

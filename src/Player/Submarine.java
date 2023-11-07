@@ -21,9 +21,9 @@ public class Submarine extends Entity {
 
     Submarine() {
         super(new Point(0, 0));
-        fuel = UpgradeState.fuelUpgrades[fuelCapacityLevel];
-        oxygen = UpgradeState.oxygenUpgrades[oxygenCapacityLevel];
-        inventory = new Inventory(UpgradeState.inventoryUpgrades[inventoryCapacityLevel]);
+        fuel = Globals.fuelUpgrades[fuelCapacityLevel];
+        oxygen = Globals.oxygenUpgrades[oxygenCapacityLevel];
+        inventory = new Inventory(Globals.inventoryUpgrades[inventoryCapacityLevel]);
     }
 
     public int upgradeInventorylevel() {
@@ -44,26 +44,34 @@ public class Submarine extends Entity {
         return ++pickupRadiusLevel;
     }
 
-    int getInventoryCapacity() {
-        return UpgradeState.inventoryUpgrades[inventoryCapacityLevel];
+    public int getInventoryCapacity() {
+        return Globals.inventoryUpgrades[inventoryCapacityLevel];
+    }
+    
+    public int getInventoryCapacityLevel() {
+        return inventoryCapacityLevel;
     }
 
-    double getFuelCapacity() {
-        return UpgradeState.fuelUpgrades[fuelCapacityLevel];
+    public double getFuelCapacity() {
+        return Globals.fuelUpgrades[fuelCapacityLevel];
+    }
+    
+    public int getFuelCapacityLevel() {
+        return fuelCapacityLevel;
     }
 
-    double getOxygenCapacity() {
-        return UpgradeState.oxygenUpgrades[oxygenCapacityLevel];
+    public double getOxygenCapacity() {
+        return Globals.oxygenUpgrades[oxygenCapacityLevel];
     }
 
-    double pickUpRadius() {
-        return UpgradeState.pickupRadiusUpgrades[pickupRadiusLevel];
+    public double getPickUpRadius() {
+        return Globals.pickupRadiusUpgrades[pickupRadiusLevel];
     }
 
-    public double getFuelLevel() {
+    public double getFuel() {
         return fuel;
     }
-    double getOxygenLevel() {
+    public double getOxygen() {
         return oxygen;
     }
 
@@ -71,10 +79,10 @@ public class Submarine extends Entity {
     void pickupItems(Space space) {
         for (int i = 0; i < space.entities.size(); i++) {
             if (space.entities.get(i) instanceof Item) {
-                inventory.addItem((Item)space.entities.get(i));
-
-                space.entities.remove(i);
-                i--;
+                if (inventory.addItem((Item)space.entities.get(i)) == 1) {
+                    space.entities.remove(i);
+                    i--;
+                }
             }
 
         }
@@ -139,11 +147,4 @@ public class Submarine extends Entity {
         return false;
     }
 
-}
-
-class UpgradeState {
-    static int[] inventoryUpgrades = {6, 8, 10, 12, 14, 16};
-    static double[] fuelUpgrades = {100, 120, 140, 160, 180, 200};
-    static double[] oxygenUpgrades = {2000, 2500, 3000, 3500, 4000, 4500};
-    static double[] pickupRadiusUpgrades = {0.5, 0.75, 1.0, 1.25, 1.5, 1.75};
 }
