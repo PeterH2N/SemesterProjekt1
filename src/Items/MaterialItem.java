@@ -4,7 +4,7 @@ import Entity.Point;
 public class MaterialItem extends Item {
     String materialKey;
 
-    MaterialItem(String materialKey, Point pos) {
+    public MaterialItem(String materialKey, Point pos) {
         super(5, pos);
         this.materialKey = materialKey;
         Material mat = Material.materials.get(materialKey);
@@ -13,11 +13,11 @@ public class MaterialItem extends Item {
 
     }
 
-    MaterialItem(String materialKey) {
+    public MaterialItem(String materialKey) {
         this(materialKey, new Point());
     }
 
-    MaterialItem() {
+    public MaterialItem() {
         this("default");
     }
 }

@@ -81,6 +81,8 @@ public class Inventory {
         ArrayList<Integer> indices = new ArrayList<>();
         int sumAmount = 0;
         for (int i = 0; i < slots.length; i++) {
+            if (slots[i]==null)
+                continue;
             Item slotItem = slots[i].item;
             int slotAmount = slots[i].amount;
             if (slotItem.getName().equals(itemName)) {
@@ -89,7 +91,7 @@ public class Inventory {
             }
         }
         if (sumAmount >= amount) {
-            for (int i = indices.size() - 1; i > 0; i--) {
+            for (int i = indices.size() - 1; i >= 0; i--) {
                 if (amount <= 0)
                     break;
 
@@ -97,7 +99,7 @@ public class Inventory {
                 slots[indices.get(i)].amount -= amount;
                 amount -= oldAmount;
                 if (slots[indices.get(i)].amount <= 0)
-                    slots[indices.get(i)] = new InventorySlot();
+                    slots[indices.get(i)] = null;
             }
             return true;
         }

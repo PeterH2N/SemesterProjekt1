@@ -25,7 +25,7 @@ public class World {
                     int amount = (int)(Math.random() * 10/*between 0 and 9*/);
                     current.createWaste(amount);
                 }
-        Space spawn = map[5][5][0];
+        Space spawn = map[Globals.worldSize/2][Globals.worldSize/2][0];
         spawn.createWorkShop();
 
     }

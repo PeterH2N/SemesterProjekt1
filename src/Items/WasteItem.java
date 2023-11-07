@@ -21,8 +21,12 @@ public class WasteItem extends Item {
         this("default", new Point());
     }
 
-    String getMaterialName() {
-        return WasteType.getType(wasteTypeKey).material().name;
+    public String getMaterialKey() {
+        return WasteType.getType(wasteTypeKey).materialKey;
+    }
+
+    String getWasteTypeKey() {
+        return wasteTypeKey;
     }
 }
 

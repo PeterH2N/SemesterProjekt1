@@ -3,13 +3,13 @@ package Buildings;
 import Entity.*;
 
 public class Building extends Entity {
-    String desription;
+    String description;
 
     public Building(String description) {
-        this.desription = desription;
+        this.description = this.description;
     }
-    public String getDesription(){
-        return desription;
+    public String getDescription(){
+        return description;
     }
 
 }
