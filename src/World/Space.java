@@ -10,7 +10,7 @@ public class Space
 {
     public ArrayList<Entity> entities = new ArrayList<>();
 
-    final boolean available;
+    public boolean available;
 
     Space(boolean a) {
         available = a;

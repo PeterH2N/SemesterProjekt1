@@ -26,7 +26,7 @@ class Material {
     static public void init() {
         try {
             Gson gson = new Gson();
-            Path filePath = Path.of(Globals.JSONpath + "materials.json");
+            Path filePath = Path.of(Globals.JSONPath + "materials.json");
             String json = Files.readString(filePath);
             materials = gson.fromJson(json, new TypeToken<HashMap<String, Material>>() {
             }.getType());

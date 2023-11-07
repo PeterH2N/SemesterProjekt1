@@ -20,8 +20,8 @@ public class Player {
         return (balance -= m);
     }
 
-    public boolean move(String dir) {
-        if (sub.move(dir)) {
+    public boolean move(String dir, World world) {
+        if (sub.move(dir, world)) {
             sub.fuel -= Globals.fuelConsumptionPerMove;
             return true;
         }

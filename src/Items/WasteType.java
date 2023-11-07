@@ -40,7 +40,7 @@ public class WasteType {
     static void init() {
         try {
             Gson gson = new Gson();
-            Path filePath = Path.of(Globals.JSONpath + "wasteTypes.json");
+            Path filePath = Path.of(Globals.JSONPath + "wasteTypes.json");
             String json = Files.readString(filePath);
             wasteTypes = gson.fromJson(json, new TypeToken<HashMap<String, WasteType>>() {
             }.getType());

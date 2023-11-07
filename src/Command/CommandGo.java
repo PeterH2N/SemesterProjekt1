@@ -14,7 +14,7 @@ public class CommandGo extends BaseCommand implements Command {
             System.out.println("Input is not a valid location");
             return;
         }
-        if (context.player.move(parameters[0])) {
+        if (context.player.move(parameters[0], context.world)) {
             System.out.println("Moved to");
             context.player.printPosition();
         }
