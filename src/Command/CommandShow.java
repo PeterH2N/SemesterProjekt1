@@ -21,7 +21,7 @@ public class CommandShow extends BaseCommand implements Command {
         }
         // fuel
         if (parameters[0].equals("fuel")) {
-            System.out.println("Fuel level: " + context.player.sub.getFuelLevel() + " litr");
+            System.out.println("Fuel level: " + context.player.sub.getFuel() + " / " + context.player.sub.getFuelCapacity() + " litres");
         }
 
     }

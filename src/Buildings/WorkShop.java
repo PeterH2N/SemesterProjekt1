@@ -1,5 +1,6 @@
 package Buildings;
 
+import Globals.Globals;
 import Items.Item;
 import Items.MaterialItem;
 import Items.WasteItem;
@@ -8,33 +9,55 @@ import Player.*;
 
 public class WorkShop extends Building {
     public WorkShop(){
-        super("This is a workshop");
+        super("This is a workshop", "Workshop");
     }
 
     public boolean upgradeInventoryCapacity(Player player){
-        for( int i = 0; i < player.sub.inventory.slots.length; i++){
-            Item item = player.sub.inventory.slots[i].item;
-            if(item.getName().equals("Glass")) {
-                if (player.sub.inventory.removeItem(item.getName(), 3)) {
-                    player.sub.upgradeInventorylevel();
-                    return true;
-                }
+        // check if we are fully upgraded
+        if (player.sub.getInventoryCapacityLevel() == Globals.inventoryUpgrades.length - 1) {
+            System.out.println("Inventory is already fully upgraded!");
+            return false;
+        }
+        // make sure we have all the items needed
+        for (int i = 0; i < Globals.inventoryUpgradeItemAmount.length; i++) {
+            if (!player.sub.inventory.containsItems(Globals.inventoryUpgradeItemName[i], Globals.inventoryUpgradeItemAmount[i][player.sub.getInventoryCapacityLevel()])) {
+                System.out.println("You dont have the required items!");
+                return false;
             }
         }
-        return false;
+        // now we remove the items
+        for (int i = 0; i < Globals.inventoryUpgradeItemName.length; i++) {
+            String itemName = Globals.inventoryUpgradeItemName[i];
+            int amount = Globals.inventoryUpgradeItemAmount[i][player.sub.getInventoryCapacityLevel()];
+            player.sub.inventory.removeItem(itemName, amount);
+        }
+        // lastly, we upgrade
+        player.sub.upgradeInventorylevel();
+        return true;
     }
 
     public boolean upgradeFuelCapacity(Player player) {
-        for (int i = 0; i < player.sub.inventory.slots.length; i++) {
-            Item item = player.sub.inventory.slots[i].item;
-            if (item.getName().equals("Aluminum")) {
-                if (player.sub.inventory.removeItem(item.getName(), 2)) {
-                    player.sub.upgradeFuelLevel();
-                    return true;
-                }
+        // check if already fully upgraded
+        if (player.sub.getFuelCapacityLevel() == Globals.fuelUpgrades.length - 1) {
+            System.out.println("Fuel capacity is already fully upgraded!");
+            return false;
+        }
+        // make sure we have all the items needed
+        for (int i = 0; i < Globals.fuelUpgradeItemName.length; i++) {
+            if (!player.sub.inventory.containsItems(Globals.fuelUpgradeItemName[i], Globals.fuelUpgradeItemAmount[i][player.sub.getFuelCapacityLevel()])) {
+                System.out.println("You dont have the required items!");
+                return false;
             }
         }
-        return false;
+        // now we remove the items
+        for (int i = 0; i < Globals.fuelUpgradeItemName.length; i++) {
+            String itemName = Globals.fuelUpgradeItemName[i];
+            int amount = Globals.fuelUpgradeItemAmount[i][player.sub.getFuelCapacityLevel()];
+            player.sub.inventory.removeItem(itemName, amount);
+        }
+        // lastly, we upgrade
+        player.sub.upgradeFuelLevel();
+        return true;
     }
     public boolean smelt(Player player, int itemSlot) {
         InventorySlot slot = player.sub.inventory.slots[itemSlot];

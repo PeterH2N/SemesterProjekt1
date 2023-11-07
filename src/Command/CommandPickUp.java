@@ -1,7 +1,12 @@
 package Command;
 
+import Buildings.Building;
 import Context.Context;
+import Entity.Entity;
+import Items.Item;
 import World.Space;
+
+import java.util.ArrayList;
 
 public class CommandPickUp extends BaseCommand implements Command
 {
@@ -17,9 +22,15 @@ public class CommandPickUp extends BaseCommand implements Command
             return;
         }
 
-        int[] pos = context.player.getPosition();
-        Space space = context.world.map[pos[1]][pos[0]][pos[2]];
-        context.player.pickUp(space);
-        System.out.println("There are " + space.entities.size() + " items left in this space");
+        Space current = context.getCurrentSpace();
+        context.player.pickUp(current);
+        int itemAmount = 0;
+        ArrayList<Building> buildings = new ArrayList<>();
+        for (Entity entity : current.entities) {
+            if (entity instanceof Item) {
+                itemAmount++;
+            }
+        }
+        System.out.println("There are " + itemAmount + " items here");
     }
 }

@@ -103,13 +103,19 @@ public class Inventory {
             }
             return true;
         }
-        else {
-            return false;
-        }
+        return false;
     }
 
-    public boolean containsItemKey(String key) {
-    return false;
+    public boolean containsItems(String name, int amount) {
+        int sumAmount = 0;
+        for (int i = 0; i < slots.length; i++) {
+            if (slots[i] == null)
+                continue;
+            if (slots[i].item.getName().equals(name)) {
+                sumAmount += slots[i].amount;
+            }
+        }
+        return sumAmount >= amount;
     }
 }
 
