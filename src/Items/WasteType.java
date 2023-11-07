@@ -19,6 +19,8 @@ public class WasteType {
     String materialKey;
     double volume;
 
+
+
     static
     {
         init();

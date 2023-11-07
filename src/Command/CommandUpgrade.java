@@ -5,7 +5,7 @@ import Context.Context;
 public class CommandUpgrade extends BaseCommand implements Command {
 
     public CommandUpgrade() {
-        description = ""; // add description
+        description = "Upgrade the submarine"; // add description
     }
 
     @Override

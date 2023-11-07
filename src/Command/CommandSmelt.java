@@ -10,10 +10,21 @@ public class CommandSmelt extends BaseCommand implements Command {
 
     @Override
     public void execute(Context context, String command, String[] parameters) {
+        // expected input parameters: Item material key, Item amount
         if (guardEq(parameters, 2)) {
-            System.out.println("Input is not a valid location");
+            System.out.println("Input is not valid");
             return;
         }
+        try {
+        if (context.player.sub.inventory.removeItem(parameters[0], Integer.parseInt(parameters[1]))){
 
+        }
+        } catch (NumberFormatException ex){
+            System.out.println("Input amount is not a number");
+        }
     }
+
+
+
+
 }

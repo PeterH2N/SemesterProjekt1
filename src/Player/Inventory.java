@@ -77,13 +77,13 @@ public class Inventory {
     }
 
     // return 1 if successful, -1 otherwise
-    public boolean removeItem(Item item, int amount) {
+    public boolean removeItem(String itemName, int amount) {
         ArrayList<Integer> indices = new ArrayList<>();
         int sumAmount = 0;
         for (int i = 0; i < slots.length; i++) {
             Item slotItem = slots[i].item;
             int slotAmount = slots[i].amount;
-            if (slotItem.getName().equals(item.getName())) {
+            if (slotItem.getName().equals(itemName)) {
                 sumAmount += slotAmount;
                 indices.add(i);
             }
@@ -104,6 +104,10 @@ public class Inventory {
         else {
             return false;
         }
+    }
+
+    public boolean containsItemKey(String key) {
+    return false;
     }
 }
 
