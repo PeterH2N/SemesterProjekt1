@@ -2,12 +2,11 @@ package World;
 /* World class for modeling the entire in-game world
  */
 
-import Entity.*;
 import Globals.Globals;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import MapGeneration.*;
 
 public class World {
 
@@ -20,24 +19,47 @@ public class World {
             for (int j = 0; j < Globals.worldSize; j++)
                 for (int k = 0; k < Globals.layers; k++) {
                     map[i][j][k] = new Space(true);
+
+                }
+
+        setTerrain(MapGenerator.makeLayerImage(MapGenerator.makeNoiseImage(0, 0), "layer1"));
+        createWaste(10);
+
+        // make terrain
+        
+
+    }
+
+    void createWaste(int maxPerSpace) {
+        for (int i = 0; i < Globals.worldSize; i++)
+            for (int j = 0; j < Globals.worldSize; j++)
+                for (int k = 0; k < Globals.layers; k++) {
                     Space current =  map[i][j][k];
                     // place waste items inside space
-                    int amount = (int)(Math.random() * 10/*between 0 and 9*/);
-                    current.createWaste(amount);
+                    if (current.available) {
+                        int amount = (int) (Math.random() * (maxPerSpace + 1));
+                        current.createWaste(amount);
+                    }
                 }
-        Space spawn = map[Globals.worldSize/2][Globals.worldSize/2][0];
-        spawn.createWorkShop();
-
     }
 
-    // adds an entity to the world, and also appends the ID to the list of the appropriate tile.
-    void addEntity() {
+    private void setTerrain(BufferedImage img) {
+        // this image contains the same amounts of shades of grey as layers in the world, that represent where the height of the terrain.
 
-    }
-
-    // creates an amount of wasteitems and places them randomly throughout the ocean. this should be done periodically
-    void createWaste(int amount) {
-
+        for (int y = 0; y < Globals.worldSize; y++) {
+            for (int x = 0; x < Globals.worldSize; x++) {
+                // if the color matches the layer
+                for (int l = 0; l < Globals.layers; l++) {
+                    if (img.getRGB(x, y) == MapGenerator.layerColor[l].getRGB()) {
+                        // set this layer and all under it to unavailable
+                        for (int i = l; i < Globals.layers; i++) {
+                            map[y][x][i].available = false;
+                        }
+                        break;
+                    }
+                }
+            }
+        }
     }
 
 }
