@@ -8,3 +8,7 @@ Der er blevet lavet en masse tomme funktioner efter manjana princippet, så vi n
 ### Hele gruppen
 I dag har vi implementeret world, og har lavet en spiller som kan bevæge sig, og samle skrald op.
 Vi kan også display inventory og brændstof niveau.
+
+## 01-11-23
+### bastian
+implementering af Workshop klassen og generering af workshop i world.

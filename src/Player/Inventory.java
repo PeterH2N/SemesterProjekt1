@@ -2,9 +2,10 @@ package Player;
 
 import Items.Item;
 import Items.WasteItem;
+import java.util.ArrayList;
 
 public class Inventory {
-    InventorySlot[] slots;
+    public InventorySlot[] slots;
 
     Inventory(int capacity) {
         slots = new InventorySlot[capacity];
@@ -74,9 +75,41 @@ public class Inventory {
     public int addItem(Item item) {
         return addItem(item, 1);
     }
+
+    // return 1 if successful, -1 otherwise
+    public boolean removeItem(String itemName, int amount) {
+        ArrayList<Integer> indices = new ArrayList<>();
+        int sumAmount = 0;
+        for (int i = 0; i < slots.length; i++) {
+            if (slots[i]==null)
+                continue;
+            Item slotItem = slots[i].item;
+            int slotAmount = slots[i].amount;
+            if (slotItem.getName().equals(itemName)) {
+                sumAmount += slotAmount;
+                indices.add(i);
+            }
+        }
+        if (sumAmount >= amount) {
+            for (int i = indices.size() - 1; i >= 0; i--) {
+                if (amount <= 0)
+                    break;
+
+                int oldAmount = slots[indices.get(i)].amount;
+                slots[indices.get(i)].amount -= amount;
+                amount -= oldAmount;
+                if (slots[indices.get(i)].amount <= 0)
+                    slots[indices.get(i)] = null;
+            }
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public boolean containsItemKey(String key) {
+    return false;
+    }
 }
 
-class InventorySlot {
-    Item item;
-    int amount;
-}

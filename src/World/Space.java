@@ -1,4 +1,5 @@
 package World;
+import Buildings.WorkShop;
 import Entity.*;
 import Items.*;
 
@@ -9,7 +10,7 @@ public class Space
 {
     public ArrayList<Entity> entities = new ArrayList<>();
 
-    final boolean available;
+    public boolean available;
 
     Space(boolean a) {
         available = a;
@@ -31,4 +32,10 @@ public class Space
         }
 
     }
+    void createWorkShop(){
+        Entity w = new WorkShop();
+        entities.add(w);
+    }
+
+
 }

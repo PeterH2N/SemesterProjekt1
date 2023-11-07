@@ -3,11 +3,11 @@ package Items;
 import Entity.Point;
 
 public class WasteItem extends Item {
-    String wasteItemTypeKey;
+    String wasteTypeKey;
 
     public WasteItem(String wasteItemTypeKey, Point pos) {
         super(5, pos);
-        this.wasteItemTypeKey = wasteItemTypeKey;
+        this.wasteTypeKey = wasteItemTypeKey;
         WasteType wt = WasteType.getType(wasteItemTypeKey);
         name = wt.name;
         description = wt.description;
@@ -21,8 +21,12 @@ public class WasteItem extends Item {
         this("default", new Point());
     }
 
-    String getMaterialKey() {
-        return WasteType.getType(wasteItemTypeKey).materialKey;
+    public String getMaterialKey() {
+        return WasteType.getType(wasteTypeKey).materialKey;
+    }
+
+    String getWasteTypeKey() {
+        return wasteTypeKey;
     }
 }
 
