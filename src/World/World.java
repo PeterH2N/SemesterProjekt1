@@ -21,8 +21,10 @@ public class World {
                     map[i][j][k] = new Space(true);
 
                 }
+        int xStart = 3;
+        int yStart = 7;
 
-        setTerrain(MapGenerator.makeLayerImage(MapGenerator.makeNoiseImage(3, 7), "layer1"));
+        setTerrain(MapGenerator.makeLayerImage(MapGenerator.makeNoiseImage(xStart, yStart), "layers" + xStart + yStart));
         createWaste(10);
 
     }
