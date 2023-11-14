@@ -12,15 +12,16 @@ import com.google.gson.reflect.TypeToken;
 class Material {
     static Map<String, Material> materials;
     String name;
-
     String longName;
+    String description;
     double density;
     int pricePerKg;
     int decayTime;
 
-    Material(String name, String longName, double density, int price, int decayTime) {
+    Material(String name, String longName, String description, double density, int price, int decayTime) {
         this.name = name;
         this.longName = longName;
+        this.description = description;
         this.density = density;
         this.pricePerKg = price;
         this.decayTime = decayTime;
