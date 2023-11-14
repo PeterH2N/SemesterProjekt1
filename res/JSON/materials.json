@@ -1,37 +1,64 @@
 {
   "default": {
     "name": "default",
+    "longName": "default",
     "density": -1.0,
     "pricePerKg": -1,
     "decayTime": -1
   },
   "Glass": {
     "name": "Glass",
+    "longName": "Glass",
     "density": 2500.0,
     "pricePerKg": 1000,
     "decayTime": 500
   },
   "ALU": {
-    "name": "Aluminum",
+    "name": "ALU",
+    "longName": "Aluminum",
     "density": 2710.0,
     "pricePerKg": 550,
     "decayTime": 100
   },
   "PVC": {
-    "name": "Polyvinyl chloride",
+    "name": "PVC",
+    "longName": "Polyvinyl chloride",
     "density": 1380.0,
     "pricePerKg": 200,
     "decayTime": 150
   },
   "PET": {
-    "name": "Polyethylene Terephthalate",
+    "name": "PET",
+    "longName": "Polyethylene Terephthalate",
     "density": 1370.0,
     "pricePerKg": 150,
     "decayTime": 100
   },
   "HDPE": {
-    "name": "High Density Polyethylene",
+    "name": "HDPE",
+    "longName": "High Density Polyethylene",
     "density": 1500.0,
+    "pricePerKg": 100,
+    "decayTime": 200
+  },
+  "LDPE": {
+    "name": "LDPE",
+    "longName": "Low Density Polyethylene",
+    "density": 940.0,
+    "pricePerKg": 100,
+    "decayTime": 200
+  },
+  "PP": {
+    "name": "PP",
+    "longName": "Poly Propylene",
+    "density": 900.0,
+    "pricePerKg": 100,
+    "decayTime": 200
+  },
+  "PS": {
+    "name": "PS",
+    "longName": "Poly Styrene",
+    "density": 300.0,
     "pricePerKg": 100,
     "decayTime": 200
   }

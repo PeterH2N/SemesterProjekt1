@@ -25,8 +25,8 @@ public class World {
         }
 
         // make terrain
-        //setTerrain(MapGenerator.makeLayerImage(MapGenerator.makeNoiseImage(0, 0), "layer1"));
-        createWaste(100);
+        setTerrain(MapGenerator.makeLayerImage(MapGenerator.makeNoiseImage(0, 1), "layer2"));
+        createWaste(10);
 
         Space spawn = map[Globals.worldSize / 2][Globals.worldSize / 2][0];
         spawn.createWorkShop();

@@ -6,6 +6,7 @@ import Items.MaterialItem;
 import Items.WasteItem;
 import Items.WasteType;
 import Player.*;
+import java.util.function.DoubleFunction;
 
 public class WorkShop extends Building {
     public WorkShop(){

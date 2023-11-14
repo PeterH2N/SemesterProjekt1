@@ -8,7 +8,7 @@ import World.*;
 public class CommandUpgrade extends BaseCommand implements Command {
 
     public CommandUpgrade() {
-        description = "Upgrade the submarine"; // add description
+        description = "Upgrade the submarine";
     }
 
     @Override
