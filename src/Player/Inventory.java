@@ -82,7 +82,4 @@ public class Inventory {
         return slots.length;
     }
 }
-class InventorySlot {
-    Item item;
-    int amount;
-}
+
