@@ -41,6 +41,11 @@ public class CommandGo extends BaseCommand implements Command {
 
         System.out.println("\nThere are " + itemAmount + " items here");
 
+        // Tells the player if they step into a space with an animal present
+        if(current.animalPresent){
+            System.out.println("\nAn animal lives in this space");
+        }
+
         // if the space contains a building, we print a description
         for (Building building : buildings) {
             System.out.println("There is a " + building.getName() + " here");

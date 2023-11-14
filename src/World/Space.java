@@ -11,6 +11,7 @@ public class Space
     public ArrayList<Entity> entities = new ArrayList<>();
 
     public boolean available;
+    public boolean animalPresent;
 
     Space(boolean a) {
         available = a;
@@ -30,11 +31,15 @@ public class Space
             Entity e = new WasteItem(randomKey);
             entities.add(e);
         }
-
     }
     void createWorkShop(){
         Entity w = new WorkShop();
         entities.add(w);
+    }
+
+    void createAnimalSpace(){
+        animalPresent = true;
+
     }
 
 

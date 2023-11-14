@@ -65,6 +65,7 @@ public class WasteType {
 
    public String getInfo(){
         return "Name: " + material().name + "\n" +
+                "Description: " + material().description + "\n" +
                "Density: " + material().density + "\n" +
                "Price Per Kg: " + material().pricePerKg + "\n" +
                "Decay Time: " + material().decayTime;

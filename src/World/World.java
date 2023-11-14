@@ -30,6 +30,8 @@ public class World {
 
         Space spawn = map[Globals.worldSize / 2][Globals.worldSize / 2][0];
         spawn.createWorkShop();
+        // Create spaces with animals
+        createAnimalSpace();
     }
 
     void createWaste(int maxPerSpace) {
@@ -41,6 +43,22 @@ public class World {
                     if (current.available) {
                         int amount = (int) (Math.random() * (maxPerSpace + 1));
                         current.createWaste(amount);
+                    }
+                }
+    }
+
+    void createAnimalSpace(){
+        for (int i = 0; i < Globals.worldSize; i++)
+            for (int j = 0; j < Globals.worldSize; j++)
+                for (int k = 0; k < Globals.layers; k++) {
+                    Space current =  map[i][j][k];
+                    // Decide whether a space should contribute to the animal indeks
+                    if(current.available) {
+                        int chance = (int) (Math.random() * 10);
+                        // Decides the odds, currently 20%
+                        if(chance > 8){
+                            current.createAnimalSpace();
+                        }
                     }
                 }
     }
