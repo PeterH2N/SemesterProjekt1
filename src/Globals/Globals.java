@@ -10,8 +10,8 @@ public class Globals {
     final public static double fuelConsumptionPerMove = 5.0;
     final public static double fuelConsumptionPerPickUp = 1.0;
 
-    final public static String[] inventoryUpgradeItemName = {"Glass", "Polyethylene Terephthalate"};
-    final public static String[] fuelUpgradeItemName = {"Aluminum"};
+    final public static String[] inventoryUpgradeItemName = {"Glass", "PET"};
+    final public static String[] fuelUpgradeItemName = {"AlU"};
     final public static int[][] inventoryUpgradeItemAmount = {  {3, 6, 9, 12, 15},
                                                                 {2, 4, 6, 8, 10}};
     final public static int[][] fuelUpgradeItemAmount = {{2, 4, 6, 8, 10}};
