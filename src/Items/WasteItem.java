@@ -29,6 +29,10 @@ public class WasteItem extends Item {
     String getWasteTypeKey() {
         return wasteTypeKey;
     }
+
+    public String getWasteItemInfo(){
+        return  WasteType.getType(wasteItemTypeKey).getInfo();
+    }
 }
 
 
