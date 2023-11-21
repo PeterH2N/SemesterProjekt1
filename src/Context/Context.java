@@ -16,7 +16,7 @@ public class Context {
 
     public Space getCurrentSpace() {
         int[] pos = player.getPosition();
-        return world.map[pos[1]][pos[0]][pos[2]];
+        return world.currentScreen.map[pos[1]][pos[0]][pos[2]];
     }
 
     public void makeDone() {

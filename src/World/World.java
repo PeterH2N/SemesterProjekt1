@@ -3,65 +3,54 @@ package World;
  */
 
 import Globals.Globals;
-
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import MapGeneration.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class World {
 
-    //final double boundMin, boundMax;
-    public Space[][][] map = new Space[Globals.worldSize][Globals.worldSize][Globals.layers];
+    // keys are just x and y values for where the screen is, first screen is at (0,0)
+    public Screen currentScreen;
+    Map<String, Screen> screens = new HashMap<String, Screen>();
 
     public World() {
-        // init all spaces
-        for (int i = 0; i < Globals.worldSize; i++) {
-            for (int j = 0; j < Globals.worldSize; j++) {
-                for (int k = 0; k < Globals.layers; k++) {
-                    map[i][j][k] = new Space(true);
+        // Make first screen
+        int x = 0;
+        int y = 0;
+        generateScreen(x, y);
+        // move to this screen, so the four adjacent screens are generated
+        moveToScreen(x, y);
 
-                }
-            }
-        }
-
-        // make terrain
-        //setTerrain(MapGenerator.makeLayerImage(MapGenerator.makeNoiseImage(0, 0), "layer1"));
-        createWaste(100);
-
-        Space spawn = map[Globals.worldSize / 2][Globals.worldSize / 2][0];
-        spawn.createWorkShop();
+        //Space spawn = map[Globals.worldSize / 2][Globals.worldSize / 2][0];
+        //spawn.createWorkShop();
     }
 
-    void createWaste(int maxPerSpace) {
-        for (int i = 0; i < Globals.worldSize; i++)
-            for (int j = 0; j < Globals.worldSize; j++)
-                for (int k = 0; k < Globals.layers; k++) {
-                    Space current =  map[i][j][k];
-                    // place waste items inside space
-                    if (current.available) {
-                        int amount = (int) (Math.random() * (maxPerSpace + 1));
-                        current.createWaste(amount);
-                    }
-                }
-    }
-
-    private void setTerrain(BufferedImage img) {
-        // this image contains the same amounts of shades of grey as layers in the world, that represent where the height of the terrain.
-
-        for (int y = 0; y < Globals.worldSize; y++) {
-            for (int x = 0; x < Globals.worldSize; x++) {
-                // if the color matches the layer
-                for (int l = 0; l < Globals.layers; l++) {
-                    if (img.getRGB(x, y) == MapGenerator.layerColor[l].getRGB()) {
-                        // set this layer and all under it to unavailable
-                        for (int i = l; i < Globals.layers; i++) {
-                            map[y][x][i].available = false;
-                        }
-                        break;
-                    }
-                }
-            }
+    public void generateScreen(int x, int y) {
+        String key = x + " " + y;
+        // if screen already exists, we return.
+        if (screens.containsKey(key)) {
+            return;
         }
+
+        Screen newScreen = new Screen(x, y);
+        screens.put(key, newScreen);
+
+    }
+    public void moveToScreen(int x, int y) {
+        // as we always generate the adjacent screens, we should never be able to move into a null screen.
+        String key = x + " " + y;
+        currentScreen = screens.get(key);
+        // make the 4 adjacent screens
+        // north
+        generateScreen(x, y + 1);
+
+        // east
+        generateScreen(x + 1, y);
+
+        // south
+        generateScreen(x, y - 1);
+
+        // west
+        generateScreen(x - 1, y);
     }
 
 }

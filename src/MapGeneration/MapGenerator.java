@@ -11,8 +11,8 @@ import java.util.Random;
 
 public class MapGenerator
 {
-    static int width = Globals.worldSize;
-    static int height = Globals.worldSize;
+    static int width = Globals.ScreenSize;
+    static int height = Globals.ScreenSize;
 
     static double freq1 = 1;
     static double freq2 = 2;
@@ -24,6 +24,10 @@ public class MapGenerator
 
     public static Color[] layerColor = new Color[Globals.layers + 1];
     static double increment;
+
+    static {
+        setLayerColors();
+    }
     static double noise(double xin, double yin) {
         return (SimplexNoise.noise(xin, yin) + 1.0) * 0.5;
     }
@@ -61,31 +65,31 @@ public class MapGenerator
             }
         }
 
-        File of = new File(path + Integer.toString(xStart) + Integer.toString(yStart) + ".png");
+        /*File of = new File(path + Integer.toString(xStart) + Integer.toString(yStart) + ".png");
         try {
             ImageIO.write(temp, "png", of);
         } catch (
                 IOException e) {
             throw new RuntimeException(e);
-        }
+        }*/
         return temp;
     }
 
-    static void setLayerColors(BufferedImage img) {
-        int highest = 0;
-        int lowest = 255;
-        // get highest and lowest greyscale value in image
-        for (int y = 0; y < img.getHeight(); y++) {
+    static void setLayerColors() {
+        int highest = 255;
+        int lowest = 0;
+        // get lowest greyscale value in image
+        /*for (int y = 0; y < img.getHeight(); y++) {
             for (int x = 0; x < img.getWidth(); x++) {
                 int c = -img.getRGB(x, y) >> 16;
                 highest = Math.max(c, highest);
                 lowest = Math.min(c, lowest);
             }
-        }
+        }*/
 
         // adjustments
-        highest -= 10;
-        lowest += 5;
+        //highest -= 10;
+        //lowest += 5;
 
         int layers = Globals.layers + 1;
         increment = (double)(highest - lowest) / (double)(layers - 1);
@@ -95,14 +99,13 @@ public class MapGenerator
             layerColor[i] = new Color(c, c, c);
         }
     }
-    static public BufferedImage makeLayerImage(BufferedImage img, String path) {
-        if (img.getHeight() != Globals.worldSize || img.getWidth() != Globals.worldSize) {
+    static public BufferedImage makeLayerImage(BufferedImage img, String key) {
+        if (img.getHeight() != Globals.ScreenSize || img.getWidth() != Globals.ScreenSize) {
             System.out.println("Image not of correct size!");
             return null;
         }
 
-        setLayerColors(img);
-        BufferedImage tmp = new BufferedImage(Globals.worldSize, Globals.worldSize, BufferedImage.TYPE_INT_RGB);
+        BufferedImage tmp = new BufferedImage(Globals.ScreenSize, Globals.ScreenSize, BufferedImage.TYPE_INT_RGB);
 
          // loop through pixels in image
          for (int y = 0; y < img.getHeight(); y++) {
@@ -117,10 +120,7 @@ public class MapGenerator
                  }
              }
          }
-
-
-
-        File of = new File(Globals.MapGenPath + "/images/" + path + ".png");
+        File of = new File(Globals.MapGenPath + "Images/layer" + key + ".png");
         try {
             ImageIO.write(tmp, "png", of);
         } catch (

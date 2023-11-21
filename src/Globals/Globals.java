@@ -3,7 +3,7 @@ package Globals;
 public class Globals {
     final public static String JSONPath = "res/JSON/";
     final public static String MapGenPath = "res/MapGen/";
-    final public static int worldSize = 21;
+    final public static int ScreenSize = 21;
     final public static int layers = 5;
 
     final public static int defaultItemStackSize = 16;

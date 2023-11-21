@@ -15,8 +15,8 @@ public class Submarine extends Entity {
     int pickupRadiusLevel = 0;
     int inventoryCapacityLevel = 0;
 
-    int x = (Globals.worldSize / 2);
-    int y = (Globals.worldSize  / 2);
+    int x = (Globals.ScreenSize / 2);
+    int y = (Globals.ScreenSize / 2);
     int z = 0;
 
     Submarine() {
@@ -95,8 +95,8 @@ public class Submarine extends Entity {
             return false;
         }
 
-        if (dir.equals("east")) {
-            if (x >= Globals.worldSize - 1)
+        /*if (dir.equals("east")) {
+            if (x >= Globals.ScreenSize - 1)
                 return false;
             if (world.map[y][x+1][z].available) {
                 x++;
@@ -120,7 +120,7 @@ public class Submarine extends Entity {
             }
         }
         else if (dir.equals("south")) {
-            if (y >= Globals.worldSize - 1)
+            if (y >= Globals.ScreenSize - 1)
                 return false;
             if (world.map[y+1][x][z].available) {
                 y++;
@@ -142,8 +142,7 @@ public class Submarine extends Entity {
                 z--;
                 return true;
             }
-        }
-
+        }*/
         return false;
     }
 

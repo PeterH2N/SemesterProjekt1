@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.stage.Screen?>
+<?import javafx.scene.layout.HBox?>
+
+
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.canvas.Canvas?>
+<HBox fx:id="hroot" xmlns:fx="http://javafx.com/fxml" prefHeight="${screen.visualBounds.height}" prefWidth="${screen.visualBounds.width}" fx:controller="GameGraphics.Controller">
+    <fx:define>
+        <Screen fx:factory="getPrimary" fx:id="screen" />
+    </fx:define>
+
+    <VBox spacing="50" prefHeight="${hroot.height}" prefWidth="${hroot.width}" style="-fx-background-color: #b3b3b3; -fx-border-color: black; -fx-border-width: 3;">
+        <!-- menu for info and settings? -->
+        <HBox prefHeight="50">
+            <Button fx:id="heyButton" text="Hey" onAction="#onHelloButtonClick"/>
+        </HBox>
+        <!-- Inventory view -->
+
+    </VBox>
+    <StackPane  minWidth="${hroot.height}" prefHeight="${hroot.height}">
+        <Label text="RENDER GAME HERE"/>
+        <Canvas fx:id="gameImage" width="${hroot.height}" height="${hroot.height}"/>
+    </StackPane>
+
+</HBox>
+
