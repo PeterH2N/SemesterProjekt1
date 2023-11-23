@@ -2,13 +2,14 @@ package Globals;
 
 public class Globals {
     final public static String JSONPath = "res/JSON/";
-    final public static String MapGenPath = "res/MapGen/";
-    final public static int ScreenSize = 21;
+    final public static String mapGenPath = "res/MapGen/";
+    final public static String spritePath = "res/Sprites/";
+    final public static int screenSize = 15;
     final public static int layers = 5;
 
     final public static int defaultItemStackSize = 16;
-    final public static double fuelConsumptionPerMove = 5.0;
-    final public static double fuelConsumptionPerPickUp = 1.0;
+    final public static double fuelConsumptionPerMove = 0.5;
+    final public static double fuelConsumptionPerPickUp = 0.1;
 
     final public static String[] inventoryUpgradeItemName = {"Glass", "PET"};
     final public static String[] fuelUpgradeItemName = {"AlU"};

@@ -15,9 +15,10 @@ public class Submarine extends Entity {
     int pickupRadiusLevel = 0;
     int inventoryCapacityLevel = 0;
 
-    int x = (Globals.ScreenSize / 2);
-    int y = (Globals.ScreenSize / 2);
-    int z = 0;
+    // position is only relative to current screen
+    public int x = (Globals.screenSize / 2);
+    public int y = (Globals.screenSize / 2);
+    public int z = 0;
 
     Submarine() {
         super(new Point(0, 0));
@@ -95,34 +96,64 @@ public class Submarine extends Entity {
             return false;
         }
 
-        /*if (dir.equals("east")) {
-            if (x >= Globals.ScreenSize - 1)
-                return false;
-            if (world.map[y][x+1][z].available) {
+        Screen currentScreen = world.currentScreen;
+
+        if (dir.equals("east")) {
+            if (x >= Globals.screenSize - 1) {
+                // we move screens, provided we are allowed to move into the space
+                currentScreen = world.getAdjacentScreen(dir);
+                if (currentScreen.map[y][0][z].available) {
+                    x = 0;
+                    world.moveToAdjacentScreen(dir);
+                    return true;
+                }
+            }
+            else if (currentScreen.map[y][x+1][z].available) {
                 x++;
                 return true;
             }
         }
         else if (dir.equals("west")) {
-            if (x <= 0)
-                return false;
-            if (world.map[y][x-1][z].available) {
+            if (x <= 0) {
+                // we move screens, provided we are allowed to move into the space
+                currentScreen = world.getAdjacentScreen(dir);
+                if (currentScreen.map[y][Globals.screenSize - 1][z].available) {
+                    x = Globals.screenSize - 1;
+                    world.moveToAdjacentScreen(dir);
+                    return true;
+                }
+            }
+            else if (currentScreen.map[y][x-1][z].available) {
                 x--;
                 return true;
             }
         }
         if (dir.equals("north")) {
-            if (y <= 0)
-                return false;
-            if (world.map[y-1][x][z].available) {
+            if (y <= 0) {
+                // we move screens, provided we are allowed to move into the space
+                currentScreen = world.getAdjacentScreen(dir);
+                if (currentScreen.map[Globals.screenSize - 1][x][z].available) {
+                    y = Globals.screenSize - 1;
+                    world.moveToAdjacentScreen(dir);
+                    return true;
+                }
+            }
+            else if (currentScreen.map[y-1][x][z].available) {
                 y--;
                 return true;
             }
         }
         else if (dir.equals("south")) {
-            if (y >= Globals.ScreenSize - 1)
-                return false;
-            if (world.map[y+1][x][z].available) {
+            if (y >= Globals.screenSize - 1) {
+                // we move screens, provided we are allowed to move into the space
+                currentScreen = world.getAdjacentScreen(dir);
+                if (currentScreen.map[0][x][z].available) {
+                    y = 0;
+                    world.moveToAdjacentScreen(dir);
+                    return true;
+                }
+            }
+            if (currentScreen.map[y+1][x][z].available) {
                 y++;
                 return true;
             }
@@ -130,7 +161,7 @@ public class Submarine extends Entity {
         if (dir.equals("down")) {
             if (z >= Globals.layers - 1)
                 return false;
-            if (world.map[y][x][z+1].available) {
+            if (currentScreen.map[y][x][z+1].available) {
                 z++;
                 return true;
             }
@@ -138,11 +169,11 @@ public class Submarine extends Entity {
         else if (dir.equals("up")) {
             if (z <= 0)
                 return false;
-            if (world.map[y][x][z-1].available) {
+            if (currentScreen.map[y][x][z-1].available) {
                 z--;
                 return true;
             }
-        }*/
+        }
         return false;
     }
 

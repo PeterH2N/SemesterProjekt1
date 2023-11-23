@@ -6,7 +6,7 @@ import World.*;
 public class Player {
     public Submarine sub = new Submarine();
 
-    int balance = 0; // in cents
+    int balance; // in cents
 
     public Player() {
         balance = 10000; // 100 dollars

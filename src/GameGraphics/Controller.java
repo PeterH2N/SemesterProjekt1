@@ -1,21 +1,19 @@
 package GameGraphics;
 
-import Context.Context;
-import GameGraphics.DrawGame;
+import Globals.Globals;
+import javafx.beans.value.ChangeListener;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-
-import java.awt.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
 public class Controller
 {
     public Controller() {
         System.out.println("controller constructed");
-
-
     }
 
     @FXML
@@ -26,15 +24,60 @@ public class Controller
     }
 
     @FXML
-    private Button heyButton;
+    private Button upButton;
 
     @FXML
     public Canvas gameImage;
 
     @FXML
-    protected void onHelloButtonClick()
+    protected void onUpButtonClick()
     {
-        heyButton.setStyle("-fx-background-color: green");
+
 
     }
+
+    public static EventHandler<KeyEvent> anyKeyEvent = new EventHandler<KeyEvent>()
+    {
+        @Override
+        public void handle(KeyEvent event)
+        {
+            DrawGame.setLayerImage();
+            DrawGame.drawGame();
+
+        }
+    };
+
+    public static EventHandler<KeyEvent> movementHandler = new EventHandler<KeyEvent>() {
+        @Override
+        public void handle(KeyEvent e) {
+            if (e.getCode() == KeyCode.W) {
+                // move up
+                DrawGame.context.player.move("north", DrawGame.context.world);
+                DrawGame.context.player.pickUp(DrawGame.context.getCurrentSpace());
+                DrawGame.currentPlayerRotation = 0;
+            }
+            else if (e.getCode() == KeyCode.A) {
+                DrawGame.context.player.move("west", DrawGame.context.world);
+                DrawGame.context.player.pickUp(DrawGame.context.getCurrentSpace());
+                DrawGame.currentPlayerRotation = -90;
+            }
+            else if (e.getCode() == KeyCode.S) {
+                DrawGame.context.player.move("south", DrawGame.context.world);
+                DrawGame.context.player.pickUp(DrawGame.context.getCurrentSpace());
+                DrawGame.currentPlayerRotation = 180;
+            }
+            else if (e.getCode() == KeyCode.D) {
+                DrawGame.context.player.move("east", DrawGame.context.world);
+                DrawGame.context.player.pickUp(DrawGame.context.getCurrentSpace());
+                DrawGame.currentPlayerRotation = 90;
+            }
+            else return;
+
+            e.consume();
+        }
+    };
+    public ChangeListener<Number> stageSizeListener = (observable, oldValue, newValue) -> {
+        DrawGame.pixelsPerTile = gameImage.getHeight() / (double)Globals.screenSize;
+        DrawGame.drawGame();
+    };
 }

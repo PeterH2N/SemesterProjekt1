@@ -4,15 +4,18 @@
 import Command.*;
 import Context.Context;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
 import GameGraphics.Controller;
 import GameGraphics.DrawGame;
+import Globals.Globals;
 import javafx.application.Application;
-import javafx.beans.value.ChangeListener;
+import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 public class Game extends Application {
@@ -46,15 +49,28 @@ public class Game extends Application {
         // load the FXML file
         FXMLLoader fxmlLoader = new FXMLLoader(Game.class.getResource("FXML/view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), width, height);
+        // add event handler
+        stage.addEventHandler(KeyEvent.KEY_PRESSED, Controller.movementHandler);
+        stage.addEventHandler(KeyEvent.ANY, Controller.anyKeyEvent);
 
         // redraw the game when window changes size
-        ChangeListener<Number> stageSizeListener = (observable, oldValue, newValue) -> DrawGame.drawGame();
-        stage.widthProperty().addListener(stageSizeListener);
-        stage.heightProperty().addListener(stageSizeListener);
+        Controller controller = fxmlLoader.getController();
+        stage.widthProperty().addListener(controller.stageSizeListener);
+        stage.heightProperty().addListener(controller.stageSizeListener);
 
         stage.setTitle("Semesterprojekt");
         stage.setScene(scene);
         stage.show();
+    }
+
+    @Override
+    public void stop() {
+        // delete all the map generation files
+        File dir = new File(Globals.mapGenPath + "Images");
+        for (File file: dir.listFiles()) {
+            if (!file.isDirectory())
+                file.delete();
+        }
     }
 
     public static void main(String[] args)

@@ -11,8 +11,8 @@ import java.util.Random;
 
 public class MapGenerator
 {
-    static int width = Globals.ScreenSize;
-    static int height = Globals.ScreenSize;
+    static int width = Globals.screenSize;
+    static int height = Globals.screenSize;
 
     static double freq1 = 1;
     static double freq2 = 2;
@@ -36,7 +36,7 @@ public class MapGenerator
         return makeNoiseImage(0, 0);
     }
     static public BufferedImage makeNoiseImage(int xStart, int yStart) {
-        return makeNoiseImage(xStart, yStart, Globals.MapGenPath + "Images/noise");
+        return makeNoiseImage(xStart, yStart, Globals.mapGenPath + "Images/noise");
     }
 
     static public BufferedImage makeNoiseImage(int xStart, int yStart, String path) {
@@ -78,18 +78,10 @@ public class MapGenerator
     static void setLayerColors() {
         int highest = 255;
         int lowest = 0;
-        // get lowest greyscale value in image
-        /*for (int y = 0; y < img.getHeight(); y++) {
-            for (int x = 0; x < img.getWidth(); x++) {
-                int c = -img.getRGB(x, y) >> 16;
-                highest = Math.max(c, highest);
-                lowest = Math.min(c, lowest);
-            }
-        }*/
 
         // adjustments
-        //highest -= 10;
-        //lowest += 5;
+        highest -= 20;
+        lowest += 20;
 
         int layers = Globals.layers + 1;
         increment = (double)(highest - lowest) / (double)(layers - 1);
@@ -100,12 +92,12 @@ public class MapGenerator
         }
     }
     static public BufferedImage makeLayerImage(BufferedImage img, String key) {
-        if (img.getHeight() != Globals.ScreenSize || img.getWidth() != Globals.ScreenSize) {
+        if (img.getHeight() != Globals.screenSize || img.getWidth() != Globals.screenSize) {
             System.out.println("Image not of correct size!");
             return null;
         }
 
-        BufferedImage tmp = new BufferedImage(Globals.ScreenSize, Globals.ScreenSize, BufferedImage.TYPE_INT_RGB);
+        BufferedImage tmp = new BufferedImage(Globals.screenSize, Globals.screenSize, BufferedImage.TYPE_INT_RGB);
 
          // loop through pixels in image
          for (int y = 0; y < img.getHeight(); y++) {
@@ -120,7 +112,7 @@ public class MapGenerator
                  }
              }
          }
-        File of = new File(Globals.MapGenPath + "Images/layer" + key + ".png");
+        File of = new File(Globals.mapGenPath + "Images/layer" + key + ".png");
         try {
             ImageIO.write(tmp, "png", of);
         } catch (

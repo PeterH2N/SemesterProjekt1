@@ -2,26 +2,58 @@ package World;
 /* World class for modeling the entire in-game world
  */
 
-import Globals.Globals;
 import java.util.HashMap;
 import java.util.Map;
 
 public class World {
 
     // keys are just x and y values for where the screen is, first screen is at (0,0)
+    public int currentX;
+    public int currentY;
     public Screen currentScreen;
     Map<String, Screen> screens = new HashMap<String, Screen>();
 
     public World() {
         // Make first screen
-        int x = 0;
-        int y = 0;
-        generateScreen(x, y);
+        currentX = 0;
+        currentY = 0;
+        generateScreen(currentX, currentY);
         // move to this screen, so the four adjacent screens are generated
-        moveToScreen(x, y);
+        moveToScreen(currentX, currentY);
 
         //Space spawn = map[Globals.worldSize / 2][Globals.worldSize / 2][0];
         //spawn.createWorkShop();
+    }
+
+    public Screen getAdjacentScreen(String dir) {
+        if (dir.equals("east")) {
+            return screens.get((currentX + 1) + " " + currentY);
+        }
+        if (dir.equals("west")) {
+            return screens.get((currentX - 1) + " " + currentY);
+        }
+        if (dir.equals("north")) {
+            return screens.get(currentX + " " + (currentY - 1));
+        }
+        if (dir.equals("south")) {
+            return screens.get(currentX + " " + (currentY + 1));
+        }
+        return null;
+    }
+
+    public void moveToAdjacentScreen(String dir) {
+        if (dir.equals("east")) {
+            moveToScreen(currentX + 1, currentY);
+        }
+        if (dir.equals("west")) {
+            moveToScreen(currentX - 1, currentY);
+        }
+        if (dir.equals("north")) {
+            moveToScreen(currentX, currentY - 1);
+        }
+        if (dir.equals("south")) {
+            moveToScreen(currentX, currentY + 1);
+        }
     }
 
     public void generateScreen(int x, int y) {
@@ -35,19 +67,21 @@ public class World {
         screens.put(key, newScreen);
 
     }
-    public void moveToScreen(int x, int y) {
+    void moveToScreen(int x, int y) {
         // as we always generate the adjacent screens, we should never be able to move into a null screen.
+        currentX = x;
+        currentY = y;
         String key = x + " " + y;
         currentScreen = screens.get(key);
         // make the 4 adjacent screens
         // north
-        generateScreen(x, y + 1);
+        generateScreen(x, y - 1);
 
         // east
         generateScreen(x + 1, y);
 
         // south
-        generateScreen(x, y - 1);
+        generateScreen(x, y + 1);
 
         // west
         generateScreen(x - 1, y);
