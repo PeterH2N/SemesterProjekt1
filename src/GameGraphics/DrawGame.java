@@ -1,5 +1,6 @@
 package GameGraphics;
 
+import Buildings.WorkShop;
 import Context.Context;
 import Entity.Entity;
 import Globals.Globals;
@@ -35,6 +36,8 @@ public class DrawGame
     static Image stoneImage;
     static Image waterImage;
 
+    static Image workShopImage;
+
     static {
         // get player sprite
         File file = new File(Globals.spritePath + "sub.png");
@@ -59,6 +62,10 @@ public class DrawGame
         file = new File(Globals.spritePath + "Surfaces/Water/water.png");
         waterImage = new Image(file.toURI().toString());
 
+        // get building sprites
+        file = new File(Globals.spritePath + "Buildings/WorkShop.png");
+        workShopImage = new Image(file.toURI().toString());
+
         // get waste item type images
         for (String typeKey : WasteType.wasteTypeKeys) {
             String path = Globals.spritePath + "WasteTypes/" + typeKey + ".png";
@@ -71,11 +78,11 @@ public class DrawGame
         // for now, we are just drawing the basic layer image to the screen
         canvas.getGraphicsContext2D().drawImage(currentLayerImage,0, 0, canvas.getWidth(), canvas.getHeight());
         drawGrass();
-        drawWasteItems();
+        drawEntities();
         drawPlayer();
     }
 
-    static void drawWasteItems() {
+    static void drawEntities() {
         Screen currentScreen = context.world.currentScreen;
 
         // draw items, if there are any
@@ -83,8 +90,18 @@ public class DrawGame
             if (entity instanceof WasteItem) {
                 drawWasteItem((WasteItem) entity);
             }
+            else if (entity instanceof WorkShop) {
+                drawWorkShop((WorkShop) entity);
+            }
         }
 
+    }
+
+    static void drawWorkShop(WorkShop workShop) {
+        double x = workShop.getPosition().x;
+        double y = workShop.getPosition().y;
+
+        canvas.getGraphicsContext2D().drawImage(workShopImage, x * pixelsPerTile - pixelsPerTile * 0.5, y * pixelsPerTile - pixelsPerTile * 0.5, pixelsPerTile, pixelsPerTile);
     }
 
     static void drawWasteItem(WasteItem item) {

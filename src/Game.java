@@ -49,14 +49,15 @@ public class Game extends Application {
         // load the FXML file
         FXMLLoader fxmlLoader = new FXMLLoader(Game.class.getResource("FXML/view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), width, height);
-        // add event handler
-        stage.addEventHandler(KeyEvent.KEY_PRESSED, Controller.movementHandler);
-        stage.addEventHandler(KeyEvent.ANY, Controller.anyKeyEvent);
 
         // redraw the game when window changes size
         Controller controller = fxmlLoader.getController();
         stage.widthProperty().addListener(controller.stageSizeListener);
         stage.heightProperty().addListener(controller.stageSizeListener);
+
+        // add event handler
+        stage.addEventHandler(KeyEvent.KEY_PRESSED, controller.movementHandler);
+        stage.addEventHandler(KeyEvent.ANY, controller.anyKeyEvent);
 
         stage.setTitle("Semesterprojekt");
         stage.setScene(scene);

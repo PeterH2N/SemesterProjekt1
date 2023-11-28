@@ -4,12 +4,14 @@ public class Globals {
     final public static String JSONPath = "res/JSON/";
     final public static String mapGenPath = "res/MapGen/";
     final public static String spritePath = "res/Sprites/";
-    final public static int tilesPerScreen = 15;
+    final public static int tilesPerScreen = 11;
     final public static int layers = 5;
 
+    final public static double workShopSpawnRate = 0.2;
+
     final public static int defaultItemStackSize = 16;
-    final public static double fuelConsumptionPerMove = 0.;
-    final public static double fuelConsumptionPerPickUp = 0.1;
+    final public static double fuelConsumptionPerMove = 0.0;
+    final public static double fuelConsumptionPerPickUp = 5.0;
 
     final public static String[] inventoryUpgradeItemName = {"Glass", "PET"};
     final public static String[] fuelUpgradeItemName = {"AlU"};

@@ -6,6 +6,8 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
@@ -20,33 +22,44 @@ public class Controller
         gameImage.getGraphicsContext2D().setImageSmoothing(false);
         DrawGame.canvas = gameImage;
         DrawGame.setLayerImage();
+        updateLabels();
     }
 
     @FXML
-    private Button upButton;
+    private Button upgradeFuelCapacityButton;
+
+    @FXML
+    private TextField smeltTextField;
+
+    @FXML
+    private Button smeltButton;
 
     @FXML
     public Canvas gameImage;
 
     @FXML
-    protected void onUpButtonClick()
-    {
+    Label fuelCapacityLabel;
 
-
+    void updateLabels() {
+        double fuelLevel = DrawGame.context.player.sub.getFuel();
+        double fuelCapacity = DrawGame.context.player.sub.getFuelCapacity();
+        String fuelText = "Fuel: " + fuelLevel + "/" + fuelCapacity;
+        fuelCapacityLabel.setText(fuelText);
     }
 
-    public static EventHandler<KeyEvent> anyKeyEvent = new EventHandler<KeyEvent>()
+    public EventHandler<KeyEvent> anyKeyEvent = new EventHandler<KeyEvent>()
     {
         @Override
         public void handle(KeyEvent event)
         {
+            updateLabels();
             DrawGame.setLayerImage();
             DrawGame.drawGame();
 
         }
     };
 
-    public static EventHandler<KeyEvent> movementHandler = new EventHandler<KeyEvent>() {
+    public EventHandler<KeyEvent> movementHandler = new EventHandler<KeyEvent>() {
         @Override
         public void handle(KeyEvent e) {
             if (e.getCode() == KeyCode.W) {

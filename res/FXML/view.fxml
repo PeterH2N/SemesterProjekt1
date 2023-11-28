@@ -21,9 +21,14 @@
     <VBox spacing="50" prefHeight="${hroot.height}" prefWidth="${hroot.width}" style="-fx-background-color: #b3b3b3; -fx-border-color: black; -fx-border-width: 3;">
         <!-- menu for info and settings? -->
         <HBox prefHeight="50">
-            <Button fx:id="upButton" text="Button" onAction="#onUpButtonClick"/>
+            <Label fx:id="fuelCapacityLabel"/>
         </HBox>
         <!-- Inventory view -->
+        <!-- Workshop -->
+        <HBox>
+            <Button text="Upgrade Fuel Capacity"/>
+            <Button text="Upgrade Inventory"/>
+        </HBox>
 
     </VBox>
     <StackPane  minWidth="${hroot.height}" prefHeight="${hroot.height}">

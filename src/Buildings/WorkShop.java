@@ -1,5 +1,6 @@
 package Buildings;
 
+import Entity.Point;
 import Globals.Globals;
 import Items.Item;
 import Items.MaterialItem;
@@ -9,8 +10,8 @@ import Player.*;
 import java.util.function.DoubleFunction;
 
 public class WorkShop extends Building {
-    public WorkShop(){
-        super("This is a workshop", "Workshop");
+    public WorkShop(Point pos){
+        super("This is a workshop", "Workshop", pos);
     }
 
     public boolean upgradeInventoryCapacity(Player player){
