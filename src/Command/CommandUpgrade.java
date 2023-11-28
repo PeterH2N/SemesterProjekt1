@@ -45,6 +45,13 @@ public class CommandUpgrade extends BaseCommand implements Command {
                 return;
             }
         }
+        if (parameters[0].equals("oxygen")){
+            if (workShop.upgradeOxygenCapacity(context.player)) {
+                System.out.println("Upgraded oxygen capacity");
+                return;
+            }
+        }
+
 
         System.out.println("Not a valid upgrade");
     }
