@@ -33,6 +33,12 @@ public class WasteItem extends Item {
     public String getWasteItemInfo(){
         return  WasteType.getType(wasteTypeKey).getInfo();
     }
+
+    int getTypeIndex() {
+        return WasteType.getType(wasteTypeKey).getIndex();
+    }
+
+
 }
 
 

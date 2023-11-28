@@ -32,5 +32,7 @@ public class CommandPickUp extends BaseCommand implements Command
             }
         }
         System.out.println("There are " + itemAmount + " items here");
+
+
     }
 }

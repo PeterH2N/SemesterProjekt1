@@ -13,11 +13,13 @@ import java.util.Map;
 
 public class WasteType {
     public static List<String> wasteTypeKeys;
-    static Map<String, WasteType> wasteTypes;
+    public static Map<String, WasteType> wasteTypes;
     String name;
     String description;
     String materialKey;
     double volume;
+
+    private int index;
 
 
 
@@ -26,11 +28,12 @@ public class WasteType {
         init();
     }
 
-    WasteType(String name, String description, String materialKey, double volume) {
+    WasteType(String name, String description, String materialKey, double volume, int index) {
         this.name = name;
         this.description = description;
         this.materialKey = materialKey;
         this.volume = volume;
+        this.index = index;
     }
 
     static WasteType getType(String key) {
@@ -62,7 +65,6 @@ public class WasteType {
         return (int) ((double) material().pricePerKg * getWeight());
     }
 
-
    public String getInfo(){
         return "Name: " + material().name + "\n" +
                "Density: " + material().density + "\n" +
@@ -70,4 +72,12 @@ public class WasteType {
                "Decay Time: " + material().decayTime;
    }
 
+    @Override
+    public String toString(){
+        return "Trash: " + name + "\n Type: " + name + "\n Number: " + getIndex() + "\nDescription: " + description;
+    }
+
+    public int getIndex() {
+        return index;
+    }
 }
