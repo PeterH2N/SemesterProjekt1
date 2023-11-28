@@ -22,7 +22,7 @@ public class CommandPickUp extends BaseCommand implements Command
             return;
         }
 
-        Space current = context.getCurrentSpace();
+        /*Space current = context.getCurrentSpace();
         context.player.pickUp(current);
         int itemAmount = 0;
         ArrayList<Building> buildings = new ArrayList<>();
@@ -31,6 +31,6 @@ public class CommandPickUp extends BaseCommand implements Command
                 itemAmount++;
             }
         }
-        System.out.println("There are " + itemAmount + " items here");
+        System.out.println("There are " + itemAmount + " items here");*/
     }
 }

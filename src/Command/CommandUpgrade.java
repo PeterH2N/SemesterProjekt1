@@ -20,12 +20,12 @@ public class CommandUpgrade extends BaseCommand implements Command {
         // make sure that player is in a space that contains a workshop
         Space current = context.getCurrentSpace();
         WorkShop workShop = null;
-        for (Entity entity : current.entities) {
+        /*for (Entity entity : current.entities) {
             if (entity instanceof WorkShop) {
                 workShop = (WorkShop)entity;
                 break;
             }
-        }
+        }*/
         if (workShop == null) {
             System.out.println("Could not upgrade. You are not near a workshop!");
             return;

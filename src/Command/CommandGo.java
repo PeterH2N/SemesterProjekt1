@@ -27,7 +27,7 @@ public class CommandGo extends BaseCommand implements Command {
         else
             System.out.println("Could not move " + parameters[0]);
         // after having moved, we print the number of items in the space
-        Space current = context.getCurrentSpace();
+        /*Space current = context.getCurrentSpace();
         int itemAmount = 0;
         ArrayList<Building> buildings = new ArrayList<>();
         for (Entity entity : current.entities) {
@@ -44,7 +44,7 @@ public class CommandGo extends BaseCommand implements Command {
         // if the space contains a building, we print a description
         for (Building building : buildings) {
             System.out.println("There is a " + building.getName() + " here");
-        }
+        }*/
 
     }
 }
