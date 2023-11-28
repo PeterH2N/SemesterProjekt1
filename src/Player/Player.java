@@ -2,6 +2,7 @@ package Player;
 
 import Globals.Globals;
 import World.*;
+import Context.*;
 
 public class Player {
     public Submarine sub = new Submarine();
@@ -20,9 +21,22 @@ public class Player {
         return (balance -= m);
     }
 
-    public boolean move(String dir, World world) {
-        if (sub.move(dir, world)) {
+    public boolean move(String dir, Context context) {
+        if (sub.move(dir, context.world)) {
             sub.fuel -= Globals.fuelConsumptionPerMove;
+
+            //If The player is underwater
+            if (sub.z>0) {
+                sub.oxygen -= Globals.oxygenConsumptionPerMove;
+            }
+            //If the player runs out of oxygen
+            if (sub.oxygen <0 ) {
+                context.makeDone();
+            }
+            //If The player is on the surface layer, oxygen must be refilled
+            if (sub.z == 0) {
+                sub.oxygen = sub.getOxygenCapacity();
+            }
             return true;
         }
          return false;

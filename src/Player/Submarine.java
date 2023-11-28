@@ -61,6 +61,10 @@ public class Submarine extends Entity {
         return fuelCapacityLevel;
     }
 
+    public int getOxygenCapacityLevel() {
+        return oxygenCapacityLevel;
+    }
+
     public double getOxygenCapacity() {
         return Globals.oxygenUpgrades[oxygenCapacityLevel];
     }
