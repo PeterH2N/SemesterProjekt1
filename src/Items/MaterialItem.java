@@ -10,7 +10,7 @@ public class MaterialItem extends Item {
         this.materialKey = materialKey;
         Material mat = Material.materials.get(materialKey);
         this.name = mat.name;
-        this.description = "Item of " + mat.name;
+        this.description = mat.description;
 
     }
 

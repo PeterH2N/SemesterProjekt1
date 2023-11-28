@@ -11,8 +11,8 @@ import java.util.Random;
 
 public class MapGenerator
 {
-    static int width = Globals.worldSize;
-    static int height = Globals.worldSize;
+    static int width = Globals.tilesPerScreen;
+    static int height = Globals.tilesPerScreen;
 
     static double freq1 = 1;
     static double freq2 = 2;
@@ -24,6 +24,10 @@ public class MapGenerator
 
     public static Color[] layerColor = new Color[Globals.layers + 1];
     static double increment;
+
+    static {
+        setLayerColors();
+    }
     static double noise(double xin, double yin) {
         return (SimplexNoise.noise(xin, yin) + 1.0) * 0.5;
     }
@@ -32,7 +36,7 @@ public class MapGenerator
         return makeNoiseImage(0, 0);
     }
     static public BufferedImage makeNoiseImage(int xStart, int yStart) {
-        return makeNoiseImage(xStart, yStart, Globals.MapGenPath + "Images/noise");
+        return makeNoiseImage(xStart, yStart, Globals.mapGenPath + "Images/noise");
     }
 
     static public BufferedImage makeNoiseImage(int xStart, int yStart, String path) {
@@ -61,55 +65,46 @@ public class MapGenerator
             }
         }
 
-        File of = new File(path + Integer.toString(xStart) + Integer.toString(yStart) + ".png");
+        /*File of = new File(path + Integer.toString(xStart) + Integer.toString(yStart) + ".png");
         try {
             ImageIO.write(temp, "png", of);
         } catch (
                 IOException e) {
             throw new RuntimeException(e);
-        }
+        }*/
         return temp;
     }
 
-    static void setLayerColors(BufferedImage img) {
-        int highest = 0;
-        int lowest = 255;
-        // get highest and lowest greyscale value in image
-        for (int y = 0; y < img.getHeight(); y++) {
-            for (int x = 0; x < img.getWidth(); x++) {
-                int c = -img.getRGB(x, y) >> 16;
-                highest = Math.max(c, highest);
-                lowest = Math.min(c, lowest);
-            }
-        }
+    static void setLayerColors() {
+        int highest = 255;
+        int lowest = 0;
 
         // adjustments
-        highest -= 10;
-        lowest += 5;
+        highest -= 30;
+        lowest += 20;
 
         int layers = Globals.layers + 1;
         increment = (double)(highest - lowest) / (double)(layers - 1);
 
-        for (int i = layerColor.length - 1; i >= 0; i--) {
+        for (int i = 0; i < layerColor.length; i++) {
             int c = (int)(lowest + increment * i);
-            layerColor[i] = new Color(c, c, c);
+            layerColor[layerColor.length - i - 1] = new Color(10, 10, c);
         }
     }
-    static public BufferedImage makeLayerImage(BufferedImage img, String path) {
-        if (img.getHeight() != Globals.worldSize || img.getWidth() != Globals.worldSize) {
+    static public BufferedImage makeLayerImage(BufferedImage img, String key) {
+        if (img.getHeight() != Globals.tilesPerScreen || img.getWidth() != Globals.tilesPerScreen) {
             System.out.println("Image not of correct size!");
             return null;
         }
 
-        setLayerColors(img);
-        BufferedImage tmp = new BufferedImage(Globals.worldSize, Globals.worldSize, BufferedImage.TYPE_INT_RGB);
+        BufferedImage tmp = new BufferedImage(Globals.tilesPerScreen, Globals.tilesPerScreen, BufferedImage.TYPE_INT_RGB);
 
          // loop through pixels in image
          for (int y = 0; y < img.getHeight(); y++) {
              for (int x = 0;  x < img.getWidth(); x++) {
                  for (Color lc : layerColor) {
-                     int ic = -img.getRGB(x, y) >> 16;
-                     int ilc = -lc.getRGB() >> 16;
+                     int ic = -img.getRGB(x, y) & 0xff;
+                     int ilc = -lc.getRGB() & 0xff;
                      if (Math.abs(ic - ilc) < increment) {
                          tmp.setRGB(x, y, lc.getRGB());
                          break;
@@ -117,10 +112,7 @@ public class MapGenerator
                  }
              }
          }
-
-
-
-        File of = new File(Globals.MapGenPath + "/images/" + path + ".png");
+        File of = new File(Globals.mapGenPath + "Images/layer" + key + ".png");
         try {
             ImageIO.write(tmp, "png", of);
         } catch (

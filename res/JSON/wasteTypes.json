@@ -28,5 +28,23 @@
     "description": "Half litre HDPE Bottle for beverages",
     "materialKey": "HDPE",
     "volume": 1.3E-5
+  },
+  "Styrofoam": {
+    "name": "Styrofoam",
+    "description": "Piece of styrofoam",
+    "materialKey": "PS",
+    "volume": 6E-3
+  },
+  "Bubble Wrap": {
+    "name": "Bubble Wrap",
+    "description": "Piece of bubble wrap, sadly all popped:(",
+    "materialKey": "LDPE",
+    "volume": 3E-5
+  },
+  "Diaper": {
+    "name": "Diaper",
+    "description": "Disposable Diaper. It smells",
+    "materialKey": "PP",
+    "volume": 5E-4
   }
 }

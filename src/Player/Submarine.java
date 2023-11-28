@@ -15,9 +15,10 @@ public class Submarine extends Entity {
     int pickupRadiusLevel = 0;
     int inventoryCapacityLevel = 0;
 
-    int x = (Globals.worldSize / 2);
-    int y = (Globals.worldSize  / 2);
-    int z = 0;
+    // position is only relative to current screen
+    public int x = (Globals.tilesPerScreen / 2);
+    public int y = (Globals.tilesPerScreen / 2);
+    public int z = 0;
 
     Submarine() {
         super(new Point(0, 0));
@@ -76,12 +77,16 @@ public class Submarine extends Entity {
     }
 
     // picks up all the items in range, and adds them to inventory, unless inventory is full
-    void pickupItems(Space space) {
-        for (int i = 0; i < space.entities.size(); i++) {
-            if (space.entities.get(i) instanceof Item) {
-                if (inventory.addItem((Item)space.entities.get(i)) == 1) {
-                    space.entities.remove(i);
-                    i--;
+    void pickupItems(Screen screen) {
+        for (int i = 0; i < screen.entities.size(); i++) {
+            Point subPos = new Point((double)x + 0.5, (double)y + 0.5);
+            Entity entity = screen.entities.get(i);
+            if (entity instanceof Item) {
+                if (Point.distance(entity.getPosition(), subPos) <= this.getPickUpRadius()) {
+                    if (inventory.addItem((Item) entity) == 1) {
+                        screen.entities.remove(i);
+                        i--;
+                    }
                 }
             }
 
@@ -95,34 +100,64 @@ public class Submarine extends Entity {
             return false;
         }
 
+        Screen currentScreen = world.currentScreen;
+
         if (dir.equals("east")) {
-            if (x >= Globals.worldSize - 1)
-                return false;
-            if (world.map[y][x+1][z].available) {
+            if (x >= Globals.tilesPerScreen - 1) {
+                // we move screens, provided we are allowed to move into the space
+                currentScreen = world.getAdjacentScreen(dir);
+                if (currentScreen.map[y][0][z].available) {
+                    x = 0;
+                    world.moveToAdjacentScreen(dir);
+                    return true;
+                }
+            }
+            else if (currentScreen.map[y][x+1][z].available) {
                 x++;
                 return true;
             }
         }
         else if (dir.equals("west")) {
-            if (x <= 0)
-                return false;
-            if (world.map[y][x-1][z].available) {
+            if (x <= 0) {
+                // we move screens, provided we are allowed to move into the space
+                currentScreen = world.getAdjacentScreen(dir);
+                if (currentScreen.map[y][Globals.tilesPerScreen - 1][z].available) {
+                    x = Globals.tilesPerScreen - 1;
+                    world.moveToAdjacentScreen(dir);
+                    return true;
+                }
+            }
+            else if (currentScreen.map[y][x-1][z].available) {
                 x--;
                 return true;
             }
         }
         if (dir.equals("north")) {
-            if (y <= 0)
-                return false;
-            if (world.map[y-1][x][z].available) {
+            if (y <= 0) {
+                // we move screens, provided we are allowed to move into the space
+                currentScreen = world.getAdjacentScreen(dir);
+                if (currentScreen.map[Globals.tilesPerScreen - 1][x][z].available) {
+                    y = Globals.tilesPerScreen - 1;
+                    world.moveToAdjacentScreen(dir);
+                    return true;
+                }
+            }
+            else if (currentScreen.map[y-1][x][z].available) {
                 y--;
                 return true;
             }
         }
         else if (dir.equals("south")) {
-            if (y >= Globals.worldSize - 1)
-                return false;
-            if (world.map[y+1][x][z].available) {
+            if (y >= Globals.tilesPerScreen - 1) {
+                // we move screens, provided we are allowed to move into the space
+                currentScreen = world.getAdjacentScreen(dir);
+                if (currentScreen.map[0][x][z].available) {
+                    y = 0;
+                    world.moveToAdjacentScreen(dir);
+                    return true;
+                }
+            }
+            if (currentScreen.map[y+1][x][z].available) {
                 y++;
                 return true;
             }
@@ -130,7 +165,7 @@ public class Submarine extends Entity {
         if (dir.equals("down")) {
             if (z >= Globals.layers - 1)
                 return false;
-            if (world.map[y][x][z+1].available) {
+            if (currentScreen.map[y][x][z+1].available) {
                 z++;
                 return true;
             }
@@ -138,12 +173,11 @@ public class Submarine extends Entity {
         else if (dir.equals("up")) {
             if (z <= 0)
                 return false;
-            if (world.map[y][x][z-1].available) {
+            if (currentScreen.map[y][x][z-1].available) {
                 z--;
                 return true;
             }
         }
-
         return false;
     }
 

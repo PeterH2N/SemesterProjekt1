@@ -6,7 +6,7 @@ import World.*;
 public class Player {
     public Submarine sub = new Submarine();
 
-    int balance = 0; // in cents
+    int balance; // in cents
 
     public Player() {
         balance = 10000; // 100 dollars
@@ -28,8 +28,8 @@ public class Player {
          return false;
     }
 
-    public void pickUp(Space space) {
-        sub.pickupItems(space);
+    public void pickUp(Screen screen) {
+        sub.pickupItems(screen);
         sub.fuel -= Globals.fuelConsumptionPerPickUp;
     }
 

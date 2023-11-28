@@ -117,5 +117,10 @@ public class Inventory {
         }
         return sumAmount >= amount;
     }
+
+    public Object getItem(int i)
+    {
+        return slots[i].item;
+    }
 }
 

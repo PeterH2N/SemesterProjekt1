@@ -4,11 +4,22 @@
 import Command.*;
 import Context.Context;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
 import javafx.event.*;
 
-class Game {
-    //static World    world    = new World();
+import GameGraphics.Controller;
+import GameGraphics.DrawGame;
+import Globals.Globals;
+import javafx.application.Application;
+import javafx.event.Event;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.input.KeyEvent;
+import javafx.stage.Stage;
+
+public class Game extends Application {
     static Context context = new Context();
     static Command fallback = new CommandUnknown();
     static Registry registry = new Registry(context, fallback);
@@ -23,11 +34,52 @@ class Game {
         registry.register("smelt", new CommandSmelt());
         registry.register("upgrade", new CommandUpgrade());
         registry.register("pickup", new CommandPickUp());
+        registry.register("info", new CommandInfo());
         registry.register("help", new CommandHelp(registry));
+
 
     }
 
-    public static void main(String[] args) {
+    @Override
+    public void start(Stage stage) throws IOException
+    {
+        double width = 700;
+        double height = 500;
+        // give the graphics renderer the context
+        DrawGame.context = context;
+        // load the FXML file
+        FXMLLoader fxmlLoader = new FXMLLoader(Game.class.getResource("FXML/view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), width, height);
+        // add event handler
+        stage.addEventHandler(KeyEvent.KEY_PRESSED, Controller.movementHandler);
+        stage.addEventHandler(KeyEvent.ANY, Controller.anyKeyEvent);
+
+        // redraw the game when window changes size
+        Controller controller = fxmlLoader.getController();
+        stage.widthProperty().addListener(controller.stageSizeListener);
+        stage.heightProperty().addListener(controller.stageSizeListener);
+
+        stage.setTitle("Semesterprojekt");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @Override
+    public void stop() {
+        // delete all the map generation files
+        File dir = new File(Globals.mapGenPath + "Images");
+        for (File file: dir.listFiles()) {
+            if (!file.isDirectory())
+                file.delete();
+        }
+    }
+
+    public static void main(String[] args)
+    {
+        launch(args);
+    }
+
+    /*public static void main(String[] args) {
         System.out.println("Welcome to our game!");
 
         initRegistry();
@@ -38,5 +90,5 @@ class Game {
             registry.dispatch(line);
         }
         System.out.println("Game Over 😥");
-    }
+    }*/
 }
