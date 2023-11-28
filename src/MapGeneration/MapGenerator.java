@@ -11,8 +11,8 @@ import java.util.Random;
 
 public class MapGenerator
 {
-    static int width = Globals.screenSize;
-    static int height = Globals.screenSize;
+    static int width = Globals.tilesPerScreen;
+    static int height = Globals.tilesPerScreen;
 
     static double freq1 = 1;
     static double freq2 = 2;
@@ -80,31 +80,31 @@ public class MapGenerator
         int lowest = 0;
 
         // adjustments
-        highest -= 20;
+        highest -= 30;
         lowest += 20;
 
         int layers = Globals.layers + 1;
         increment = (double)(highest - lowest) / (double)(layers - 1);
 
-        for (int i = layerColor.length - 1; i >= 0; i--) {
+        for (int i = 0; i < layerColor.length; i++) {
             int c = (int)(lowest + increment * i);
-            layerColor[i] = new Color(c, c, c);
+            layerColor[layerColor.length - i - 1] = new Color(10, 10, c);
         }
     }
     static public BufferedImage makeLayerImage(BufferedImage img, String key) {
-        if (img.getHeight() != Globals.screenSize || img.getWidth() != Globals.screenSize) {
+        if (img.getHeight() != Globals.tilesPerScreen || img.getWidth() != Globals.tilesPerScreen) {
             System.out.println("Image not of correct size!");
             return null;
         }
 
-        BufferedImage tmp = new BufferedImage(Globals.screenSize, Globals.screenSize, BufferedImage.TYPE_INT_RGB);
+        BufferedImage tmp = new BufferedImage(Globals.tilesPerScreen, Globals.tilesPerScreen, BufferedImage.TYPE_INT_RGB);
 
          // loop through pixels in image
          for (int y = 0; y < img.getHeight(); y++) {
              for (int x = 0;  x < img.getWidth(); x++) {
                  for (Color lc : layerColor) {
-                     int ic = -img.getRGB(x, y) >> 16;
-                     int ilc = -lc.getRGB() >> 16;
+                     int ic = -img.getRGB(x, y) & 0xff;
+                     int ilc = -lc.getRGB() & 0xff;
                      if (Math.abs(ic - ilc) < increment) {
                          tmp.setRGB(x, y, lc.getRGB());
                          break;

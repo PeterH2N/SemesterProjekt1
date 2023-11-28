@@ -2,7 +2,6 @@ package GameGraphics;
 
 import Globals.Globals;
 import javafx.beans.value.ChangeListener;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
@@ -53,23 +52,22 @@ public class Controller
             if (e.getCode() == KeyCode.W) {
                 // move up
                 DrawGame.context.player.move("north", DrawGame.context.world);
-                DrawGame.context.player.pickUp(DrawGame.context.getCurrentSpace());
-                DrawGame.currentPlayerRotation = 0;
+                DrawGame.context.player.sub.setRotation(0);
             }
             else if (e.getCode() == KeyCode.A) {
                 DrawGame.context.player.move("west", DrawGame.context.world);
-                DrawGame.context.player.pickUp(DrawGame.context.getCurrentSpace());
-                DrawGame.currentPlayerRotation = -90;
+                DrawGame.context.player.sub.setRotation(-90);
             }
             else if (e.getCode() == KeyCode.S) {
                 DrawGame.context.player.move("south", DrawGame.context.world);
-                DrawGame.context.player.pickUp(DrawGame.context.getCurrentSpace());
-                DrawGame.currentPlayerRotation = 180;
+                DrawGame.context.player.sub.setRotation(180);
             }
             else if (e.getCode() == KeyCode.D) {
                 DrawGame.context.player.move("east", DrawGame.context.world);
-                DrawGame.context.player.pickUp(DrawGame.context.getCurrentSpace());
-                DrawGame.currentPlayerRotation = 90;
+                DrawGame.context.player.sub.setRotation(90);
+            }
+            else if (e.getCode() == KeyCode.P) {
+                DrawGame.context.player.pickUp(DrawGame.context.world.currentScreen);
             }
             else return;
 
@@ -77,7 +75,7 @@ public class Controller
         }
     };
     public ChangeListener<Number> stageSizeListener = (observable, oldValue, newValue) -> {
-        DrawGame.pixelsPerTile = gameImage.getHeight() / (double)Globals.screenSize;
+        DrawGame.pixelsPerTile = gameImage.getHeight() / (double)Globals.tilesPerScreen;
         DrawGame.drawGame();
     };
 }
