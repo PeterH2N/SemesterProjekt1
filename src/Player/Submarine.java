@@ -9,11 +9,13 @@ public class Submarine extends Entity {
     public Inventory inventory;
     double fuel;
     double oxygen;
+    int hull;
 
     int fuelCapacityLevel = 0;
     int oxygenCapacityLevel = 0;
     int pickupRadiusLevel = 0;
     int inventoryCapacityLevel = 0;
+    int hullStrengthLevel = 0;
 
     // position is only relative to current screen
     public int x = (Globals.tilesPerScreen / 2);
@@ -24,6 +26,7 @@ public class Submarine extends Entity {
         super(new Point(0, 0));
         fuel = Globals.fuelUpgrades[fuelCapacityLevel];
         oxygen = Globals.oxygenUpgrades[oxygenCapacityLevel];
+        hull = Globals.hullStrengthUpgrades[hullStrengthLevel];
         inventory = new Inventory(Globals.inventoryUpgrades[inventoryCapacityLevel]);
     }
 
@@ -39,6 +42,10 @@ public class Submarine extends Entity {
 
     public int upgradeOxygenLevel() {
         return ++oxygenCapacityLevel;
+    }
+
+    public int upgradeHullStrengthLevel() {
+        return ++hullStrengthLevel;
     }
 
     public int upgradePickupRadius() {
@@ -59,6 +66,13 @@ public class Submarine extends Entity {
     
     public int getFuelCapacityLevel() {
         return fuelCapacityLevel;
+    }
+
+    public int getOxygenCapacityLevel() {
+        return oxygenCapacityLevel;
+    }
+    public int getHullStrengthLevel() {
+        return hullStrengthLevel;
     }
 
     public double getOxygenCapacity() {
@@ -165,7 +179,7 @@ public class Submarine extends Entity {
         if (dir.equals("down")) {
             if (z >= Globals.layers - 1)
                 return false;
-            if (currentScreen.map[y][x][z+1].available) {
+            if (currentScreen.map[y][x][z+1].available && hullStrengthLevel > 0) {
                 z++;
                 return true;
             }
