@@ -13,24 +13,24 @@ import java.util.Map;
 
 public class WasteType {
     public static List<String> wasteTypeKeys;
-    static Map<String, WasteType> wasteTypes;
+    public static Map<String, WasteType> wasteTypes;
     String name;
     String description;
     String materialKey;
     double volume;
-
-
+    double imageScale;
 
     static
     {
         init();
     }
 
-    WasteType(String name, String description, String materialKey, double volume) {
+    WasteType(String name, String description, String materialKey, double volume, double imageScale) {
         this.name = name;
         this.description = description;
         this.materialKey = materialKey;
         this.volume = volume;
+        this.imageScale = imageScale;
     }
 
     static WasteType getType(String key) {
@@ -70,4 +70,8 @@ public class WasteType {
                "Decay Time: " + material().decayTime;
    }
 
+    public double getImageScale()
+    {
+        return imageScale;
+    }
 }

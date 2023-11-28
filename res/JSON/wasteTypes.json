@@ -3,48 +3,63 @@
     "name": "default",
     "description": "default",
     "materialKey": "default",
-    "volume": -1.0
+    "volume": -1.0,
+    "imageScale" : 1.0
   },
   "0.5 PET Bottle": {
     "name": "0.5 PET Bottle",
     "description": "Half litre Bottle for beverages",
     "materialKey": "PET",
-    "volume": 1.3E-5
+    "volume": 1.3E-5,
+    "imageScale" : 0.7
   },
   "Glass Bottle": {
     "name": "Glass Bottle",
     "description": "Half litre glass bottle for beverages",
     "materialKey": "Glass",
-    "volume": 5.3E-5
+    "volume": 5.3E-5,
+    "imageScale" : 1.0
   },
   "ALU Can": {
     "name": "ALU Can",
     "description": "Aluminum can for beverages",
     "materialKey": "ALU",
-    "volume": 5.0E-6
+    "volume": 5.0E-6,
+    "imageScale" : 0.5
   },
   "0.5 HDPE Bottle": {
     "name": "0.5 HDPE Bottle",
     "description": "Half litre HDPE Bottle for beverages",
     "materialKey": "HDPE",
-    "volume": 1.3E-5
+    "volume": 1.3E-5,
+    "imageScale" : 0.6
   },
   "Styrofoam": {
     "name": "Styrofoam",
     "description": "Piece of styrofoam",
     "materialKey": "PS",
-    "volume": 6E-3
+    "volume": 6E-3,
+    "imageScale" : 0.6
   },
   "Bubble Wrap": {
     "name": "Bubble Wrap",
     "description": "Piece of bubble wrap, sadly all popped:(",
     "materialKey": "LDPE",
-    "volume": 3E-5
+    "volume": 3E-5,
+    "imageScale" : 0.8
   },
   "Diaper": {
     "name": "Diaper",
     "description": "Disposable Diaper. It smells",
     "materialKey": "PP",
-    "volume": 5E-4
+    "volume": 5E-4,
+    "imageScale" : 0.8
+  },
+  "PVC Pipe": {
+    "name": "PVC Pipe",
+    "description": "Pipe used for plumbing",
+    "materialKey": "PVC",
+    "volume": 5E-4,
+    "imageScale" : 0.9
   }
 }

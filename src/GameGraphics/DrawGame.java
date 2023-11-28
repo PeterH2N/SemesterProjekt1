@@ -3,7 +3,7 @@ package GameGraphics;
 import Context.Context;
 import Entity.Entity;
 import Globals.Globals;
-import Items.WasteItem;
+import Items.*;
 import MapGeneration.MapGenerator;
 import World.Screen;
 import javafx.scene.SnapshotParameters;
@@ -14,6 +14,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 
 import java.io.File;
+import java.util.HashMap;
 
 public class DrawGame
 {
@@ -25,8 +26,7 @@ public class DrawGame
 
     static Image currentLayerImage;
     static Image playerImage;
-    static Image bottleImage;
-
+    static HashMap<String, Image> wasteTypeImages = new HashMap<>();
     static Image grassImage;
     static Image grassEdgeTopImage;
     static Image grassEdgeLeftImage;
@@ -39,9 +39,6 @@ public class DrawGame
         // get player sprite
         File file = new File(Globals.spritePath + "sub.png");
         playerImage = new Image(file.toURI().toString());
-        // get bottle sprite
-        file = new File(Globals.spritePath + "bottle.png");
-        bottleImage = new Image(file.toURI().toString());
         // get grass sprites
         file = new File(Globals.spritePath + "Surfaces/Grass/grass.png");
         grassImage = new Image(file.toURI().toString());
@@ -61,6 +58,14 @@ public class DrawGame
         // get water sprite
         file = new File(Globals.spritePath + "Surfaces/Water/water.png");
         waterImage = new Image(file.toURI().toString());
+
+        // get waste item type images
+        for (String typeKey : WasteType.wasteTypeKeys) {
+            String path = Globals.spritePath + "WasteTypes/" + typeKey + ".png";
+            file = new File(path);
+            Image img = new Image(file.toURI().toString());
+            wasteTypeImages.put(typeKey, img);
+        }
     }
     public static void drawGame() {
         // for now, we are just drawing the basic layer image to the screen
@@ -83,18 +88,23 @@ public class DrawGame
     }
 
     static void drawWasteItem(WasteItem item) {
-        // in the future, change sprite dependent on the kind of waste
+
+        String key = item.getName();
+
+        double imageScale = WasteType.wasteTypes.get(key).getImageScale();
+        double scale = pixelsPerTile * imageScale;
+
         double dx = item.getPosition().x * pixelsPerTile;
         double dy = item.getPosition().y * pixelsPerTile;
 
         // rotate image
-        ImageView iv = new ImageView(bottleImage);
+        ImageView iv = new ImageView(wasteTypeImages.get(key));
         iv.setRotate(item.getRotation());
         SnapshotParameters params = new SnapshotParameters();
         params.setFill(Color.TRANSPARENT);
         Image rotatedImage = iv.snapshot(params, null);
 
-        canvas.getGraphicsContext2D().drawImage(rotatedImage, dx, dy, pixelsPerTile, pixelsPerTile);
+        canvas.getGraphicsContext2D().drawImage(rotatedImage, dx + scale * 0.5, dy + scale * 0.5, scale, scale);
 
     }
 
@@ -107,13 +117,15 @@ public class DrawGame
         double y = subY * pixelsPerTile;
         GraphicsContext gc = canvas.getGraphicsContext2D();
 
+        double scale = pixelsPerTile * 0.4;
+
         // draw with proper rotation
         ImageView iv = new ImageView(playerImage);
         iv.setRotate(context.player.sub.getRotation());
         SnapshotParameters params = new SnapshotParameters();
         params.setFill(Color.TRANSPARENT);
         Image rotatedImage = iv.snapshot(params, null); // maybe this solution is not the best, but it works
-        gc.drawImage(rotatedImage, x, y, pixelsPerTile, pixelsPerTile);
+        gc.drawImage(rotatedImage, x - scale * 0.5, y - scale * 0.5, pixelsPerTile + scale, pixelsPerTile + scale);
 
     }
 
