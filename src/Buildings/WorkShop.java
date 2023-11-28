@@ -81,7 +81,31 @@ public class WorkShop extends Building {
             player.sub.inventory.removeItem(itemName, amount);
         }
         // lastly, we upgrade
-        player.sub.upgradeFuelLevel();
+        player.sub.upgradeOxygenLevel();
+        return true;
+    }
+
+    public boolean upgradeHullStrength(Player player) {
+        // check if already fully upgraded
+        if (player.sub.getHullStrengthLevel() == Globals.hullStrengthUpgrades.length - 1) {
+            System.out.println("Hull strength is already fully upgraded!");
+            return false;
+        }
+        // make sure we have all the items needed
+        for (int i = 0; i < Globals.hullStrengthUpgradeItemName.length; i++) {
+            if (!player.sub.inventory.containsItems(Globals.hullStrengthUpgradeItemName[i], Globals.hullStrengthUpgradeItemAmount[i][player.sub.getHullStrengthLevel()])) {
+                System.out.println("You dont have the required items!");
+                return false;
+            }
+        }
+        // now we remove the items
+        for (int i = 0; i < Globals.hullStrengthUpgradeItemName.length; i++) {
+            String itemName = Globals.hullStrengthUpgradeItemName[i];
+            int amount = Globals.hullStrengthUpgradeItemAmount[i][player.sub.getHullStrengthLevel()];
+            player.sub.inventory.removeItem(itemName, amount);
+        }
+        // lastly, we upgrade
+        player.sub.upgradeHullStrengthLevel();
         return true;
     }
     public boolean smelt(Player player, int itemSlot) {

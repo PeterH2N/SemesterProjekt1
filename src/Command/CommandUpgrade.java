@@ -52,6 +52,13 @@ public class CommandUpgrade extends BaseCommand implements Command {
             }
         }
 
+        if (parameters[0].equals("hull")){
+            if (workShop.upgradeHullStrength(context.player)) {
+                System.out.println("Upgraded hull strength");
+                return;
+            }
+        }
+
 
         System.out.println("Not a valid upgrade");
     }
