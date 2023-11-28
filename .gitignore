@@ -29,4 +29,5 @@ bin/
 .DS_Store
 
 ### User ###
-#res/MapGen/Images/*.png
+res/MapGen/Images/*.png
+!res/MapGen/Images/
