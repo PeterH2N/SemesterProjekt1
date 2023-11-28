@@ -42,5 +42,7 @@ public class Space
 
     }
 
-
+    public boolean getAnimalPresent() {
+        return animalPresent;
+    }
 }

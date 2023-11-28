@@ -1,6 +1,8 @@
 package Command;
 
 import Context.Context;
+import World.AnimalIndeks;
+import World.World;
 
 public class CommandShow extends BaseCommand implements Command {
 
@@ -22,6 +24,10 @@ public class CommandShow extends BaseCommand implements Command {
         // fuel
         if (parameters[0].equals("fuel")) {
             System.out.println("Fuel level: " + context.player.sub.getFuel() + " / " + context.player.sub.getFuelCapacity() + " litres");
+        }
+        // Animal indeks
+        if (parameters[0].equals("animal")) {
+            System.out.println("Animal Indeks: " + AnimalIndeks.getAnimalIndeks());
         }
 
     }

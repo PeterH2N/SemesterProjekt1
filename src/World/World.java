@@ -54,8 +54,8 @@ public class World {
                     Space current =  map[i][j][k];
                     // Decide whether a space should contribute to the animal indeks
                     if(current.available) {
-                        int chance = (int) (Math.random() * 10);
                         // Decides the odds, currently 20%
+                        int chance = (int) (Math.random() * 10);
                         if(chance > 8){
                             current.createAnimalSpace();
                         }

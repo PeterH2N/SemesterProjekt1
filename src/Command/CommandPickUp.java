@@ -4,7 +4,9 @@ import Buildings.Building;
 import Context.Context;
 import Entity.Entity;
 import Items.Item;
+import Player.Inventory;
 import World.Space;
+
 
 import java.util.ArrayList;
 
@@ -23,6 +25,7 @@ public class CommandPickUp extends BaseCommand implements Command
         }
 
         Space current = context.getCurrentSpace();
+        int currInventoryTotal = context.player.sub.inventory.totalItemsInventory();
         context.player.pickUp(current);
         int itemAmount = 0;
         ArrayList<Building> buildings = new ArrayList<>();
@@ -32,5 +35,14 @@ public class CommandPickUp extends BaseCommand implements Command
             }
         }
         System.out.println("There are " + itemAmount + " items here");
+
+        // If an animal is in tile, assign points to the animal indeks, based of the amount of trash picked up.
+        if (current.getAnimalPresent()){
+            int totalTrashPickedUp = context.player.sub.inventory.totalItemsInventory() - currInventoryTotal;
+            World.AnimalIndeks.trashToIndeks(totalTrashPickedUp);
+        }
+
     }
+
+
 }

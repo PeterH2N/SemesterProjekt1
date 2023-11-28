@@ -3,15 +3,17 @@ package World;
 
 
 public class AnimalIndeks {
-    int animalIndeks;
+    static int animalIndeks;
 
     AnimalIndeks(){
-        this.animalIndeks = 0;
+        animalIndeks = 0;
     }
     // Convert picked up trash to points in the indeks
-    public void trashToIndeks(int totalTrash){
+    public static void trashToIndeks(int totalTrash){
         animalIndeks += totalTrash;
     }
 
-
+    public static int getAnimalIndeks() {
+        return animalIndeks;
+    }
 }
