@@ -35,7 +35,7 @@ public class CommandSmelt extends BaseCommand implements Command {
             return;
         }
         // make sure that player is in a space that contains a workshop
-        Space current = context.getCurrentSpace();
+        /*Space current = context.getCurrentSpace();
         WorkShop workShop = null;
         for (Entity entity : current.entities) {
             if (entity instanceof WorkShop) {
@@ -50,7 +50,7 @@ public class CommandSmelt extends BaseCommand implements Command {
 
         if (workShop.smelt(context.player, slotIndex)){
             System.out.println("Smelted items");
-        }
+        }*/
     }
 
 

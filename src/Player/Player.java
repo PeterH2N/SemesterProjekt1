@@ -28,8 +28,8 @@ public class Player {
          return false;
     }
 
-    public void pickUp(Space space) {
-        sub.pickupItems(space);
+    public void pickUp(Screen screen) {
+        sub.pickupItems(screen);
         sub.fuel -= Globals.fuelConsumptionPerPickUp;
     }
 
