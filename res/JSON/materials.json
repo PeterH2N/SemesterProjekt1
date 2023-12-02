@@ -4,7 +4,7 @@
     "longName": "default",
     "description": "default",
     "density": -1.0,
-    "pricePerKg": -1,
+    "pricePerItem": -1,
     "decayTime": -1
   },
   "Glass": {
@@ -12,7 +12,7 @@
     "longName": "Glass",
     "description": "Glass melted down",
     "density": 2500.0,
-    "pricePerKg": 1000,
+    "pricePerItem": 1000,
     "decayTime": 500
   },
   "ALU": {
@@ -20,7 +20,7 @@
     "longName": "Aluminum",
     "description": "The most widely used metal for packaging. Could be useful for upgrading the submarine",
     "density": 2710.0,
-    "pricePerKg": 550,
+    "pricePerItem": 550,
     "decayTime": 100
   },
   "PVC": {
@@ -28,7 +28,7 @@
     "longName": "Polyvinyl chloride",
     "description": "Commonly used in plumbing",
     "density": 1380.0,
-    "pricePerKg": 200,
+    "pricePerItem": 200,
     "decayTime": 150
   },
   "PET": {
@@ -36,7 +36,7 @@
     "longName": "Polyethylene Terephthalate",
     "description": "",
     "density": 1370.0,
-    "pricePerKg": 150,
+    "pricePerItem": 150,
     "decayTime": 100
   },
   "HDPE": {
@@ -44,7 +44,7 @@
     "longName": "High Density Polyethylene",
     "description": "",
     "density": 1500.0,
-    "pricePerKg": 100,
+    "pricePerItem": 100,
     "decayTime": 200
   },
   "LDPE": {
@@ -52,7 +52,7 @@
     "longName": "Low Density Polyethylene",
     "description": "",
     "density": 940.0,
-    "pricePerKg": 100,
+    "pricePerItem": 100,
     "decayTime": 200
   },
   "PP": {
@@ -60,7 +60,7 @@
     "longName": "Poly Propylene",
     "description": "",
     "density": 900.0,
-    "pricePerKg": 100,
+    "pricePerItem": 100,
     "decayTime": 200
   },
   "PS": {
@@ -68,7 +68,7 @@
     "longName": "Poly Styrene",
     "description": "Very light plastic",
     "density": 300.0,
-    "pricePerKg": 100,
+    "pricePerItem": 100,
     "decayTime": 200
   }
 }

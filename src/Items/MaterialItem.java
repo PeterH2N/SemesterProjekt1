@@ -18,6 +18,10 @@ public class MaterialItem extends Item {
         this(materialKey, new Point());
     }
 
+    public Material getMaterial() {
+        return Material.materials.get(materialKey);
+    }
+
     public MaterialItem() {
         this("default");
     }

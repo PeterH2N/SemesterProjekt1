@@ -9,13 +9,13 @@ import Globals.Globals;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-class Material {
+public class Material {
     static Map<String, Material> materials;
     String name;
     String longName;
     String description;
     double density;
-    int pricePerKg;
+    public int pricePerItem;
     int decayTime;
 
     Material(String name, String longName, String description, double density, int price, int decayTime) {
@@ -23,7 +23,7 @@ class Material {
         this.longName = longName;
         this.description = description;
         this.density = density;
-        this.pricePerKg = price;
+        this.pricePerItem = price;
         this.decayTime = decayTime;
     }
 

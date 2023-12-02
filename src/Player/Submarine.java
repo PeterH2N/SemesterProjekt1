@@ -26,6 +26,10 @@ public class Submarine extends Entity {
         inventory = new Inventory(Globals.inventoryUpgrades[inventoryCapacityLevel]);
     }
 
+    public void refuel(double amount) {
+        fuel = Math.min(fuel + amount, getFuelCapacity());
+    }
+
     public int upgradeInventorylevel() {
         inventoryCapacityLevel++;
         inventory.increaseCapacity(getInventoryCapacity());
