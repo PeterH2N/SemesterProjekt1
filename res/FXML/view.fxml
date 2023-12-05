@@ -34,11 +34,11 @@
             <Button text="Sell"/>
         </HBox>
         <VBox>
-            <Button text="Upgrade Inventory" onAction="#handleUpgradeInventory"/>
+            <Button text="Upgrade Inventory Capacity" onAction="#handleUpgradeInventory"/>
             <Button text="Upgrade Fuel Capacity" onAction="#handleUpgradeFuelCapacity"/>
-            <Button text="Upgrade Pickup Radius"/>
-            <Button text="Upgrade Oxygen Capacity"/>
-
+            <Button text="Upgrade Pickup Radius" onAction="#handleUpgradePickupRadius"/>
+            <Button text="Upgrade Oxygen Capacity" onAction="#handleUpgradeOxygenCapacity"/>
+            <Button text="Upgrade Hull Strength" onAction="#handleUpgradeHullStrength"/>
         </VBox>
 
     </VBox>

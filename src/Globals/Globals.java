@@ -10,8 +10,8 @@ public class Globals {
     final public static double workShopSpawnRate = 0.2;
 
     final public static int defaultItemStackSize = 16;
-    final public static double fuelConsumptionPerMove = 0.0;
-    final public static double fuelConsumptionPerPickUp = 5.0;
+    final public static double fuelConsumptionPerMove = 0.1;
+    final public static double fuelConsumptionPerPickUp = 0.5;
     final public static double oxygenConsumptionPerMove = 50;
 
     final public static String[] inventoryUpgradeItemName = {"Glass", "PET"};
