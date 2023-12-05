@@ -109,6 +109,30 @@ public class WorkShop extends Building {
         player.sub.upgradeHullStrengthLevel();
         return true;
     }
+
+    public boolean upgradePickupRadius(Player player) {
+        // check if already fully upgraded
+        if (player.sub.getPickupRadiusLevel() == Globals.pickupRadiusUpgrades.length - 1) {
+            System.out.println("Pickup radius is already fully upgraded!");
+            return false;
+        }
+        // make sure we have all the items needed
+        for (int i = 0; i < Globals.pickupRadiusUpgradeItemName.length; i++) {
+            if (!player.sub.inventory.containsItems(Globals.pickupRadiusUpgradeItemName[i], Globals.pickupRadiusUpgradeItemAmount[i][player.sub.getPickupRadiusLevel()])) {
+                System.out.println("You dont have the required items!");
+                return false;
+            }
+        }
+        // now we remove the items
+        for (int i = 0; i < Globals.pickupRadiusUpgradeItemName.length; i++) {
+            String itemName = Globals.pickupRadiusUpgradeItemName[i];
+            int amount = Globals.pickupRadiusUpgradeItemAmount[i][player.sub.getPickupRadiusLevel()];
+            player.sub.inventory.removeItem(itemName, amount);
+        }
+        // lastly, we upgrade
+        player.sub.upgradePickupRadius();
+        return true;
+    }
     public boolean smelt(Player player, int itemSlot) {
         InventorySlot slot = player.sub.inventory.slots[itemSlot];
 

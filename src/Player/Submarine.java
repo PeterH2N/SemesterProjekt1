@@ -75,6 +75,9 @@ public class Submarine extends Entity {
     public int getHullStrengthLevel() {
         return hullStrengthLevel;
     }
+    public int getPickupRadiusLevel() {
+        return pickupRadiusLevel;
+    }
 
     public double getOxygenCapacity() {
         return Globals.oxygenUpgrades[oxygenCapacityLevel];
