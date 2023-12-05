@@ -13,22 +13,33 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.ListView?>
 <HBox fx:id="hroot" xmlns:fx="http://javafx.com/fxml" prefHeight="${screen.visualBounds.height}" prefWidth="${screen.visualBounds.width}" fx:controller="GameGraphics.Controller">
     <fx:define>
         <Screen fx:factory="getPrimary" fx:id="screen" />
     </fx:define>
 
-    <VBox spacing="50" prefHeight="${hroot.height}" prefWidth="${hroot.width}" style="-fx-background-color: #b3b3b3; -fx-border-color: black; -fx-border-width: 3;">
+    <VBox spacing="5" prefHeight="${hroot.height}" prefWidth="${hroot.width}" style="-fx-background-color: #b3b3b3; -fx-border-color: black; -fx-border-width: 3;">
         <!-- menu for info and settings? -->
-        <HBox prefHeight="50">
+        <HBox>
             <Label fx:id="fuelCapacityLabel"/>
         </HBox>
         <!-- Inventory view -->
-        <!-- Workshop -->
+        <ListView fx:id="inventoryList" maxHeight="${hroot.height*0.33}"/>
+        <!-- Actions -->
         <HBox>
-            <Button text="Upgrade Fuel Capacity"/>
-            <Button text="Upgrade Inventory"/>
+            <Button text="Delete" onAction="#handleDeleteItemButton"/>
+            <Button text="Smelt" onAction="#handleSmeltButton"/>
+            <Button text="Buy"/>
+            <Button text="Sell"/>
         </HBox>
+        <VBox>
+            <Button text="Upgrade Inventory" onAction="#handleUpgradeInventory"/>
+            <Button text="Upgrade Fuel Capacity" onAction="#handleUpgradeFuelCapacity"/>
+            <Button text="Upgrade Pickup Radius"/>
+            <Button text="Upgrade Oxygen Capacity"/>
+
+        </VBox>
 
     </VBox>
     <StackPane  minWidth="${hroot.height}" prefHeight="${hroot.height}">
