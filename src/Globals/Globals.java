@@ -15,9 +15,9 @@ public class Globals {
     final public static double oxygenConsumptionPerMove = 50;
 
     final public static String[] inventoryUpgradeItemName = {"Glass", "PET"};
-    final public static String[] fuelUpgradeItemName = {"AlU"};
+    final public static String[] fuelUpgradeItemName = {"ALU"};
     final public static String[] oxygenUpgradeItemName = {"LDPE", "PVC"};
-    final public static String[] hullStrengthUpgradeItemName = {"Alu", "Glass", "HDPE"};
+    final public static String[] hullStrengthUpgradeItemName = {"ALU", "Glass", "HDPE"};
     final public static int[][] inventoryUpgradeItemAmount = {{3, 6, 9, 12, 15},
             {2, 4, 6, 8, 10}};
     final public static int[][] fuelUpgradeItemAmount = {{2, 4, 6, 8, 10}};
