@@ -33,6 +33,13 @@ public class Player {
         sub.fuel -= Globals.fuelConsumptionPerPickUp;
     }
 
+    public void deleteItem(int slotIndex, int amount) {
+        if (sub.inventory.slots[slotIndex] == null)
+            return;
+        String itemName = sub.inventory.slots[slotIndex].item.getName();
+        sub.inventory.removeItem(itemName, amount);
+    }
+
     public int[] getPosition() {
         int[] p = new int[3];
         p[0] = sub.x;

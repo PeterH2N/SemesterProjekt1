@@ -1,5 +1,6 @@
 package Player;
 
+import Buildings.WorkShop;
 import Entity.*;
 import Items.Item;
 import World.*;
@@ -78,6 +79,9 @@ public class Submarine extends Entity {
 
     // picks up all the items in range, and adds them to inventory, unless inventory is full
     void pickupItems(Screen screen) {
+        if (fuel < Globals.fuelConsumptionPerPickUp)
+            return;
+
         for (int i = 0; i < screen.entities.size(); i++) {
             Point subPos = new Point((double)x + 0.5, (double)y + 0.5);
             Entity entity = screen.entities.get(i);
@@ -179,6 +183,22 @@ public class Submarine extends Entity {
             }
         }
         return false;
+    }
+
+    public WorkShop isByWorkShop(Screen screen) {
+        // find workshop on the screen
+        for (Entity entity : screen.entities) {
+            if (!(entity instanceof WorkShop))
+                continue;
+
+            // if within pickup range
+            Point playerPos = new Point(x + 0.5, y + 0.5);
+
+            if (Point.distance(playerPos, entity.getPosition()) <= getPickUpRadius()) {
+                return (WorkShop) entity;
+            }
+        }
+        return null;
     }
 
 }
