@@ -4,6 +4,7 @@ package World;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class World {
 
@@ -11,7 +12,9 @@ public class World {
     public int currentX;
     public int currentY;
     public Screen currentScreen;
-    Map<String, Screen> screens = new HashMap<String, Screen>();
+    Map<String, Screen> screens = new HashMap<>();
+
+    Random rand = new Random();
 
     public World() {
         // Make first screen
@@ -21,8 +24,7 @@ public class World {
         // move to this screen, so the four adjacent screens are generated
         moveToScreen(currentX, currentY);
 
-        //Space spawn = map[Globals.worldSize / 2][Globals.worldSize / 2][0];
-        //spawn.createWorkShop();
+        rand.setSeed(10843823 ^ 0x5f9ec9);
     }
 
     public Screen getAdjacentScreen(String dir) {
@@ -63,7 +65,7 @@ public class World {
             return;
         }
 
-        Screen newScreen = new Screen(x, y);
+        Screen newScreen = new Screen(x, y, rand);
         screens.put(key, newScreen);
 
     }

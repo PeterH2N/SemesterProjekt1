@@ -19,7 +19,7 @@ public class Space
 
 
     void createWorkShop(){
-        Entity w = new WorkShop();
+        Entity w = new WorkShop(new Point());
         //entities.add(w);
     }
 
