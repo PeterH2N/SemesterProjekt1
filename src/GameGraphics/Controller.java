@@ -1,15 +1,21 @@
 package GameGraphics;
 
+import Buildings.WorkShop;
 import Globals.Globals;
+import Player.InventorySlot;
 import javafx.beans.value.ChangeListener;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+
+import Items.Item;
 
 public class Controller
 {
@@ -22,17 +28,11 @@ public class Controller
         gameImage.getGraphicsContext2D().setImageSmoothing(false);
         DrawGame.canvas = gameImage;
         DrawGame.setLayerImage();
-        updateLabels();
+        updateFields();
     }
 
     @FXML
-    private Button upgradeFuelCapacityButton;
-
-    @FXML
-    private TextField smeltTextField;
-
-    @FXML
-    private Button smeltButton;
+    private ListView<InventorySlot> inventoryList;
 
     @FXML
     public Canvas gameImage;
@@ -47,12 +47,64 @@ public class Controller
         fuelCapacityLabel.setText(fuelText);
     }
 
+    void updateFields() {
+        updateLabels();
+        initInventoryList();
+    }
+
+    void initInventoryList() {
+        inventoryList.getItems().clear();
+        // add all slots
+        for (InventorySlot slot : DrawGame.context.player.sub.inventory.slots) {
+            inventoryList.getItems().add(slot);
+        }
+
+    }
+    @FXML
+    private void handleDeleteItemButton(ActionEvent event) {
+        int slotIndex = inventoryList.getSelectionModel().getSelectedIndex();
+        DrawGame.context.player.deleteItem(slotIndex, 1);
+        updateFields();
+    }
+
+    @FXML
+    private void handleSmeltButton(ActionEvent event) {
+        int slotIndex = inventoryList.getSelectionModel().getSelectedIndex();
+        // if workshop is near
+        WorkShop workShop = DrawGame.context.player.sub.isByWorkShop(DrawGame.context.world.currentScreen);
+        if (workShop == null)
+            return;
+
+        workShop.smelt(DrawGame.context.player, slotIndex);
+        updateFields();
+    }
+
+    @FXML
+    private void handleUpgradeInventory(ActionEvent event) {
+        WorkShop workShop = DrawGame.context.player.sub.isByWorkShop(DrawGame.context.world.currentScreen);
+        if (workShop == null)
+            return;
+
+        workShop.upgradeInventoryCapacity(DrawGame.context.player);
+        updateFields();
+    }
+
+    @FXML
+    private void handleUpgradeFuelCapacity(ActionEvent event) {
+        WorkShop workShop = DrawGame.context.player.sub.isByWorkShop(DrawGame.context.world.currentScreen);
+        if (workShop == null)
+            return;
+
+        workShop.upgradeFuelCapacity(DrawGame.context.player);
+        updateFields();
+    }
+
     public EventHandler<KeyEvent> anyKeyEvent = new EventHandler<KeyEvent>()
     {
         @Override
         public void handle(KeyEvent event)
         {
-            updateLabels();
+            updateFields();
             DrawGame.setLayerImage();
             DrawGame.drawGame();
 
