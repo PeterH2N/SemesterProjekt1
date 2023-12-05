@@ -25,7 +25,7 @@ public class Shop extends Building {
         MaterialItem item = (MaterialItem) player.sub.inventory.slots[slot].item;
         double money = amount * item.getMaterial().pricePerItem;
         player.addToBalance((int)money);
-        player.sub.inventory.removeItem(item.getName(), amount);
+        player.sub.inventory.removeItemFromSlot(slot, amount);
 
         return true;
     }
@@ -33,6 +33,8 @@ public class Shop extends Building {
         double price = Globals.fuelPricePerLitre * amount;
 
         // early exit
+        if (player.sub.getFuel() + amount > player.sub.getFuelCapacity())
+            return false;
         if (player.getBalance() < price)
             return false;
 

@@ -34,7 +34,7 @@ public class Screen
         }
 
         setTerrain(MapGenerator.makeLayerImage(MapGenerator.makeNoiseImage(xStart, yStart), x + " " + y));
-        createWaste((int)(Globals.tilesPerScreen * 3), 0);
+        createWaste((int)(Globals.tilesPerScreen * 2), 0);
         makeBuildings();
     }
 
@@ -44,7 +44,7 @@ public class Screen
             // get random waste type
             String randomKey = "default";
             while (randomKey.equals("default")) {
-                int randomIndex = (int) (Math.random() * (WasteType.wasteTypeKeys.size() - 1));
+                int randomIndex = (int) (Math.random() * (WasteType.wasteTypeKeys.size()));
                 randomKey = WasteType.wasteTypeKeys.get(randomIndex);
             }
             // random point within "screensize"
@@ -52,13 +52,12 @@ public class Screen
             double ix = 0;
             double iy = 0;
             while (!available) {
-                ix = Math.random() * (Globals.tilesPerScreen - 1);
-                iy = Math.random() * (Globals.tilesPerScreen - 1);
-                available = map[(int)ix][(int)ix][layer].available;
+                ix = Math.random() * (Globals.tilesPerScreen);
+                iy = Math.random() * (Globals.tilesPerScreen);
+                available = map[(int)iy][(int)ix][layer].available;
             }
-            double rotation = Math.random() * 360.0;
             Entity e = new WasteItem(randomKey, new Point(ix, iy));
-            e.setRotation(rotation);
+            e.setRotation(Math.random() * 360.0);
             entities.add(e);
         }
 

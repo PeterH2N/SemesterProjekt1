@@ -147,7 +147,7 @@ public class WorkShop extends Building {
 
         int amount = slot.amount;
 
-        player.sub.inventory.removeItem(slot.item.getName(), amount);
+        player.sub.inventory.removeItemFromSlot(itemSlot, amount);
         player.sub.inventory.addItem(new MaterialItem(materialKey), amount);
         return true;
     }

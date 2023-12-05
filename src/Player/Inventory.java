@@ -78,6 +78,20 @@ public class Inventory {
         return addItem(item, 1);
     }
 
+    public boolean removeItemFromSlot(int index, int amount) {
+        InventorySlot slot = slots[index];
+        if (slot == null)
+            return false;
+        if (amount > slot.amount)
+            return false;
+
+        slot.amount -= amount;
+        if (slot.amount <= 0)
+            slots[index] = null;
+
+        return true;
+    }
+
     public boolean removeItem(String itemName, int amount) {
         ArrayList<Integer> indices = new ArrayList<>();
         int sumAmount = 0;

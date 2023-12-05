@@ -126,8 +126,8 @@ public class DrawGame
         double imageScale = WasteType.wasteTypes.get(key).getImageScale();
         double scale = pixelsPerTile * imageScale;
 
-        double dx = item.getPosition().x * pixelsPerTile;
-        double dy = item.getPosition().y * pixelsPerTile;
+        double dx = item.getPosition().x * pixelsPerTile - pixelsPerTile * 0.5;
+        double dy = item.getPosition().y * pixelsPerTile - pixelsPerTile * 0.5;
 
         // rotate image
         ImageView iv = new ImageView(wasteTypeImages.get(key));

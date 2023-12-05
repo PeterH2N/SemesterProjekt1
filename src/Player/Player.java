@@ -54,8 +54,8 @@ public class Player {
     public void deleteItem(int slotIndex, int amount) {
         if (sub.inventory.slots[slotIndex] == null)
             return;
-        String itemName = sub.inventory.slots[slotIndex].item.getName();
-        sub.inventory.removeItem(itemName, amount);
+
+        sub.inventory.removeItemFromSlot(slotIndex, amount);
     }
 
     public int[] getPosition() {
