@@ -1,5 +1,7 @@
 package GameGraphics;
 
+import Buildings.Building;
+import Buildings.Shop;
 import Buildings.WorkShop;
 import Context.Context;
 import Entity.Entity;
@@ -38,6 +40,8 @@ public class DrawGame
 
     static Image workShopImage;
 
+    static Image shopImage;
+
     static {
         // get player sprite
         File file = new File(Globals.spritePath + "sub.png");
@@ -66,6 +70,9 @@ public class DrawGame
         file = new File(Globals.spritePath + "Buildings/WorkShop.png");
         workShopImage = new Image(file.toURI().toString());
 
+        file = new File(Globals.spritePath + "Buildings/Shop.png");
+        shopImage = new Image(file.toURI().toString());
+
         // get waste item type images
         for (String typeKey : WasteType.wasteTypeKeys) {
             String path = Globals.spritePath + "WasteTypes/" + typeKey + ".png";
@@ -90,18 +97,26 @@ public class DrawGame
             if (entity instanceof WasteItem) {
                 drawWasteItem((WasteItem) entity);
             }
-            else if (entity instanceof WorkShop) {
-                drawWorkShop((WorkShop) entity);
+            else if (entity instanceof Building) {
+                drawBuilding((Building) entity);
             }
         }
 
     }
 
-    static void drawWorkShop(WorkShop workShop) {
-        double x = workShop.getPosition().x;
-        double y = workShop.getPosition().y;
+    static void drawBuilding(Building building) {
+        Image image = null;
+        if (building instanceof WorkShop)
+            image = workShopImage;
+        else if (building instanceof Shop)
+            image = shopImage;
+        else
+            return;
 
-        canvas.getGraphicsContext2D().drawImage(workShopImage, x * pixelsPerTile - pixelsPerTile * 0.5, y * pixelsPerTile - pixelsPerTile * 0.5, pixelsPerTile, pixelsPerTile);
+        double x = building.getPosition().x;
+        double y = building.getPosition().y;
+
+        canvas.getGraphicsContext2D().drawImage(image, x * pixelsPerTile - pixelsPerTile * 0.5, y * pixelsPerTile - pixelsPerTile * 0.5, pixelsPerTile, pixelsPerTile);
     }
 
     static void drawWasteItem(WasteItem item) {

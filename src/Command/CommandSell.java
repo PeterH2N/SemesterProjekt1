@@ -18,7 +18,7 @@ public class CommandSell extends BaseCommand implements Command {
             return;
         }
 
-        if (parameters[0].equals("fuel")) {
+        /*if (parameters[0].equals("fuel")) {
             int amount = Integer.getInteger(parameters[1]);
             Shop shop = null;
             for (Entity entity : context.getCurrentSpace().entities) {
@@ -31,7 +31,7 @@ public class CommandSell extends BaseCommand implements Command {
                 return;
 
             shop.buyFuel(context.player, amount);
-        }
+        }*/
 
     }
 }

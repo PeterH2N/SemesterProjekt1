@@ -1,5 +1,6 @@
 package GameGraphics;
 
+import Buildings.Shop;
 import Buildings.WorkShop;
 import Globals.Globals;
 import Player.InventorySlot;
@@ -40,11 +41,20 @@ public class Controller
     @FXML
     Label fuelCapacityLabel;
 
+    @FXML
+    Label balanceLabel;
+
     void updateLabels() {
-        double fuelLevel = DrawGame.context.player.sub.getFuel();
-        double fuelCapacity = DrawGame.context.player.sub.getFuelCapacity();
+        // fuel capacity
+        int fuelLevel = (int)DrawGame.context.player.sub.getFuel();
+        int fuelCapacity = (int)DrawGame.context.player.sub.getFuelCapacity();
         String fuelText = "Fuel: " + fuelLevel + "/" + fuelCapacity;
         fuelCapacityLabel.setText(fuelText);
+
+        // player balance
+        double balance = (double) DrawGame.context.player.getBalance() / 100;
+        balanceLabel.setText("Balance: $" + balance);
+
     }
 
     void updateFields() {
@@ -66,7 +76,8 @@ public class Controller
         if (slotIndex == -1)
             return;
 
-        DrawGame.context.player.deleteItem(slotIndex, 1);
+        int amount = DrawGame.context.player.sub.inventory.slots[slotIndex].amount;
+        DrawGame.context.player.deleteItem(slotIndex, amount);
         updateFields();
     }
 
@@ -81,6 +92,32 @@ public class Controller
             return;
 
         workShop.smelt(DrawGame.context.player, slotIndex);
+        updateFields();
+    }
+
+    @FXML
+    private void handleBuyButton(ActionEvent event) {
+        // if shop is near
+        Shop shop = DrawGame.context.player.sub.isByShop(DrawGame.context.world.currentScreen);
+        if (shop == null)
+            return;
+
+        shop.buyFuel(DrawGame.context.player, 10.0);
+        updateFields();
+    }
+
+    @FXML
+    private void handleSellButton(ActionEvent event) {
+        int slotIndex = inventoryList.getSelectionModel().getSelectedIndex();
+        if (slotIndex == -1)
+            return;
+        // if shop is near
+        Shop shop = DrawGame.context.player.sub.isByShop(DrawGame.context.world.currentScreen);
+        if (shop == null)
+            return;
+
+        int amount = DrawGame.context.player.sub.inventory.slots[slotIndex].amount;
+        shop.sellItem(DrawGame.context.player, slotIndex, amount);
         updateFields();
     }
 
