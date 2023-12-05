@@ -9,10 +9,14 @@ public class Globals {
 
     final public static double workShopSpawnRate = 0.2;
 
+    final public static double shopSpawnRate = 0.5;
+
     final public static int defaultItemStackSize = 16;
     final public static double fuelConsumptionPerMove = 0.1;
     final public static double fuelConsumptionPerPickUp = 0.5;
     final public static double oxygenConsumptionPerMove = 50;
+
+    final public static double fuelPricePerLitre = 200;
 
     final public static String[] inventoryUpgradeItemName = {"Glass", "PET"};
     final public static String[] fuelUpgradeItemName = {"ALU"};
@@ -36,4 +40,5 @@ public class Globals {
     final public static double[] oxygenUpgrades = {2000, 2500, 3000, 3500, 4000, 4500};
     final public static double[] pickupRadiusUpgrades = {2.0, 2.25, 2.5, 3.0, 3.5};
     final public static int[] hullStrengthUpgrades = {1, 2, 3};
+
 }

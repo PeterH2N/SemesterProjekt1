@@ -11,6 +11,14 @@ public class Point {
     public Point() {
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Point p))
+            return false;
+
+        return (x == p.x && y == p.y);
+    }
+
     static public double distance(Point a, Point b) {
         double x = b.x - a.x;
         double y = b.y - a.y;

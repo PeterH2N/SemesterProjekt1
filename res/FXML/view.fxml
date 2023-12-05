@@ -21,8 +21,9 @@
 
     <VBox spacing="5" prefHeight="${hroot.height}" prefWidth="${hroot.width}" style="-fx-background-color: #b3b3b3; -fx-border-color: black; -fx-border-width: 3;">
         <!-- menu for info and settings? -->
-        <HBox>
+        <HBox spacing="5">
             <Label fx:id="fuelCapacityLabel"/>
+            <Label fx:id="balanceLabel"/>
         </HBox>
         <!-- Inventory view -->
         <ListView fx:id="inventoryList" maxHeight="${hroot.height*0.33}"/>
@@ -30,8 +31,8 @@
         <HBox>
             <Button text="Delete" onAction="#handleDeleteItemButton"/>
             <Button text="Smelt" onAction="#handleSmeltButton"/>
-            <Button text="Buy"/>
-            <Button text="Sell"/>
+            <Button text="Buy" onAction="#handleBuyButton"/>
+            <Button text="Sell" onAction="#handleSellButton"/>
         </HBox>
         <VBox>
             <Button text="Upgrade Inventory Capacity" onAction="#handleUpgradeInventory"/>

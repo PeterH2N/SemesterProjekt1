@@ -13,11 +13,15 @@ public class Player {
         balance = 10000; // 100 dollars
     }
 
-    int addToBalance(int p) {
+    public int getBalance() {
+        return balance;
+    }
+
+    public int addToBalance(int p) {
         return (balance += p);
     }
 
-    int removeFromBalance(int m) {
+    public int removeFromBalance(int m) {
         return (balance -= m);
     }
 
@@ -50,8 +54,8 @@ public class Player {
     public void deleteItem(int slotIndex, int amount) {
         if (sub.inventory.slots[slotIndex] == null)
             return;
-        String itemName = sub.inventory.slots[slotIndex].item.getName();
-        sub.inventory.removeItem(itemName, amount);
+
+        sub.inventory.removeItemFromSlot(slotIndex, amount);
     }
 
     public int[] getPosition() {

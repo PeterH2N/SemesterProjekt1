@@ -1,5 +1,6 @@
 package Player;
 
+import Buildings.Shop;
 import Buildings.WorkShop;
 import Entity.*;
 import Items.Item;
@@ -29,6 +30,10 @@ public class Submarine extends Entity {
         oxygen = Globals.oxygenUpgrades[oxygenCapacityLevel];
         hull = Globals.hullStrengthUpgrades[hullStrengthLevel];
         inventory = new Inventory(Globals.inventoryUpgrades[inventoryCapacityLevel]);
+    }
+
+    public void refuel(double amount) {
+        fuel = Math.min(fuel + amount, getFuelCapacity());
     }
 
     public int upgradeInventorylevel() {
@@ -218,4 +223,19 @@ public class Submarine extends Entity {
         return null;
     }
 
+    public Shop isByShop(Screen screen)
+    {
+        for (Entity entity : screen.entities) {
+            if (!(entity instanceof Shop))
+                continue;
+
+            // if within pickup range
+            Point playerPos = new Point(x + 0.5, y + 0.5);
+
+            if (Point.distance(playerPos, entity.getPosition()) <= getPickUpRadius()) {
+                return (Shop) entity;
+            }
+        }
+        return null;
+    }
 }

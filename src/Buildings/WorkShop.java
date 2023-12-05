@@ -145,10 +145,10 @@ public class WorkShop extends Building {
         WasteItem waste = (Items.WasteItem) slot.item;
         String materialKey = waste.getMaterialKey();
 
-        int materialAmount = slot.amount;
+        int amount = slot.amount;
 
-        player.sub.inventory.removeItem(slot.item.getName(), materialAmount);
-        player.sub.inventory.addItem(new MaterialItem(materialKey), materialAmount);
+        player.sub.inventory.removeItemFromSlot(itemSlot, amount);
+        player.sub.inventory.addItem(new MaterialItem(materialKey), amount);
         return true;
     }
 }
