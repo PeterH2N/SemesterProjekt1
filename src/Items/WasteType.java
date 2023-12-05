@@ -59,14 +59,14 @@ public class WasteType {
     }
 
     public int getPrice() {
-        return (int) ((double) material().pricePerKg * getWeight());
+        return (int) ((double) material().pricePerItem * getWeight());
     }
 
 
    public String getInfo(){
         return "Name: " + material().name + "\n" +
                "Density: " + material().density + "\n" +
-               "Price Per Kg: " + material().pricePerKg + "\n" +
+               "Price Per Kg: " + material().pricePerItem + "\n" +
                "Decay Time: " + material().decayTime;
    }
 

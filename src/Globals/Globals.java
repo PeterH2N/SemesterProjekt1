@@ -14,6 +14,8 @@ public class Globals {
     final public static double fuelConsumptionPerPickUp = 0.5;
     final public static double oxygenConsumptionPerMove = 50;
 
+    final public static double fuelPricePerLitre = 100;
+
     final public static String[] inventoryUpgradeItemName = {"Glass", "PET"};
     final public static String[] fuelUpgradeItemName = {"ALU"};
     final public static String[] oxygenUpgradeItemName = {"LDPE", "PVC"};
