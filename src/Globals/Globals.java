@@ -10,14 +10,15 @@ public class Globals {
     final public static double workShopSpawnRate = 0.2;
 
     final public static int defaultItemStackSize = 16;
-    final public static double fuelConsumptionPerMove = 0.0;
-    final public static double fuelConsumptionPerPickUp = 5.0;
+    final public static double fuelConsumptionPerMove = 0.1;
+    final public static double fuelConsumptionPerPickUp = 0.5;
     final public static double oxygenConsumptionPerMove = 50;
 
     final public static String[] inventoryUpgradeItemName = {"Glass", "PET"};
-    final public static String[] fuelUpgradeItemName = {"AlU"};
+    final public static String[] fuelUpgradeItemName = {"ALU"};
     final public static String[] oxygenUpgradeItemName = {"LDPE", "PVC"};
-    final public static String[] hullStrengthUpgradeItemName = {"Alu", "Glass", "HDPE"};
+    final public static String[] hullStrengthUpgradeItemName = {"ALU", "Glass", "HDPE"};
+    final public static String[] pickupRadiusUpgradeItemName = {"LDPE", "PP"};
     final public static int[][] inventoryUpgradeItemAmount = {{3, 6, 9, 12, 15},
             {2, 4, 6, 8, 10}};
     final public static int[][] fuelUpgradeItemAmount = {{2, 4, 6, 8, 10}};
@@ -26,6 +27,8 @@ public class Globals {
     final public static int[][] hullStrengthUpgradeItemAmount = {{3, 6, 9},
             {2, 4, 6},
             {1, 2, 3}};
+    final public static int[][] pickupRadiusUpgradeItemAmount = {{3, 6, 9, 12, 15},
+            {2, 4, 6, 8, 10}};
 
     // Submarine upgrades //
     final public static int[] inventoryUpgrades = {6, 8, 10, 12, 14, 16};

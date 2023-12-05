@@ -63,6 +63,9 @@ public class Controller
     @FXML
     private void handleDeleteItemButton(ActionEvent event) {
         int slotIndex = inventoryList.getSelectionModel().getSelectedIndex();
+        if (slotIndex == -1)
+            return;
+
         DrawGame.context.player.deleteItem(slotIndex, 1);
         updateFields();
     }
@@ -70,6 +73,8 @@ public class Controller
     @FXML
     private void handleSmeltButton(ActionEvent event) {
         int slotIndex = inventoryList.getSelectionModel().getSelectedIndex();
+        if (slotIndex == -1)
+            return;
         // if workshop is near
         WorkShop workShop = DrawGame.context.player.sub.isByWorkShop(DrawGame.context.world.currentScreen);
         if (workShop == null)
@@ -96,6 +101,36 @@ public class Controller
             return;
 
         workShop.upgradeFuelCapacity(DrawGame.context.player);
+        updateFields();
+    }
+
+    @FXML
+    private void handleUpgradeOxygenCapacity(ActionEvent event) {
+        WorkShop workShop = DrawGame.context.player.sub.isByWorkShop(DrawGame.context.world.currentScreen);
+        if (workShop == null)
+            return;
+
+        workShop.upgradeOxygenCapacity(DrawGame.context.player);
+        updateFields();
+    }
+
+    @FXML
+    private void handleUpgradePickupRadius(ActionEvent event) {
+        WorkShop workShop = DrawGame.context.player.sub.isByWorkShop(DrawGame.context.world.currentScreen);
+        if (workShop == null)
+            return;
+
+        workShop.upgradePickupRadius(DrawGame.context.player);
+        updateFields();
+    }
+
+    @FXML
+    private void handleUpgradeHullStrength(ActionEvent event) {
+        WorkShop workShop = DrawGame.context.player.sub.isByWorkShop(DrawGame.context.world.currentScreen);
+        if (workShop == null)
+            return;
+
+        workShop.upgradeHullStrength(DrawGame.context.player);
         updateFields();
     }
 

@@ -70,7 +70,7 @@ public class Game extends Application {
         // delete all the map generation files
         File dir = new File(Globals.mapGenPath + "Images");
         for (File file: dir.listFiles()) {
-            if (!file.isDirectory())
+            if (!file.isDirectory() && !file.getName().equals(".gitignore"))
                 file.delete();
         }
     }
