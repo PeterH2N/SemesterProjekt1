@@ -203,6 +203,12 @@ public class Controller
                 DrawGame.context.player.move("east", DrawGame.context);
                 DrawGame.context.player.sub.setRotation(90);
             }
+            else if (e.getCode() == KeyCode.Q) {
+                DrawGame.context.player.move("up", DrawGame.context);
+            }
+            else if (e.getCode() == KeyCode.E) {
+                DrawGame.context.player.move("down", DrawGame.context);
+            }
             else if (e.getCode() == KeyCode.P) {
                 DrawGame.context.player.pickUp(DrawGame.context.world.currentScreen);
             }

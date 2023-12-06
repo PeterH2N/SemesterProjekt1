@@ -15,7 +15,7 @@ import java.util.Random;
 public class Screen
 {
     public Space[][][] map = new Space[Globals.tilesPerScreen][Globals.tilesPerScreen][Globals.layers];
-    public ArrayList<Entity> entities = new ArrayList<>();
+    public ArrayList<Entity>[] entities = new ArrayList[Globals.layers];
 
     Random rand;
 
@@ -32,9 +32,16 @@ public class Screen
                 }
             }
         }
+        // init arraylist
+        for (int i = 0; i < Globals.layers; i++) {
+            entities[i] = new ArrayList<Entity>();
+        }
 
         setTerrain(MapGenerator.makeLayerImage(MapGenerator.makeNoiseImage(xStart, yStart), x + " " + y));
-        createWaste((int)(Globals.tilesPerScreen * 2), 0);
+        for (int i = 0; i < Globals.layers; i++) {
+            int scalar = i * 3 + 2;
+            createWaste((int) (Globals.tilesPerScreen * scalar), i);
+        }
         makeBuildings();
     }
 
@@ -48,17 +55,17 @@ public class Screen
                 randomKey = WasteType.wasteTypeKeys.get(randomIndex);
             }
             // random point within "screensize"
-            boolean available = false;
             double ix = 0;
             double iy = 0;
-            while (!available) {
-                ix = Math.random() * (Globals.tilesPerScreen);
-                iy = Math.random() * (Globals.tilesPerScreen);
-                available = map[(int)iy][(int)ix][layer].available;
-            }
+
+            ix = Math.random() * (Globals.tilesPerScreen);
+            iy = Math.random() * (Globals.tilesPerScreen);
+            if (!map[(int)iy][(int)ix][layer].available)
+                continue;
+
             Entity e = new WasteItem(randomKey, new Point(ix, iy));
             e.setRotation(Math.random() * 360.0);
-            entities.add(e);
+            entities[layer].add(e);
         }
 
     }
@@ -112,7 +119,7 @@ public class Screen
         int index = (int) (rand.nextDouble() * candidates.size());
         Point pick = candidates.get(index);
         Point pos = new Point(pick.x + 0.5, pick.y + 0.5);
-        entities.add(new WorkShop(pos));
+        entities[0].add(new WorkShop(pos));
         return pos;
     }
 
@@ -144,7 +151,7 @@ public class Screen
             Point pick = candidates.get(index);
             pos = new Point(pick.x + 0.5, pick.y + 0.5);
         }
-        entities.add(new Shop(pos));
+        entities[0].add(new Shop(pos));
     }
 
     private boolean waterNextTo(int x, int y)
