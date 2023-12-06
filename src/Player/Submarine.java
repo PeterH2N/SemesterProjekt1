@@ -122,7 +122,7 @@ public class Submarine extends Entity {
     // moves the submarines and spends the fuel necessary
     boolean move(String dir, World world) {
         if (fuel < Globals.fuelConsumptionPerMove) {
-            System.out.println("Not enough fuel!");
+            Globals.globalMessage = ("Not enough fuel!");
             return false;
         }
 

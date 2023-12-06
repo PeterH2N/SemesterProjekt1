@@ -14,6 +14,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
 <HBox fx:id="hroot" xmlns:fx="http://javafx.com/fxml" prefHeight="${screen.visualBounds.height}" prefWidth="${screen.visualBounds.width}" fx:controller="GameGraphics.Controller">
     <fx:define>
         <Screen fx:factory="getPrimary" fx:id="screen" />
@@ -45,10 +46,11 @@
         </VBox>
 
     </VBox>
-    <StackPane  minWidth="${hroot.height}" prefHeight="${hroot.height}">
+    <AnchorPane minWidth="${hroot.height}" prefHeight="${hroot.height}">
         <Label text="RENDER GAME HERE"/>
         <Canvas fx:id="gameImage" width="${hroot.height}" height="${hroot.height}"/>
-    </StackPane>
+        <Label fx:id="messageLabel" AnchorPane.bottomAnchor="0.0"/>
+    </AnchorPane>
 
 </HBox>
 

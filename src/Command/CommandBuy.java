@@ -2,6 +2,7 @@ package Command;
 
 import Buildings.Shop;
 import Context.Context;
+import Globals.Globals;
 import Entity.Entity;
 
 public class CommandBuy extends BaseCommand implements Command {
@@ -13,7 +14,7 @@ public class CommandBuy extends BaseCommand implements Command {
     @Override
     public void execute(Context context, String command, String[] parameters) {
         if (guardEq(parameters, 3)) {
-            System.out.println("Input is not a valid location");
+            Globals.globalMessage = ("Input is not a valid location");
             return;
         }
 

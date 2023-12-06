@@ -14,6 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.paint.Color;
 
 public class Controller
 {
@@ -70,6 +71,9 @@ public class Controller
     @FXML
     Label hulLStrengthLabel;
 
+    @FXML
+    Label messageLabel;
+
     void updateLabels() {
         // fuel
         int fuelLevel = (int)DrawGame.context.player.sub.getFuel();
@@ -88,6 +92,11 @@ public class Controller
 
         // hull strength
         hulLStrengthLabel.setText("Hull strength: " + DrawGame.context.player.sub.getHullStrengthLevel());
+
+        // messageLabel
+        messageLabel.setText(Globals.globalMessage);
+        messageLabel.setTextFill(Color.WHITE);
+
 
         // buttons
         String level = String.valueOf(DrawGame.context.player.sub.getInventoryCapacityLevel());
