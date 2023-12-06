@@ -108,7 +108,16 @@ public class Submarine extends Entity {
             Point subPos = new Point((double)x + 0.5, (double)y + 0.5);
             Entity entity = screen.entities[z].get(i);
             if (entity instanceof Item) {
-                if (Point.distance(entity.getPosition(), subPos) <= this.getPickUpRadius()) {
+                // Check if picked up items is in an animal tile
+                if(Point.distance(entity.getPosition(), subPos) <= this.getPickUpRadius() && screen.map[(int)entity.getPosition().x][(int)entity.getPosition().y][z].animalPresent){
+                    if (inventory.addItem((Item) entity) == 1) {
+                        screen.entities[z].remove(i);
+                        i--;
+                        AnimalIndeks.trashToIndeks(1, z+1);
+                    }
+
+                }
+                else if (Point.distance(entity.getPosition(), subPos) <= this.getPickUpRadius()) {
                     if (inventory.addItem((Item) entity) == 1) {
                         screen.entities[z].remove(i);
                         i--;
@@ -117,6 +126,8 @@ public class Submarine extends Entity {
             }
 
         }
+
+        System.out.println("Indeks points: "+AnimalIndeks.getAnimalIndeks());
     }
 
     // moves the submarines and spends the fuel necessary

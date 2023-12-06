@@ -43,6 +43,24 @@ public class Screen
             createWaste((int) (Globals.tilesPerScreen * scalar), i);
         }
         makeBuildings();
+        //entities.add(new WorkShop(new Point(5,5)));
+        makeWorkshop();
+        for(int i = 0; i < Globals.layers; i++){
+            createAnimalTile(i);
+        }
+    }
+
+    void createAnimalTile(int layer){
+        for(Entity entity: entities[layer]){
+            if(entity instanceof WasteItem){
+                int chance = (int) (Math.random() * 10);
+                // Odds for an animal tile, currently 20%
+                if(chance > 8) {
+                    Point position = entity.getPosition();
+                    map[(int) position.x][(int) position.y][layer].setAnimalPresent();
+                }
+            }
+        }
     }
 
     void createWaste(int amount, int layer) {
