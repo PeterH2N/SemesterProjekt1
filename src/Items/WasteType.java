@@ -20,6 +20,10 @@ public class WasteType {
     double volume;
     double imageScale;
 
+
+    private int index;
+    private boolean discovered;
+
     static
     {
         init();
@@ -31,6 +35,8 @@ public class WasteType {
         this.materialKey = materialKey;
         this.volume = volume;
         this.imageScale = imageScale;
+        this.index = index;
+        this.discovered = false;
     }
 
     static WasteType getType(String key) {
@@ -73,5 +79,32 @@ public class WasteType {
     public double getImageScale()
     {
         return imageScale;
+    }
+
+    public void discover() {
+        this.discovered = true;
+    }
+
+    public boolean isDiscovered() {
+        return this.discovered;
+    }
+
+    public static List<WasteType> getDiscoveredWasteTypes() {
+        List<WasteType> discoveredList = new ArrayList<>();
+        for (WasteType wasteType : wasteTypes.values()) {
+            if(wasteType.isDiscovered()){
+                discoveredList.add(wasteType);
+            }
+        }
+        return discoveredList;
+    }
+
+    @Override
+    public String toString(){
+        return "Trash: " + name + "\n Type: " + name + "\n Number: " + getIndex() + "\nDescription: " + description;
+    }
+
+    public int getIndex() {
+        return index;
     }
 }

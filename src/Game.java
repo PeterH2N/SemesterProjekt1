@@ -63,6 +63,8 @@ public class Game extends Application {
         stage.setTitle("Semesterprojekt");
         stage.setScene(scene);
         stage.show();
+
+
     }
 
     @Override
@@ -73,15 +75,12 @@ public class Game extends Application {
             if (!file.isDirectory() && !file.getName().equals(".gitignore"))
                 file.delete();
         }
-
-
     }
 
     public static void main(String[] args)
     {
         launch(args);
     }
-    World.Quiz quiz;
 
     /*public static void main(String[] args) {
         System.out.println("Welcome to our game!");

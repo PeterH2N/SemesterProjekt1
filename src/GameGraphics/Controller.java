@@ -3,8 +3,10 @@ package GameGraphics;
 import Buildings.Shop;
 import Buildings.WorkShop;
 import Globals.Globals;
+import Items.Item;
 import Player.InventorySlot;
 import World.AnimalIndeks;
+import World.Quiz;
 import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -29,6 +31,7 @@ public class Controller
         DrawGame.canvas = gameImage;
         DrawGame.setLayerImage();
         updateFields();
+        inventoryList.getSelectionModel().selectedItemProperty().addListener(selectionChangedListener);
     }
 
     @FXML
@@ -78,6 +81,9 @@ public class Controller
     @FXML
     Label scoreLabel;
 
+    @FXML
+    Label itemDescribtionLabel;
+
     void updateLabels() {
         // fuel
         int fuelLevel = (int)DrawGame.context.player.sub.getFuel();
@@ -96,9 +102,6 @@ public class Controller
 
         // hull strength
         hulLStrengthLabel.setText("Hull strength: " + DrawGame.context.player.sub.getHullStrengthLevel());
-
-        // score label
-        scoreLabel.setText("Score: " + AnimalIndeks.getAnimalIndeks());
 
         // messageLabel
         messageLabel.setText(Globals.globalMessage);
@@ -124,7 +127,7 @@ public class Controller
         upgradePickupButton.setText("Upgrade Pickup Radius |  " + level);
 
         level = String.valueOf(DrawGame.context.player.sub.getOxygenCapacityLevel());
-        if (DrawGame.context.player.sub.getOxygenCapacity() == Globals.oxygenUpgrades.length - 1)
+        if (DrawGame.context.player.sub.getOxygenCapacityLevel() == Globals.oxygenUpgrades.length - 1)
             level = "max";
 
         upgradeOxygenButton.setText("Upgrade Oxygen Capacity |  " + level);
@@ -293,6 +296,9 @@ public class Controller
             updateFields();
             DrawGame.setLayerImage();
             DrawGame.drawGame();
+            if(DrawGame.context.isDone()){
+                World.Quiz quiz = new World.Quiz();
+            }
 
         }
     };
@@ -329,8 +335,18 @@ public class Controller
             else return;
 
             e.consume();
+
+            if(DrawGame.context.player.sub.getFuel() <= 0){
+                DrawGame.context.makeDone();
+            }
         }
     };
+
+    public ChangeListener<InventorySlot> selectionChangedListener = (observable, oldValue, newValue) -> {
+        Item item = ((InventorySlot)newValue).item;
+        itemDescribtionLabel.setText(item.getDescription());
+    };
+
     public ChangeListener<Number> stageSizeListener = (observable, oldValue, newValue) -> {
         DrawGame.pixelsPerTile = gameImage.getHeight() / (double)Globals.tilesPerScreen;
         DrawGame.drawGame();
