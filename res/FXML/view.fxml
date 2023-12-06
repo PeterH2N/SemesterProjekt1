@@ -46,6 +46,7 @@
             <Button fx:id="upgradeHullButton" onAction="#handleUpgradeHullStrength" prefWidth="200"/>
         </VBox>
         <VBox>
+            <Label fx:id="itemNameLabel"/>
             <Label fx:id="itemDescribtionLabel"/>
         </VBox>
     </VBox>

@@ -18,6 +18,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
+import javafx.scene.text.TextAlignment;
 
 public class Controller
 {
@@ -83,6 +84,12 @@ public class Controller
 
     @FXML
     Label itemDescribtionLabel;
+
+    @FXML
+    Label itemNameLabel;
+
+
+
 
     void updateLabels() {
         // fuel
@@ -350,7 +357,10 @@ public class Controller
 
     public ChangeListener<InventorySlot> selectionChangedListener = (observable, oldValue, newValue) -> {
         Item item = ((InventorySlot)newValue).item;
+        itemNameLabel.setText(item.getName());
         itemDescribtionLabel.setText(item.getDescription());
+        itemDescribtionLabel.setWrapText(true);
+        itemDescribtionLabel.setTextAlignment(TextAlignment.LEFT);
     };
 
     public ChangeListener<Number> stageSizeListener = (observable, oldValue, newValue) -> {
