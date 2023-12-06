@@ -23,7 +23,12 @@ public class WorkShop extends Building {
         // make sure we have all the items needed
         for (int i = 0; i < Globals.inventoryUpgradeItemAmount.length; i++) {
             if (!player.sub.inventory.containsItems(Globals.inventoryUpgradeItemName[i], Globals.inventoryUpgradeItemAmount[i][player.sub.getInventoryCapacityLevel()])) {
-                Globals.globalMessage = ("You dont have the required items!");
+                Globals.globalMessage = ("You dont have the required items! You need: \n");
+                for (int j = 0; j < Globals.inventoryUpgradeItemName.length; j++){
+                    Globals.globalMessage +=
+                            Globals.inventoryUpgradeItemName[j] + " x " +
+                            Globals.inventoryUpgradeItemAmount[j][player.sub.getInventoryCapacityLevel()] + "\n";
+                }
                 return false;
             }
         }
@@ -35,6 +40,7 @@ public class WorkShop extends Building {
         }
         // lastly, we upgrade
         player.sub.upgradeInventorylevel();
+        Globals.globalMessage = "Upgraded Inventory Capacity!";
         return true;
     }
 
@@ -47,7 +53,12 @@ public class WorkShop extends Building {
         // make sure we have all the items needed
         for (int i = 0; i < Globals.fuelUpgradeItemName.length; i++) {
             if (!player.sub.inventory.containsItems(Globals.fuelUpgradeItemName[i], Globals.fuelUpgradeItemAmount[i][player.sub.getFuelCapacityLevel()])) {
-                Globals.globalMessage = ("You dont have the required items!");
+                Globals.globalMessage = ("You dont have the required items! You need: \n");
+                for (int j = 0; j < Globals.fuelUpgradeItemName.length; j++){
+                    Globals.globalMessage +=
+                            Globals.fuelUpgradeItemName[j] + " x " +
+                                    Globals.fuelUpgradeItemAmount[j][player.sub.getFuelCapacityLevel()] + "\n";
+                }
                 return false;
             }
         }
@@ -59,6 +70,7 @@ public class WorkShop extends Building {
         }
         // lastly, we upgrade
         player.sub.upgradeFuelLevel();
+        Globals.globalMessage = "Upgraded Fuel Capacity!";
         return true;
     }
 
@@ -71,7 +83,12 @@ public class WorkShop extends Building {
         // make sure we have all the items needed
         for (int i = 0; i < Globals.oxygenUpgradeItemName.length; i++) {
             if (!player.sub.inventory.containsItems(Globals.oxygenUpgradeItemName[i], Globals.oxygenUpgradeItemAmount[i][player.sub.getOxygenCapacityLevel()])) {
-                Globals.globalMessage = ("You dont have the required items!");
+                Globals.globalMessage = ("You dont have the required items! You need: \n");
+                for (int j = 0; j < Globals.oxygenUpgradeItemName.length; j++){
+                    Globals.globalMessage +=
+                            Globals.oxygenUpgradeItemName[j] + " x " +
+                                    Globals.oxygenUpgradeItemAmount[j][player.sub.getOxygenCapacityLevel()] + "\n";
+                }
                 return false;
             }
         }
@@ -83,6 +100,7 @@ public class WorkShop extends Building {
         }
         // lastly, we upgrade
         player.sub.upgradeOxygenLevel();
+        Globals.globalMessage = "Upgraded Oxygen Capacity!";
         return true;
     }
 
@@ -95,7 +113,12 @@ public class WorkShop extends Building {
         // make sure we have all the items needed
         for (int i = 0; i < Globals.hullStrengthUpgradeItemName.length; i++) {
             if (!player.sub.inventory.containsItems(Globals.hullStrengthUpgradeItemName[i], Globals.hullStrengthUpgradeItemAmount[i][player.sub.getHullStrengthLevel()])) {
-                Globals.globalMessage = ("You dont have the required items!");
+                Globals.globalMessage = ("You dont have the required items! You need: \n");
+                for (int j = 0; j < Globals.hullStrengthUpgradeItemName.length; j++){
+                    Globals.globalMessage +=
+                            Globals.hullStrengthUpgradeItemName[j] + " x " +
+                                    Globals.hullStrengthUpgradeItemAmount[j][player.sub.getHullStrengthLevel()] + "\n";
+                }
                 return false;
             }
         }
@@ -107,6 +130,7 @@ public class WorkShop extends Building {
         }
         // lastly, we upgrade
         player.sub.upgradeHullStrengthLevel();
+        Globals.globalMessage = "Upgraded Hull Strength!";
         return true;
     }
 
@@ -119,7 +143,12 @@ public class WorkShop extends Building {
         // make sure we have all the items needed
         for (int i = 0; i < Globals.pickupRadiusUpgradeItemName.length; i++) {
             if (!player.sub.inventory.containsItems(Globals.pickupRadiusUpgradeItemName[i], Globals.pickupRadiusUpgradeItemAmount[i][player.sub.getPickupRadiusLevel()])) {
-                Globals.globalMessage = ("You dont have the required items!");
+                Globals.globalMessage = ("You dont have the required items! You need: \n");
+                for (int j = 0; j < Globals.pickupRadiusUpgradeItemName.length; j++){
+                    Globals.globalMessage +=
+                            Globals.pickupRadiusUpgradeItemName[j] + " x " +
+                                    Globals.pickupRadiusUpgradeItemAmount[j][player.sub.getPickupRadiusLevel()] + "\n";
+                }
                 return false;
             }
         }
@@ -131,6 +160,7 @@ public class WorkShop extends Building {
         }
         // lastly, we upgrade
         player.sub.upgradePickupRadius();
+        Globals.globalMessage = "Upgraded Pickup Radius!";
         return true;
     }
     public boolean smelt(Player player, int itemSlot) {

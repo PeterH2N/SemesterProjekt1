@@ -117,7 +117,7 @@ public class Controller
         upgradePickupButton.setText("Upgrade Pickup Radius |  " + level);
 
         level = String.valueOf(DrawGame.context.player.sub.getOxygenCapacityLevel());
-        if (DrawGame.context.player.sub.getOxygenCapacity() == Globals.oxygenUpgrades.length - 1)
+        if (DrawGame.context.player.sub.getOxygenCapacityLevel() == Globals.oxygenUpgrades.length - 1)
             level = "max";
 
         upgradeOxygenButton.setText("Upgrade Oxygen Capacity |  " + level);

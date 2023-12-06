@@ -17,7 +17,7 @@ public class Submarine extends Entity {
     int oxygenCapacityLevel = 0;
     int pickupRadiusLevel = 0;
     int inventoryCapacityLevel = 0;
-    int hullStrengthLevel = 3;
+    int hullStrengthLevel = 0;
 
     // position is only relative to current screen
     public int x = (Globals.tilesPerScreen / 2);
