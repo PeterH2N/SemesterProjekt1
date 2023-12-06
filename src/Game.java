@@ -73,15 +73,13 @@ public class Game extends Application {
             if (!file.isDirectory() && !file.getName().equals(".gitignore"))
                 file.delete();
         }
-
-
     }
 
     public static void main(String[] args)
     {
         launch(args);
     }
-    World.Quiz quiz;
+    World.Quiz quiz = new World.Quiz();
 
     /*public static void main(String[] args) {
         System.out.println("Welcome to our game!");
