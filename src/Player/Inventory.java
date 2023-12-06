@@ -36,7 +36,7 @@ public class Inventory {
 
     // adds item to inventory. If the itemtype already exists, add the amount of items. Else, add the item to new slot
     // returns index to item, or -1 if inventory is full
-    public int addItem(Item item, int amount) {;
+    public int addItem(Item item, int amount) {
         // loop through items, if we have one of the same type, we add to the amount
         int overflowAmount;
         for (InventorySlot slot : slots) {
@@ -122,5 +122,19 @@ public class Inventory {
     {
         return slots[i].item;
     }
+
+    public int totalItemsInventory(){
+        int counter = 0;
+        for(int i = 0; i < slots.length; i++) {
+            if (slots[i] != null ) {
+                Item item = slots[i].item;
+                if (item != null) {
+                    counter = slots[i].amount + counter;
+                }
+            }
+        }
+        return counter;
+    }
 }
+
 

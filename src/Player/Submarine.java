@@ -100,7 +100,18 @@ public class Submarine extends Entity {
             Point subPos = new Point((double)x + 0.5, (double)y + 0.5);
             Entity entity = screen.entities.get(i);
             if (entity instanceof Item) {
-                if (Point.distance(entity.getPosition(), subPos) <= this.getPickUpRadius()) {
+                // Check if picked up items is in an animal tile
+                if(Point.distance(entity.getPosition(), subPos) <= this.getPickUpRadius() && screen.map[(int)entity.getPosition().y][(int)entity.getPosition().x][0].animalPresent){
+                    int totalItemsInventory = inventory.totalItemsInventory();
+                    if (inventory.addItem((Item) entity) == 1) {
+                        screen.entities.remove(i);
+                        i--;
+                    }
+                    // Calculate the amount of trash picked up.
+                    int totalTrashPickedUp = inventory.totalItemsInventory() - totalItemsInventory;
+                    AnimalIndeks.trashToIndeks(totalTrashPickedUp);
+                }
+                else if (Point.distance(entity.getPosition(), subPos) <= this.getPickUpRadius()) {
                     if (inventory.addItem((Item) entity) == 1) {
                         screen.entities.remove(i);
                         i--;

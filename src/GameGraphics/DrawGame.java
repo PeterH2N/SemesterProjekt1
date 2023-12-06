@@ -1,5 +1,6 @@
 package GameGraphics;
 
+
 import Buildings.WorkShop;
 import Context.Context;
 import Entity.Entity;
@@ -13,6 +14,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
+import World.Space;
 
 import java.io.File;
 import java.util.HashMap;
@@ -37,6 +39,8 @@ public class DrawGame
     static Image waterImage;
 
     static Image workShopImage;
+
+    static Image animalTile;
 
     static {
         // get player sprite
@@ -80,6 +84,8 @@ public class DrawGame
         drawGrass();
         drawEntities();
         drawPlayer();
+        drawAnimalTile();
+
     }
 
     static void drawEntities() {
@@ -196,6 +202,24 @@ public class DrawGame
             }
         }
         gc.setGlobalAlpha(1.0);
+
+    }
+
+    static void drawAnimalTile(){
+        // Get animal tile sprite
+        File file = new File(Globals.spritePath + "Surface/Animal.png");
+        animalTile = new Image(file.toURI().toString());
+        Screen currentScreen = context.world.currentScreen;
+        Space[][][] map = currentScreen.map;
+        for (int i = 0; i < Globals.tilesPerScreen; i++){
+            for ( int j = 0; j < Globals.tilesPerScreen; j++){
+                // Currently only the first layer will create animals tiles.
+                if(map[i][j][0].animalPresent){
+                    canvas.getGraphicsContext2D().drawImage(animalTile, j * pixelsPerTile - pixelsPerTile * 0.5, i * pixelsPerTile - pixelsPerTile * 0.5, pixelsPerTile, pixelsPerTile);
+                }
+            }
+        }
+
 
     }
     static void setLayerImage() {

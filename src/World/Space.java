@@ -10,6 +10,8 @@ public class Space
 {
     public boolean available;
 
+    public boolean animalPresent;
+
     Space(boolean a) {
         available = a;
     }
@@ -21,6 +23,10 @@ public class Space
     void createWorkShop(){
         Entity w = new WorkShop(new Point());
         //entities.add(w);
+    }
+
+    void setAnimalPresent(){
+        animalPresent = true;
     }
 
 
