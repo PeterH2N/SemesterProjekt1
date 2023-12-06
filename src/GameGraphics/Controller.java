@@ -4,6 +4,7 @@ import Buildings.Shop;
 import Buildings.WorkShop;
 import Globals.Globals;
 import Player.InventorySlot;
+import World.Quiz;
 import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -286,6 +287,9 @@ public class Controller
             updateFields();
             DrawGame.setLayerImage();
             DrawGame.drawGame();
+            if(DrawGame.context.isDone()){
+                World.Quiz quiz = new World.Quiz();
+            }
 
         }
     };
@@ -322,6 +326,10 @@ public class Controller
             else return;
 
             e.consume();
+
+            if(DrawGame.context.player.sub.getFuel() <= 0){
+                DrawGame.context.makeDone();
+            }
         }
     };
     public ChangeListener<Number> stageSizeListener = (observable, oldValue, newValue) -> {

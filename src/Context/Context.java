@@ -23,7 +23,7 @@ public class Context {
         done = true;
     }
 
-    public boolean xisDone() {
+    public boolean isDone() {
         return done;
     }
 }
