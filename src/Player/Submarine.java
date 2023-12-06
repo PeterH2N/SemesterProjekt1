@@ -102,14 +102,13 @@ public class Submarine extends Entity {
             if (entity instanceof Item) {
                 // Check if picked up items is in an animal tile
                 if(Point.distance(entity.getPosition(), subPos) <= this.getPickUpRadius() && screen.map[(int)entity.getPosition().y][(int)entity.getPosition().x][0].animalPresent){
-                    int totalItemsInventory = inventory.totalItemsInventory();
+                    System.out.println("Animal indeks, reached");
                     if (inventory.addItem((Item) entity) == 1) {
                         screen.entities.remove(i);
                         i--;
+                        AnimalIndeks.trashToIndeks(1);
                     }
-                    // Calculate the amount of trash picked up.
-                    int totalTrashPickedUp = inventory.totalItemsInventory() - totalItemsInventory;
-                    AnimalIndeks.trashToIndeks(totalTrashPickedUp);
+
                 }
                 else if (Point.distance(entity.getPosition(), subPos) <= this.getPickUpRadius()) {
                     if (inventory.addItem((Item) entity) == 1) {
@@ -120,6 +119,8 @@ public class Submarine extends Entity {
             }
 
         }
+
+        System.out.println(AnimalIndeks.getAnimalIndeks());
     }
 
     // moves the submarines and spends the fuel necessary

@@ -44,9 +44,9 @@ public class Screen
             if(entity instanceof WasteItem){
                 int chance = (int) (Math.random() * 10);
                 // Odds for an animal tile, currently 20%
-                if(chance > 8) {
+                if(chance > 8 ) {
                     Point position = entity.getPosition();
-                    map[(int) position.x][(int) position.y][layer].setAnimalPresent();
+                    map[(int) position.y][(int) position.x][layer].setAnimalPresent();
                 }
             }
         }

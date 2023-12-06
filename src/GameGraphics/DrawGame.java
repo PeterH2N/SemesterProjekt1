@@ -81,10 +81,11 @@ public class DrawGame
     public static void drawGame() {
         // for now, we are just drawing the basic layer image to the screen
         canvas.getGraphicsContext2D().drawImage(currentLayerImage,0, 0, canvas.getWidth(), canvas.getHeight());
+        drawAnimalTile();
         drawGrass();
         drawEntities();
         drawPlayer();
-        drawAnimalTile();
+
 
     }
 
@@ -207,14 +208,14 @@ public class DrawGame
 
     static void drawAnimalTile(){
         // Get animal tile sprite
-        File file = new File(Globals.spritePath + "Surface/Animal.png");
+        File file = new File(Globals.spritePath + "Animal/Fish.png");
         animalTile = new Image(file.toURI().toString());
         Screen currentScreen = context.world.currentScreen;
-        Space[][][] map = currentScreen.map;
+        //Space[][][] map = currentScreen.map;
         for (int i = 0; i < Globals.tilesPerScreen; i++){
             for ( int j = 0; j < Globals.tilesPerScreen; j++){
                 // Currently only the first layer will create animals tiles.
-                if(map[i][j][0].animalPresent){
+                if(currentScreen.map[i][j][0].animalPresent){
                     canvas.getGraphicsContext2D().drawImage(animalTile, j * pixelsPerTile - pixelsPerTile * 0.5, i * pixelsPerTile - pixelsPerTile * 0.5, pixelsPerTile, pixelsPerTile);
                 }
             }
