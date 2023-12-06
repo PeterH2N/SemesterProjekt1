@@ -57,7 +57,7 @@
   },
   "PVC Pipe": {
     "name": "PVC Pipe",
-    "description": "PVC plastic in the ocean, leeches microplastics into the water. They also release chlorine-based\n chemicals called dioxins, that are very toxic to marine life and humans. ",
+    "description": "PVC plastic in the ocean, leeches microplastics into the water. They also release chlorine-based\n chemicals called dioxins, that are very toxic to marine life and humans(the most toxic for humans). ",
     "materialKey": "PVC",
     "volume": 5E-4,
     "imageScale" : 0.9

@@ -9,22 +9,25 @@ import java.awt.event.ActionListener;
     public class Quiz implements ActionListener {
 
         String[] questions = 	{
-                "What can you find in the ocean?",
-                "Why should you recycle trash",
-                "Why is plastic not good?",
-                "What did you learn in this game?"
+                "Which type of trash releases the most CO2 ?",
+                "What type of trash is the most toxic for humans? ",
+                "Which trash is considered not to be recycle?",
+                "Which UN world goal is fighting to remove trash from the oceans?",
+                "Where is plastic not found"
         };
         String[][] options = 	{
-                {"Plastic","Humans","Birds","Apples"},
-                {"to reduce ocean pollution","to be clever","to be lazy","to add plastic in the ocean"},
-                {"Microplastics scattered everywhere","gives Vitamin-p","reduces pollution","its edible"},
-                {"to be mindful and reduce my plastic consumption","drive a submarine","One piece is real","Trash pollution is false"}
+                {"Plastic bottles","Aluminium cans","Diapers","Styrofoam"},
+                {"Bubble wrap","Styrofoam","Plastic bottle","PVC pipe"},
+                {"PET bottles","Glass bottles","Styrofoam","Plastic bottles"},
+                {"Goal 14 ","Goal 19","Goal 12","Goal 4"},
+                {"In humans ","In the ocean","In the forrest","On Saturn"}
         };
         char[] answers = 		{
                 'A',
+                'D',
+                'C',
                 'A',
-                'A',
-                'A'
+                'D'
         };
 
         char answer;
@@ -70,7 +73,7 @@ import java.awt.event.ActionListener;
             textarea.setWrapStyleWord(true);
             textarea.setBackground(new Color(145,178,255));
             textarea.setForeground(new Color(255,255,255));
-            textarea.setFont(new Font("MV Boli",Font.BOLD,25));
+            textarea.setFont(new Font("MV Boli",Font.BOLD,15));
             textarea.setBorder(BorderFactory.createBevelBorder(1));
             textarea.setEditable(false);
 
