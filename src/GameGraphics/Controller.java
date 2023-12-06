@@ -107,6 +107,9 @@ public class Controller
         messageLabel.setText(Globals.globalMessage);
         messageLabel.setTextFill(Color.WHITE);
 
+        // score label
+        scoreLabel.setText("Score: "+AnimalIndeks.getAnimalIndeks());
+
 
         // buttons
         String level = String.valueOf(DrawGame.context.player.sub.getInventoryCapacityLevel());
@@ -293,9 +296,12 @@ public class Controller
         @Override
         public void handle(KeyEvent event)
         {
+
+
             updateFields();
             DrawGame.setLayerImage();
             DrawGame.drawGame();
+
             if(DrawGame.context.isDone()){
                 World.Quiz quiz = new World.Quiz();
             }
@@ -306,39 +312,39 @@ public class Controller
     public EventHandler<KeyEvent> movementHandler = new EventHandler<KeyEvent>() {
         @Override
         public void handle(KeyEvent e) {
-            if (e.getCode() == KeyCode.W) {
-                // move up
-                DrawGame.context.player.move("north", DrawGame.context);
-                DrawGame.context.player.sub.setRotation(0);
-            }
-            else if (e.getCode() == KeyCode.A) {
-                DrawGame.context.player.move("west", DrawGame.context);
-                DrawGame.context.player.sub.setRotation(-90);
-            }
-            else if (e.getCode() == KeyCode.S) {
-                DrawGame.context.player.move("south", DrawGame.context);
-                DrawGame.context.player.sub.setRotation(180);
-            }
-            else if (e.getCode() == KeyCode.D) {
-                DrawGame.context.player.move("east", DrawGame.context);
-                DrawGame.context.player.sub.setRotation(90);
-            }
-            else if (e.getCode() == KeyCode.Q) {
-                DrawGame.context.player.move("up", DrawGame.context);
-            }
-            else if (e.getCode() == KeyCode.E) {
-                DrawGame.context.player.move("down", DrawGame.context);
-            }
-            else if (e.getCode() == KeyCode.P) {
-                DrawGame.context.player.pickUp(DrawGame.context.world.currentScreen);
-            }
-            else return;
+                if (e.getCode() == KeyCode.W) {
+                    // move up
+                    DrawGame.context.player.move("north", DrawGame.context);
+                    DrawGame.context.player.sub.setRotation(0);
+                }
+                else if (e.getCode() == KeyCode.A) {
+                    DrawGame.context.player.move("west", DrawGame.context);
+                    DrawGame.context.player.sub.setRotation(-90);
+                }
+                else if (e.getCode() == KeyCode.S) {
+                    DrawGame.context.player.move("south", DrawGame.context);
+                    DrawGame.context.player.sub.setRotation(180);
+                }
+                else if (e.getCode() == KeyCode.D) {
+                    DrawGame.context.player.move("east", DrawGame.context);
+                    DrawGame.context.player.sub.setRotation(90);
+                }
+                else if (e.getCode() == KeyCode.Q) {
+                    DrawGame.context.player.move("up", DrawGame.context);
+                }
+                else if (e.getCode() == KeyCode.E) {
+                    DrawGame.context.player.move("down", DrawGame.context);
+                }
+                else if (e.getCode() == KeyCode.P) {
+                    DrawGame.context.player.pickUp(DrawGame.context.world.currentScreen);
+                }
+                else return;
 
-            e.consume();
+                e.consume();
 
-            if(DrawGame.context.player.sub.getFuel() <= 0){
-                DrawGame.context.makeDone();
-            }
+                if(DrawGame.context.player.sub.getFuel() <= 0){
+                    DrawGame.context.makeDone();
+                }
         }
     };
 
