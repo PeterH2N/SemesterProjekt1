@@ -12,11 +12,9 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-
-import Items.Item;
+import javafx.scene.paint.Color;
 
 public class Controller
 {
@@ -36,6 +34,29 @@ public class Controller
     private ListView<InventorySlot> inventoryList;
 
     @FXML
+    Button upgradeInventoryButton;
+
+    @FXML
+    Button upgradeFuelButton;
+
+    @FXML
+    Button upgradePickupButton;
+
+    @FXML
+    Button upgradeOxygenButton;
+
+    @FXML
+    Button upgradeHullButton;
+    @FXML
+    Button sellButton;
+
+    @FXML
+    Button buyButton;
+
+    @FXML
+    Button smeltButton;
+
+    @FXML
     public Canvas gameImage;
 
     @FXML
@@ -44,8 +65,17 @@ public class Controller
     @FXML
     Label balanceLabel;
 
+    @FXML
+    Label oxygenLabel;
+
+    @FXML
+    Label hulLStrengthLabel;
+
+    @FXML
+    Label messageLabel;
+
     void updateLabels() {
-        // fuel capacity
+        // fuel
         int fuelLevel = (int)DrawGame.context.player.sub.getFuel();
         int fuelCapacity = (int)DrawGame.context.player.sub.getFuelCapacity();
         String fuelText = "Fuel: " + fuelLevel + "/" + fuelCapacity;
@@ -54,6 +84,77 @@ public class Controller
         // player balance
         double balance = (double) DrawGame.context.player.getBalance() / 100;
         balanceLabel.setText("Balance: $" + balance);
+
+        // oxygen level
+        int oxygenLevel = (int) DrawGame.context.player.sub.getOxygen();
+        int oxygenCapacity = (int) DrawGame.context.player.sub.getOxygenCapacity();
+        oxygenLabel.setText("Oxygen: " + oxygenLevel + "/" + oxygenCapacity);
+
+        // hull strength
+        hulLStrengthLabel.setText("Hull strength: " + DrawGame.context.player.sub.getHullStrengthLevel());
+
+        // messageLabel
+        messageLabel.setText(Globals.globalMessage);
+        messageLabel.setTextFill(Color.WHITE);
+
+
+        // buttons
+        String level = String.valueOf(DrawGame.context.player.sub.getInventoryCapacityLevel());
+        if (DrawGame.context.player.sub.getInventoryCapacityLevel() == Globals.inventoryUpgrades.length - 1)
+            level = "max";
+        upgradeInventoryButton.setText("Upgrade Inventory Capacity |  " + level);
+
+        level = String.valueOf(DrawGame.context.player.sub.getFuelCapacityLevel());
+        if (DrawGame.context.player.sub.getFuelCapacityLevel() == Globals.fuelUpgrades.length - 1)
+            level = "max";
+
+        upgradeFuelButton.setText("Upgrade Fuel Capacity |  " + level);
+
+        level = String.valueOf(DrawGame.context.player.sub.getPickupRadiusLevel());
+        if (DrawGame.context.player.sub.getPickupRadiusLevel() == Globals.pickupRadiusUpgrades.length - 1)
+            level = "max";
+
+        upgradePickupButton.setText("Upgrade Pickup Radius |  " + level);
+
+        level = String.valueOf(DrawGame.context.player.sub.getOxygenCapacityLevel());
+        if (DrawGame.context.player.sub.getOxygenCapacity() == Globals.oxygenUpgrades.length - 1)
+            level = "max";
+
+        upgradeOxygenButton.setText("Upgrade Oxygen Capacity |  " + level);
+
+        level = String.valueOf(DrawGame.context.player.sub.getHullStrengthLevel());
+        if (DrawGame.context.player.sub.getHullStrengthLevel() == Globals.hullStrengthUpgrades.length - 1)
+            level = "max";
+
+        upgradeHullButton.setText("Upgrade Hull Strength |  " + level);
+
+        // disable if not near workshop
+        if (DrawGame.context.player.sub.isByWorkShop(DrawGame.context.world.currentScreen) == null) {
+            upgradeInventoryButton.setDisable(true);
+            upgradeFuelButton.setDisable(true);
+            upgradePickupButton.setDisable(true);
+            upgradeOxygenButton.setDisable(true);
+            upgradeHullButton.setDisable(true);
+            smeltButton.setDisable(true);
+        }
+        else {
+            upgradeInventoryButton.setDisable(false);
+            upgradeFuelButton.setDisable(false);
+            upgradePickupButton.setDisable(false);
+            upgradeOxygenButton.setDisable(false);
+            upgradeHullButton.setDisable(false);
+            smeltButton.setDisable(false);
+        }
+
+        // make these disabled if not near shop
+        if (DrawGame.context.player.sub.isByShop(DrawGame.context.world.currentScreen) == null) {
+            sellButton.setDisable(true);
+            buyButton.setDisable(true);
+        }
+        else {
+            sellButton.setDisable(false);
+            buyButton.setDisable(false);
+        }
 
     }
 
@@ -71,14 +172,17 @@ public class Controller
 
     }
     @FXML
-    private void handleDeleteItemButton(ActionEvent event) {
+    private void handleDropButton(ActionEvent event) {
         int slotIndex = inventoryList.getSelectionModel().getSelectedIndex();
         if (slotIndex == -1)
+            return;
+        if (DrawGame.context.player.sub.inventory.slots[slotIndex] == null)
             return;
 
         int amount = DrawGame.context.player.sub.inventory.slots[slotIndex].amount;
         DrawGame.context.player.deleteItem(slotIndex, amount);
         updateFields();
+        inventoryList.getSelectionModel().select(slotIndex);
     }
 
     @FXML
@@ -93,6 +197,7 @@ public class Controller
 
         workShop.smelt(DrawGame.context.player, slotIndex);
         updateFields();
+        inventoryList.getSelectionModel().select(slotIndex);
     }
 
     @FXML
@@ -104,6 +209,7 @@ public class Controller
 
         shop.buyFuel(DrawGame.context.player, 10.0);
         updateFields();
+
     }
 
     @FXML
@@ -119,6 +225,7 @@ public class Controller
         int amount = DrawGame.context.player.sub.inventory.slots[slotIndex].amount;
         shop.sellItem(DrawGame.context.player, slotIndex, amount);
         updateFields();
+        inventoryList.getSelectionModel().select(slotIndex);
     }
 
     @FXML
@@ -202,6 +309,12 @@ public class Controller
             else if (e.getCode() == KeyCode.D) {
                 DrawGame.context.player.move("east", DrawGame.context);
                 DrawGame.context.player.sub.setRotation(90);
+            }
+            else if (e.getCode() == KeyCode.Q) {
+                DrawGame.context.player.move("up", DrawGame.context);
+            }
+            else if (e.getCode() == KeyCode.E) {
+                DrawGame.context.player.move("down", DrawGame.context);
             }
             else if (e.getCode() == KeyCode.P) {
                 DrawGame.context.player.pickUp(DrawGame.context.world.currentScreen);

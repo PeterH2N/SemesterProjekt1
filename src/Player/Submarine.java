@@ -17,7 +17,7 @@ public class Submarine extends Entity {
     int oxygenCapacityLevel = 0;
     int pickupRadiusLevel = 0;
     int inventoryCapacityLevel = 0;
-    int hullStrengthLevel = 0;
+    int hullStrengthLevel = 3;
 
     // position is only relative to current screen
     public int x = (Globals.tilesPerScreen / 2);
@@ -104,13 +104,13 @@ public class Submarine extends Entity {
         if (fuel < Globals.fuelConsumptionPerPickUp)
             return;
 
-        for (int i = 0; i < screen.entities.size(); i++) {
+        for (int i = 0; i < screen.entities[z].size(); i++) {
             Point subPos = new Point((double)x + 0.5, (double)y + 0.5);
-            Entity entity = screen.entities.get(i);
+            Entity entity = screen.entities[z].get(i);
             if (entity instanceof Item) {
                 if (Point.distance(entity.getPosition(), subPos) <= this.getPickUpRadius()) {
                     if (inventory.addItem((Item) entity) == 1) {
-                        screen.entities.remove(i);
+                        screen.entities[z].remove(i);
                         i--;
                     }
                 }
@@ -122,7 +122,7 @@ public class Submarine extends Entity {
     // moves the submarines and spends the fuel necessary
     boolean move(String dir, World world) {
         if (fuel < Globals.fuelConsumptionPerMove) {
-            System.out.println("Not enough fuel!");
+            Globals.globalMessage = ("Not enough fuel!");
             return false;
         }
 
@@ -191,7 +191,7 @@ public class Submarine extends Entity {
         if (dir.equals("down")) {
             if (z >= Globals.layers - 1)
                 return false;
-            if (currentScreen.map[y][x][z+1].available && hullStrengthLevel > 0) {
+            if (currentScreen.map[y][x][z+1].available && getHullStrengthLevel() > z) {
                 z++;
                 return true;
             }
@@ -209,7 +209,7 @@ public class Submarine extends Entity {
 
     public WorkShop isByWorkShop(Screen screen) {
         // find workshop on the screen
-        for (Entity entity : screen.entities) {
+        for (Entity entity : screen.entities[z]) {
             if (!(entity instanceof WorkShop))
                 continue;
 
@@ -225,7 +225,7 @@ public class Submarine extends Entity {
 
     public Shop isByShop(Screen screen)
     {
-        for (Entity entity : screen.entities) {
+        for (Entity entity : screen.entities[z]) {
             if (!(entity instanceof Shop))
                 continue;
 

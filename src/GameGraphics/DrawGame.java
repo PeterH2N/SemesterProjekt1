@@ -82,18 +82,32 @@ public class DrawGame
         }
     }
     public static void drawGame() {
-        // for now, we are just drawing the basic layer image to the screen
-        canvas.getGraphicsContext2D().drawImage(currentLayerImage,0, 0, canvas.getWidth(), canvas.getHeight());
-        drawGrass();
-        drawEntities();
+        // clear screen
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        gc.setGlobalAlpha(1.0);
+        gc.drawImage(currentLayerImage,0, 0, canvas.getWidth(), canvas.getHeight());
+        if (DrawGame.context.player.sub.z == 0) {
+            drawGrass();
+        }
+        else {
+            drawStone(DrawGame.context.player.sub.z);
+        }
+
+        drawEntities(DrawGame.context.player.sub.z);
         drawPlayer();
+        if (DrawGame.context.player.sub.z != 0) {
+            gc.setGlobalAlpha(0.4);
+            gc.setFill(Color.BLUE);
+            gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+            gc.setGlobalAlpha(1.0);
+        }
     }
 
-    static void drawEntities() {
+    static void drawEntities(int layer) {
         Screen currentScreen = context.world.currentScreen;
 
         // draw items, if there are any
-        for (Entity entity : currentScreen.entities) {
+        for (Entity entity : currentScreen.entities[layer]) {
             if (entity instanceof WasteItem) {
                 drawWasteItem((WasteItem) entity);
             }
@@ -161,11 +175,39 @@ public class DrawGame
 
     }
 
+    static void drawStone(int currentLayer) {
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        // get top layer color
+        java.awt.Color awtc = MapGenerator.layerColor[currentLayer];
+        Color glc = Color.rgb(awtc.getRed(), awtc.getGreen(), awtc.getBlue());
+
+        // loop through layer image, find all the grass tiles
+        for (int y = 0; y < Globals.tilesPerScreen; y++) {
+            for (int x = 0; x < Globals.tilesPerScreen; x++) {
+                double dx = x * pixelsPerTile;
+                double dy = y * pixelsPerTile;
+
+                if (currentLayerImage.getPixelReader().getColor(x, y).getBlue() >= glc.getBlue()) {
+                    gc.setGlobalAlpha(0.8);
+                }
+                else {
+                    gc.setGlobalAlpha(0.3);
+                }
+                // draw the stone layer
+                gc.drawImage(stoneImage, dx, dy, pixelsPerTile, pixelsPerTile);
+                gc.setGlobalAlpha(1.0);
+
+            }
+        }
+    }
+
     static void drawGrass() {
         GraphicsContext gc = canvas.getGraphicsContext2D();
-        // get the darkest color, grass layer color
+        // get the lightest color, grass layer color
         java.awt.Color awtc = MapGenerator.layerColor[0];
         Color glc = Color.rgb(awtc.getRed(), awtc.getGreen(), awtc.getBlue());
+
+
 
         // loop through layer image, find all the grass tiles
         for (int y = 0; y < Globals.tilesPerScreen; y++) {

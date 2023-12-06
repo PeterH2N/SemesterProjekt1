@@ -14,6 +14,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
 <HBox fx:id="hroot" xmlns:fx="http://javafx.com/fxml" prefHeight="${screen.visualBounds.height}" prefWidth="${screen.visualBounds.width}" fx:controller="GameGraphics.Controller">
     <fx:define>
         <Screen fx:factory="getPrimary" fx:id="screen" />
@@ -24,29 +25,32 @@
         <HBox spacing="5">
             <Label fx:id="fuelCapacityLabel"/>
             <Label fx:id="balanceLabel"/>
+            <Label fx:id="oxygenLabel"/>
+            <Label fx:id="hulLStrengthLabel"/>
         </HBox>
         <!-- Inventory view -->
         <ListView fx:id="inventoryList" maxHeight="${hroot.height*0.33}"/>
         <!-- Actions -->
-        <HBox>
-            <Button text="Delete" onAction="#handleDeleteItemButton"/>
-            <Button text="Smelt" onAction="#handleSmeltButton"/>
-            <Button text="Buy" onAction="#handleBuyButton"/>
-            <Button text="Sell" onAction="#handleSellButton"/>
+        <HBox alignment="TOP_CENTER">
+            <Button text="Drop" onAction="#handleDropButton" prefWidth="50"/>
+            <Button fx:id="smeltButton" text="Smelt" onAction="#handleSmeltButton" prefWidth="50"/>
+            <Button fx:id="buyButton" text="Buy" onAction="#handleBuyButton" prefWidth="50"/>
+            <Button fx:id="sellButton" text="Sell" onAction="#handleSellButton" prefWidth="50"/>
         </HBox>
-        <VBox>
-            <Button text="Upgrade Inventory Capacity" onAction="#handleUpgradeInventory"/>
-            <Button text="Upgrade Fuel Capacity" onAction="#handleUpgradeFuelCapacity"/>
-            <Button text="Upgrade Pickup Radius" onAction="#handleUpgradePickupRadius"/>
-            <Button text="Upgrade Oxygen Capacity" onAction="#handleUpgradeOxygenCapacity"/>
-            <Button text="Upgrade Hull Strength" onAction="#handleUpgradeHullStrength"/>
+        <VBox spacing="5" alignment="TOP_CENTER">
+            <Button fx:id="upgradeInventoryButton" onAction="#handleUpgradeInventory" prefWidth="200"/>
+            <Button fx:id="upgradeFuelButton" onAction="#handleUpgradeFuelCapacity" prefWidth="200"/>
+            <Button fx:id="upgradePickupButton" onAction="#handleUpgradePickupRadius" prefWidth="200"/>
+            <Button fx:id="upgradeOxygenButton" onAction="#handleUpgradeOxygenCapacity" prefWidth="200"/>
+            <Button fx:id="upgradeHullButton" onAction="#handleUpgradeHullStrength" prefWidth="200"/>
         </VBox>
 
     </VBox>
-    <StackPane  minWidth="${hroot.height}" prefHeight="${hroot.height}">
+    <AnchorPane minWidth="${hroot.height}" prefHeight="${hroot.height}">
         <Label text="RENDER GAME HERE"/>
         <Canvas fx:id="gameImage" width="${hroot.height}" height="${hroot.height}"/>
-    </StackPane>
+        <Label fx:id="messageLabel" AnchorPane.bottomAnchor="0.0"/>
+    </AnchorPane>
 
 </HBox>
 
