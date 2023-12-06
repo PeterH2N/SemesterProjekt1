@@ -137,6 +137,19 @@ public class Inventory {
     {
         return slots[i].item;
     }
+
+    public int totalItemsInventory(){
+        int counter = 0;
+        for(int i = 0; i < slots.length; i++) {
+            if (slots[i] != null ) {
+                Item item = slots[i].item;
+                if (item != null) {
+                    counter = slots[i].amount + counter;
+                }
+            }
+        }
+        return counter;
+    }
 }
 
 

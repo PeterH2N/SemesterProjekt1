@@ -27,6 +27,7 @@
             <Label fx:id="balanceLabel"/>
             <Label fx:id="oxygenLabel"/>
             <Label fx:id="hulLStrengthLabel"/>
+            <Label fx:id="scoreLabel"/>
         </HBox>
         <!-- Inventory view -->
         <ListView fx:id="inventoryList" maxHeight="${hroot.height*0.33}"/>

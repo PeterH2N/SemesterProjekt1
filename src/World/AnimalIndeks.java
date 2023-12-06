@@ -9,8 +9,8 @@ public class AnimalIndeks {
         animalIndeks = 0;
     }
     // Convert picked up trash to points in the indeks
-    public static void trashToIndeks(int totalTrash){
-        animalIndeks += totalTrash;
+    public static void trashToIndeks(int totalTrash, int layer){
+        animalIndeks = animalIndeks + (totalTrash * layer);
     }
 
     public static int getAnimalIndeks() {

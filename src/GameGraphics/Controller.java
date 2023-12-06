@@ -4,6 +4,7 @@ import Buildings.Shop;
 import Buildings.WorkShop;
 import Globals.Globals;
 import Player.InventorySlot;
+import World.AnimalIndeks;
 import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -74,6 +75,9 @@ public class Controller
     @FXML
     Label messageLabel;
 
+    @FXML
+    Label scoreLabel;
+
     void updateLabels() {
         // fuel
         int fuelLevel = (int)DrawGame.context.player.sub.getFuel();
@@ -92,6 +96,9 @@ public class Controller
 
         // hull strength
         hulLStrengthLabel.setText("Hull strength: " + DrawGame.context.player.sub.getHullStrengthLevel());
+
+        // score label
+        scoreLabel.setText("Score: " + AnimalIndeks.getAnimalIndeks());
 
         // messageLabel
         messageLabel.setText(Globals.globalMessage);
