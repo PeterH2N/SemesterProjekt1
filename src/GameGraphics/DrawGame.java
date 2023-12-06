@@ -1,5 +1,7 @@
 package GameGraphics;
 
+import Buildings.Building;
+import Buildings.Shop;
 
 import Buildings.WorkShop;
 import Context.Context;
@@ -42,6 +44,8 @@ public class DrawGame
 
     static Image animalTile;
 
+    static Image shopImage;
+
     static {
         // get player sprite
         File file = new File(Globals.spritePath + "sub.png");
@@ -70,6 +74,9 @@ public class DrawGame
         file = new File(Globals.spritePath + "Buildings/WorkShop.png");
         workShopImage = new Image(file.toURI().toString());
 
+        file = new File(Globals.spritePath + "Buildings/Shop.png");
+        shopImage = new Image(file.toURI().toString());
+
         // get waste item type images
         for (String typeKey : WasteType.wasteTypeKeys) {
             String path = Globals.spritePath + "WasteTypes/" + typeKey + ".png";
@@ -84,31 +91,57 @@ public class DrawGame
         drawAnimalTile();
         drawGrass();
         drawEntities();
+        // clear screen
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        gc.setGlobalAlpha(1.0);
+        gc.drawImage(currentLayerImage,0, 0, canvas.getWidth(), canvas.getHeight());
+        if (DrawGame.context.player.sub.z == 0) {
+            drawGrass();
+        }
+        else {
+            drawStone(DrawGame.context.player.sub.z);
+        }
+
+        drawEntities(DrawGame.context.player.sub.z);
         drawPlayer();
 
 
+        if (DrawGame.context.player.sub.z != 0) {
+            gc.setGlobalAlpha(0.4);
+            gc.setFill(Color.BLUE);
+            gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+            gc.setGlobalAlpha(1.0);
+        }
     }
 
-    static void drawEntities() {
+    static void drawEntities(int layer) {
         Screen currentScreen = context.world.currentScreen;
 
         // draw items, if there are any
-        for (Entity entity : currentScreen.entities) {
+        for (Entity entity : currentScreen.entities[layer]) {
             if (entity instanceof WasteItem) {
                 drawWasteItem((WasteItem) entity);
             }
-            else if (entity instanceof WorkShop) {
-                drawWorkShop((WorkShop) entity);
+            else if (entity instanceof Building) {
+                drawBuilding((Building) entity);
             }
         }
 
     }
 
-    static void drawWorkShop(WorkShop workShop) {
-        double x = workShop.getPosition().x;
-        double y = workShop.getPosition().y;
+    static void drawBuilding(Building building) {
+        Image image = null;
+        if (building instanceof WorkShop)
+            image = workShopImage;
+        else if (building instanceof Shop)
+            image = shopImage;
+        else
+            return;
 
-        canvas.getGraphicsContext2D().drawImage(workShopImage, x * pixelsPerTile - pixelsPerTile * 0.5, y * pixelsPerTile - pixelsPerTile * 0.5, pixelsPerTile, pixelsPerTile);
+        double x = building.getPosition().x;
+        double y = building.getPosition().y;
+
+        canvas.getGraphicsContext2D().drawImage(image, x * pixelsPerTile - pixelsPerTile * 0.5, y * pixelsPerTile - pixelsPerTile * 0.5, pixelsPerTile, pixelsPerTile);
     }
 
     static void drawWasteItem(WasteItem item) {
@@ -118,8 +151,8 @@ public class DrawGame
         double imageScale = WasteType.wasteTypes.get(key).getImageScale();
         double scale = pixelsPerTile * imageScale;
 
-        double dx = item.getPosition().x * pixelsPerTile;
-        double dy = item.getPosition().y * pixelsPerTile;
+        double dx = item.getPosition().x * pixelsPerTile - pixelsPerTile * 0.5;
+        double dy = item.getPosition().y * pixelsPerTile - pixelsPerTile * 0.5;
 
         // rotate image
         ImageView iv = new ImageView(wasteTypeImages.get(key));
@@ -153,11 +186,39 @@ public class DrawGame
 
     }
 
+    static void drawStone(int currentLayer) {
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        // get top layer color
+        java.awt.Color awtc = MapGenerator.layerColor[currentLayer];
+        Color glc = Color.rgb(awtc.getRed(), awtc.getGreen(), awtc.getBlue());
+
+        // loop through layer image, find all the grass tiles
+        for (int y = 0; y < Globals.tilesPerScreen; y++) {
+            for (int x = 0; x < Globals.tilesPerScreen; x++) {
+                double dx = x * pixelsPerTile;
+                double dy = y * pixelsPerTile;
+
+                if (currentLayerImage.getPixelReader().getColor(x, y).getBlue() >= glc.getBlue()) {
+                    gc.setGlobalAlpha(0.8);
+                }
+                else {
+                    gc.setGlobalAlpha(0.3);
+                }
+                // draw the stone layer
+                gc.drawImage(stoneImage, dx, dy, pixelsPerTile, pixelsPerTile);
+                gc.setGlobalAlpha(1.0);
+
+            }
+        }
+    }
+
     static void drawGrass() {
         GraphicsContext gc = canvas.getGraphicsContext2D();
-        // get the darkest color, grass layer color
+        // get the lightest color, grass layer color
         java.awt.Color awtc = MapGenerator.layerColor[0];
         Color glc = Color.rgb(awtc.getRed(), awtc.getGreen(), awtc.getBlue());
+
+
 
         // loop through layer image, find all the grass tiles
         for (int y = 0; y < Globals.tilesPerScreen; y++) {
@@ -203,24 +264,6 @@ public class DrawGame
             }
         }
         gc.setGlobalAlpha(1.0);
-
-    }
-
-    static void drawAnimalTile(){
-        // Get animal tile sprite
-        File file = new File(Globals.spritePath + "Animal/Fish.png");
-        animalTile = new Image(file.toURI().toString());
-        Screen currentScreen = context.world.currentScreen;
-        //Space[][][] map = currentScreen.map;
-        for (int i = 0; i < Globals.tilesPerScreen; i++){
-            for ( int j = 0; j < Globals.tilesPerScreen; j++){
-                // Currently only the first layer will create animals tiles.
-                if(currentScreen.map[i][j][0].animalPresent){
-                    canvas.getGraphicsContext2D().drawImage(animalTile, j * pixelsPerTile - pixelsPerTile * 0.5, i * pixelsPerTile - pixelsPerTile * 0.5, pixelsPerTile, pixelsPerTile);
-                }
-            }
-        }
-
 
     }
     static void setLayerImage() {

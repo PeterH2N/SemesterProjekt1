@@ -1,5 +1,6 @@
 package World;
 
+import Buildings.Shop;
 import Buildings.WorkShop;
 import Entity.*;
 import Globals.Globals;
@@ -14,7 +15,7 @@ import java.util.Random;
 public class Screen
 {
     public Space[][][] map = new Space[Globals.tilesPerScreen][Globals.tilesPerScreen][Globals.layers];
-    public ArrayList<Entity> entities = new ArrayList<>();
+    public ArrayList<Entity>[] entities = new ArrayList[Globals.layers];
 
     Random rand;
 
@@ -30,6 +31,10 @@ public class Screen
 
                 }
             }
+        }
+        // init arraylist
+        for (int i = 0; i < Globals.layers; i++) {
+            entities[i] = new ArrayList<Entity>();
         }
 
         setTerrain(MapGenerator.makeLayerImage(MapGenerator.makeNoiseImage(xStart, yStart), x + " " + y));
@@ -50,6 +55,11 @@ public class Screen
                 }
             }
         }
+        for (int i = 0; i < Globals.layers; i++) {
+            int scalar = i * 5 + 2;
+            createWaste((int) (Globals.tilesPerScreen * scalar), i);
+        }
+        makeBuildings();
     }
 
     void createWaste(int amount, int layer) {
@@ -58,22 +68,21 @@ public class Screen
             // get random waste type
             String randomKey = "default";
             while (randomKey.equals("default")) {
-                int randomIndex = (int) (Math.random() * (WasteType.wasteTypeKeys.size() - 1));
+                int randomIndex = (int) (Math.random() * (WasteType.wasteTypeKeys.size()));
                 randomKey = WasteType.wasteTypeKeys.get(randomIndex);
             }
             // random point within "screensize"
-            boolean available = false;
             double ix = 0;
             double iy = 0;
-            while (!available) {
-                ix = Math.random() * (Globals.tilesPerScreen - 1);
-                iy = Math.random() * (Globals.tilesPerScreen - 1);
-                available = map[(int)ix][(int)ix][layer].available;
-            }
-            double rotation = Math.random() * 360.0;
+
+            ix = Math.random() * (Globals.tilesPerScreen);
+            iy = Math.random() * (Globals.tilesPerScreen);
+            if (!map[(int)iy][(int)ix][layer].available)
+                continue;
+
             Entity e = new WasteItem(randomKey, new Point(ix, iy));
-            e.setRotation(rotation);
-            entities.add(e);
+            e.setRotation(Math.random() * 360.0);
+            entities[layer].add(e);
         }
 
     }
@@ -97,10 +106,15 @@ public class Screen
         }
     }
 
-    private void makeWorkshop() {
+    private void makeBuildings() {
+        Point pos = makeWorkshop();
+        makeShop(pos);
+    }
+
+    private Point makeWorkshop() {
         // every time we load a screen, we have a 50% chance of spawning a workshop
         if (rand.nextDouble() >= Globals.workShopSpawnRate) {
-            return;
+            return new Point();
         }
 
         // find all grass spaces that are directly next to water
@@ -122,7 +136,39 @@ public class Screen
         int index = (int) (rand.nextDouble() * candidates.size());
         Point pick = candidates.get(index);
         Point pos = new Point(pick.x + 0.5, pick.y + 0.5);
-        entities.add(new WorkShop(pos));
+        entities[0].add(new WorkShop(pos));
+        return pos;
+    }
+
+    private void makeShop(Point workShopPos) {
+        // every time we load a screen, we have a 50% chance of spawning a workshop
+        if (rand.nextDouble() >= Globals.shopSpawnRate) {
+            return;
+        }
+
+        // find all grass spaces that are directly next to water
+        ArrayList<Point> candidates = new ArrayList<>();
+        for (int y = 0; y < Globals.tilesPerScreen; y++) {
+            for (int x = 0; x < Globals.tilesPerScreen; x++) {
+                Point current = new Point(x, y);
+                // if space is not grass, continue
+                if (map[y][x][0].available) {
+                    continue;
+                }
+                // check for water around the space
+                if (waterNextTo(x, y))
+                    candidates.add(current);
+            }
+
+        }
+
+        Point pos = workShopPos;
+        while (pos.equals(workShopPos)) {
+            int index = (int) (rand.nextDouble() * candidates.size());
+            Point pick = candidates.get(index);
+            pos = new Point(pick.x + 0.5, pick.y + 0.5);
+        }
+        entities[0].add(new Shop(pos));
     }
 
     private boolean waterNextTo(int x, int y)

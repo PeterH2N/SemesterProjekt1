@@ -1,5 +1,6 @@
 package Player;
 
+import Buildings.Shop;
 import Buildings.WorkShop;
 import Entity.*;
 import Items.Item;
@@ -16,7 +17,7 @@ public class Submarine extends Entity {
     int oxygenCapacityLevel = 0;
     int pickupRadiusLevel = 0;
     int inventoryCapacityLevel = 0;
-    int hullStrengthLevel = 0;
+    int hullStrengthLevel = 3;
 
     // position is only relative to current screen
     public int x = (Globals.tilesPerScreen / 2);
@@ -29,6 +30,10 @@ public class Submarine extends Entity {
         oxygen = Globals.oxygenUpgrades[oxygenCapacityLevel];
         hull = Globals.hullStrengthUpgrades[hullStrengthLevel];
         inventory = new Inventory(Globals.inventoryUpgrades[inventoryCapacityLevel]);
+    }
+
+    public void refuel(double amount) {
+        fuel = Math.min(fuel + amount, getFuelCapacity());
     }
 
     public int upgradeInventorylevel() {
@@ -75,6 +80,9 @@ public class Submarine extends Entity {
     public int getHullStrengthLevel() {
         return hullStrengthLevel;
     }
+    public int getPickupRadiusLevel() {
+        return pickupRadiusLevel;
+    }
 
     public double getOxygenCapacity() {
         return Globals.oxygenUpgrades[oxygenCapacityLevel];
@@ -96,9 +104,9 @@ public class Submarine extends Entity {
         if (fuel < Globals.fuelConsumptionPerPickUp)
             return;
 
-        for (int i = 0; i < screen.entities.size(); i++) {
+        for (int i = 0; i < screen.entities[z].size(); i++) {
             Point subPos = new Point((double)x + 0.5, (double)y + 0.5);
-            Entity entity = screen.entities.get(i);
+            Entity entity = screen.entities[z].get(i);
             if (entity instanceof Item) {
                 // Check if picked up items is in an animal tile
                 if(Point.distance(entity.getPosition(), subPos) <= this.getPickUpRadius() && screen.map[(int)entity.getPosition().y][(int)entity.getPosition().x][0].animalPresent){
@@ -112,7 +120,7 @@ public class Submarine extends Entity {
                 }
                 else if (Point.distance(entity.getPosition(), subPos) <= this.getPickUpRadius()) {
                     if (inventory.addItem((Item) entity) == 1) {
-                        screen.entities.remove(i);
+                        screen.entities[z].remove(i);
                         i--;
                     }
                 }
@@ -126,7 +134,7 @@ public class Submarine extends Entity {
     // moves the submarines and spends the fuel necessary
     boolean move(String dir, World world) {
         if (fuel < Globals.fuelConsumptionPerMove) {
-            System.out.println("Not enough fuel!");
+            Globals.globalMessage = ("Not enough fuel!");
             return false;
         }
 
@@ -195,7 +203,7 @@ public class Submarine extends Entity {
         if (dir.equals("down")) {
             if (z >= Globals.layers - 1)
                 return false;
-            if (currentScreen.map[y][x][z+1].available && hullStrengthLevel > 0) {
+            if (currentScreen.map[y][x][z+1].available && getHullStrengthLevel() > z) {
                 z++;
                 return true;
             }
@@ -213,7 +221,7 @@ public class Submarine extends Entity {
 
     public WorkShop isByWorkShop(Screen screen) {
         // find workshop on the screen
-        for (Entity entity : screen.entities) {
+        for (Entity entity : screen.entities[z]) {
             if (!(entity instanceof WorkShop))
                 continue;
 
@@ -227,4 +235,19 @@ public class Submarine extends Entity {
         return null;
     }
 
+    public Shop isByShop(Screen screen)
+    {
+        for (Entity entity : screen.entities[z]) {
+            if (!(entity instanceof Shop))
+                continue;
+
+            // if within pickup range
+            Point playerPos = new Point(x + 0.5, y + 0.5);
+
+            if (Point.distance(playerPos, entity.getPosition()) <= getPickUpRadius()) {
+                return (Shop) entity;
+            }
+        }
+        return null;
+    }
 }

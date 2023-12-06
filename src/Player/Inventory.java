@@ -43,18 +43,20 @@ public class Inventory {
             if (slot == null) {
                 continue;
             }
-            if (slot.item.getName().equals(item.getName())) {
-                if (slot.amount + amount > item.getStackSize()) {
-                    overflowAmount = amount + item.getStackSize() - slot.amount;
-                    slot.amount += amount - overflowAmount;
-                    amount = overflowAmount;
-                }
-                else {
-                    slot.amount += amount;
-                    return 1;
-                }
+            if (!(slot.item.getName().equals(item.getName())))
+                continue;
 
+            // if adding the amount exceeds the stack size
+            if (slot.amount + amount > item.getStackSize()) {
+                overflowAmount = amount + slot.amount - item.getStackSize();
+                slot.amount += (amount - overflowAmount);
+                amount = overflowAmount;
             }
+            else {
+                slot.amount += amount;
+                return 1;
+            }
+
         }
         // find the first empty slot
         if (amount > 0) {
@@ -76,7 +78,20 @@ public class Inventory {
         return addItem(item, 1);
     }
 
-    // return 1 if successful, -1 otherwise
+    public boolean removeItemFromSlot(int index, int amount) {
+        InventorySlot slot = slots[index];
+        if (slot == null)
+            return false;
+        if (amount > slot.amount)
+            return false;
+
+        slot.amount -= amount;
+        if (slot.amount <= 0)
+            slots[index] = null;
+
+        return true;
+    }
+
     public boolean removeItem(String itemName, int amount) {
         ArrayList<Integer> indices = new ArrayList<>();
         int sumAmount = 0;

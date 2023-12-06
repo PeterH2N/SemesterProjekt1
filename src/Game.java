@@ -7,6 +7,7 @@ import Context.Context;
 import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
+import javafx.event.*;
 
 import GameGraphics.Controller;
 import GameGraphics.DrawGame;
@@ -72,12 +73,15 @@ public class Game extends Application {
             if (!file.isDirectory() && !file.getName().equals(".gitignore"))
                 file.delete();
         }
+
+
     }
 
     public static void main(String[] args)
     {
         launch(args);
     }
+    World.Quiz quiz;
 
     /*public static void main(String[] args) {
         System.out.println("Welcome to our game!");
