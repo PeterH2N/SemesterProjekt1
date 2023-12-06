@@ -8,7 +8,7 @@
   },
   "PET Bottle": {
     "name": "PET Bottle",
-    "description": "Bottle for beverages",
+    "description": "PET bottles are not biodegradable and are one of the hardest to destroy.\n This plastic leeches microplastics into the water, which is harmful to marine life. ",
     "materialKey": "PET",
     "volume": 1.3E-5,
     "imageScale" : 0.7

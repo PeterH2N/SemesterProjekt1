@@ -44,7 +44,9 @@
             <Button fx:id="upgradeOxygenButton" onAction="#handleUpgradeOxygenCapacity" prefWidth="200"/>
             <Button fx:id="upgradeHullButton" onAction="#handleUpgradeHullStrength" prefWidth="200"/>
         </VBox>
-
+        <VBox>
+            <Label fx:id="itemDescribtionLabel"/>
+        </VBox>
     </VBox>
     <AnchorPane minWidth="${hroot.height}" prefHeight="${hroot.height}">
         <Label text="RENDER GAME HERE"/>
