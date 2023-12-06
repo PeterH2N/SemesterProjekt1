@@ -73,33 +73,33 @@ import java.awt.event.ActionListener;
             textarea.setWrapStyleWord(true);
             textarea.setBackground(new Color(145,178,255));
             textarea.setForeground(new Color(255,255,255));
-            textarea.setFont(new Font("MV Boli",Font.BOLD,15));
+            textarea.setFont(new Font("Ink Free",Font.BOLD,15));
             textarea.setBorder(BorderFactory.createBevelBorder(1));
             textarea.setEditable(false);
 
             buttonA.setBounds(0,100,100,100);
-            buttonA.setFont(new Font("MV Boli",Font.BOLD,35));
+            buttonA.setFont(new Font("Ink Free",Font.BOLD,35));
             buttonA.setFocusable(false);
             buttonA.addActionListener(this);
             buttonA.setText("A");
             buttonA.setForeground(new Color(255,255,255));
 
             buttonB.setBounds(0,200,100,100);
-            buttonB.setFont(new Font("MV Boli",Font.BOLD,35));
+            buttonB.setFont(new Font("Ink Free",Font.BOLD,35));
             buttonB.setFocusable(false);
             buttonB.addActionListener(this);
             buttonB.setText("B");
             buttonB.setForeground(new Color(255,255,255));
 
             buttonC.setBounds(0,300,100,100);
-            buttonC.setFont(new Font("MV Boli",Font.BOLD,35));
+            buttonC.setFont(new Font("Ink Free",Font.BOLD,35));
             buttonC.setFocusable(false);
             buttonC.addActionListener(this);
             buttonC.setText("C");
             buttonC.setForeground(new Color(255,255,255));
 
             buttonD.setBounds(0,400,100,100);
-            buttonD.setFont(new Font("MV Boli",Font.BOLD,35));
+            buttonD.setFont(new Font("Ink Free",Font.BOLD,35));
             buttonD.setFocusable(false);
             buttonD.addActionListener(this);
             buttonD.setText("D");
@@ -108,22 +108,22 @@ import java.awt.event.ActionListener;
             answer_labelA.setBounds(125,100,500,100);
             answer_labelA.setBackground(new Color(145,178,255));
             answer_labelA.setForeground(new Color(255,255,255));
-            answer_labelA.setFont(new Font("MV Boli",Font.PLAIN,35));
+            answer_labelA.setFont(new Font("Ink Free",Font.PLAIN,35));
 
             answer_labelB.setBounds(125,200,500,100);
             answer_labelB.setBackground(new Color(145,178,255));
             answer_labelB.setForeground(new Color(255,255,255));
-            answer_labelB.setFont(new Font("MV Boli",Font.PLAIN,35));
+            answer_labelB.setFont(new Font("Ink Free",Font.PLAIN,35));
 
             answer_labelC.setBounds(125,300,500,100);
             answer_labelC.setBackground(new Color(145,178,255));
             answer_labelC.setForeground(new Color(255,255,255));
-            answer_labelC.setFont(new Font("MV Boli",Font.PLAIN,35));
+            answer_labelC.setFont(new Font("Ink Free",Font.PLAIN,35));
 
             answer_labelD.setBounds(125,400,500,100);
             answer_labelD.setBackground(new Color(145,178,255));
             answer_labelD.setForeground(new Color(255,255,255));
-            answer_labelD.setFont(new Font("MV Boli",Font.PLAIN,35));
+            answer_labelD.setFont(new Font("Ink Free",Font.PLAIN,35));
 
 
 
