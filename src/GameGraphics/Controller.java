@@ -3,6 +3,7 @@ package GameGraphics;
 import Buildings.Shop;
 import Buildings.WorkShop;
 import Globals.Globals;
+import Items.Item;
 import Player.InventorySlot;
 import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
@@ -28,6 +29,7 @@ public class Controller
         DrawGame.canvas = gameImage;
         DrawGame.setLayerImage();
         updateFields();
+        inventoryList.getSelectionModel().selectedItemProperty().addListener(selectionChangedListener);
     }
 
     @FXML
@@ -73,6 +75,9 @@ public class Controller
 
     @FXML
     Label messageLabel;
+
+    @FXML
+    Label itemDescribtionLabel;
 
     void updateLabels() {
         // fuel
@@ -324,6 +329,12 @@ public class Controller
             e.consume();
         }
     };
+
+    public ChangeListener<InventorySlot> selectionChangedListener = (observable, oldValue, newValue) -> {
+        Item item = ((InventorySlot)newValue).item;
+        itemDescribtionLabel.setText(item.getDescription());
+    };
+
     public ChangeListener<Number> stageSizeListener = (observable, oldValue, newValue) -> {
         DrawGame.pixelsPerTile = gameImage.getHeight() / (double)Globals.tilesPerScreen;
         DrawGame.drawGame();
