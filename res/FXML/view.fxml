@@ -24,22 +24,24 @@
         <HBox spacing="5">
             <Label fx:id="fuelCapacityLabel"/>
             <Label fx:id="balanceLabel"/>
+            <Label fx:id="oxygenLabel"/>
+            <Label fx:id="hulLStrengthLabel"/>
         </HBox>
         <!-- Inventory view -->
         <ListView fx:id="inventoryList" maxHeight="${hroot.height*0.33}"/>
         <!-- Actions -->
-        <HBox>
-            <Button text="Delete" onAction="#handleDeleteItemButton"/>
-            <Button text="Smelt" onAction="#handleSmeltButton"/>
-            <Button text="Buy" onAction="#handleBuyButton"/>
-            <Button text="Sell" onAction="#handleSellButton"/>
+        <HBox alignment="TOP_CENTER">
+            <Button text="Drop" onAction="#handleDropButton" prefWidth="50"/>
+            <Button fx:id="smeltButton" text="Smelt" onAction="#handleSmeltButton" prefWidth="50"/>
+            <Button fx:id="buyButton" text="Buy" onAction="#handleBuyButton" prefWidth="50"/>
+            <Button fx:id="sellButton" text="Sell" onAction="#handleSellButton" prefWidth="50"/>
         </HBox>
-        <VBox>
-            <Button text="Upgrade Inventory Capacity" onAction="#handleUpgradeInventory"/>
-            <Button text="Upgrade Fuel Capacity" onAction="#handleUpgradeFuelCapacity"/>
-            <Button text="Upgrade Pickup Radius" onAction="#handleUpgradePickupRadius"/>
-            <Button text="Upgrade Oxygen Capacity" onAction="#handleUpgradeOxygenCapacity"/>
-            <Button text="Upgrade Hull Strength" onAction="#handleUpgradeHullStrength"/>
+        <VBox spacing="5" alignment="TOP_CENTER">
+            <Button fx:id="upgradeInventoryButton" onAction="#handleUpgradeInventory" prefWidth="200"/>
+            <Button fx:id="upgradeFuelButton" onAction="#handleUpgradeFuelCapacity" prefWidth="200"/>
+            <Button fx:id="upgradePickupButton" onAction="#handleUpgradePickupRadius" prefWidth="200"/>
+            <Button fx:id="upgradeOxygenButton" onAction="#handleUpgradeOxygenCapacity" prefWidth="200"/>
+            <Button fx:id="upgradeHullButton" onAction="#handleUpgradeHullStrength" prefWidth="200"/>
         </VBox>
 
     </VBox>

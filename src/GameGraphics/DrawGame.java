@@ -91,13 +91,16 @@ public class DrawGame
         }
         else {
             drawStone(DrawGame.context.player.sub.z);
-            gc.setGlobalAlpha(0.5);
-            gc.setFill(Color.BLUE);
-            gc.fillRect(0,0, canvas.getWidth(), canvas.getHeight());
         }
 
         drawEntities(DrawGame.context.player.sub.z);
         drawPlayer();
+        if (DrawGame.context.player.sub.z != 0) {
+            gc.setGlobalAlpha(0.4);
+            gc.setFill(Color.BLUE);
+            gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+            gc.setGlobalAlpha(1.0);
+        }
     }
 
     static void drawEntities(int layer) {
@@ -192,6 +195,7 @@ public class DrawGame
                 }
                 // draw the stone layer
                 gc.drawImage(stoneImage, dx, dy, pixelsPerTile, pixelsPerTile);
+                gc.setGlobalAlpha(1.0);
 
             }
         }

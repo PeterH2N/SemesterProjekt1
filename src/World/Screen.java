@@ -39,7 +39,7 @@ public class Screen
 
         setTerrain(MapGenerator.makeLayerImage(MapGenerator.makeNoiseImage(xStart, yStart), x + " " + y));
         for (int i = 0; i < Globals.layers; i++) {
-            int scalar = i * 3 + 2;
+            int scalar = i * 5 + 2;
             createWaste((int) (Globals.tilesPerScreen * scalar), i);
         }
         makeBuildings();

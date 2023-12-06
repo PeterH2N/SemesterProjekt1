@@ -4,6 +4,8 @@ public class Globals {
     final public static String JSONPath = "res/JSON/";
     final public static String mapGenPath = "res/MapGen/";
     final public static String spritePath = "res/Sprites/";
+
+    public static String globalMessage = "";
     final public static int tilesPerScreen = 11;
     final public static int layers = 5;
 
@@ -28,9 +30,9 @@ public class Globals {
     final public static int[][] fuelUpgradeItemAmount = {{2, 4, 6, 8, 10}};
     final public static int[][] oxygenUpgradeItemAmount = {{3, 6, 9, 12, 15},
             {2, 4, 6, 8, 10}};
-    final public static int[][] hullStrengthUpgradeItemAmount = {{3, 6, 9},
-            {2, 4, 6},
-            {1, 2, 3}};
+    final public static int[][] hullStrengthUpgradeItemAmount = {{3, 6, 9, 12},
+            {2, 4, 6, 8},
+            {1, 2, 3, 4}};
     final public static int[][] pickupRadiusUpgradeItemAmount = {{3, 6, 9, 12, 15},
             {2, 4, 6, 8, 10}};
 
@@ -39,6 +41,6 @@ public class Globals {
     final public static double[] fuelUpgrades = {100, 120, 140, 160, 180, 200};
     final public static double[] oxygenUpgrades = {2000, 2500, 3000, 3500, 4000, 4500};
     final public static double[] pickupRadiusUpgrades = {2.0, 2.25, 2.5, 3.0, 3.5};
-    final public static int[] hullStrengthUpgrades = {1, 2, 3};
+    final public static int[] hullStrengthUpgrades = {1, 2, 3, 4};
 
 }
