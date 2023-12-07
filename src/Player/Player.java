@@ -49,6 +49,7 @@ public class Player {
     public void pickUp(Screen screen) {
         sub.pickupItems(screen);
         sub.fuel -= Globals.fuelConsumptionPerPickUp;
+
     }
 
     public void deleteItem(int slotIndex, int amount) {

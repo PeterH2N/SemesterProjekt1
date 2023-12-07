@@ -6,58 +6,58 @@
     "volume": -1.0,
     "imageScale" : 1.0
   },
-  "0.5 PET Bottle": {
-    "name": "0.5 PET Bottle",
-    "description": "Half litre Bottle for beverages",
+  "PET Bottle": {
+    "name": "PET Bottle",
+    "description": "PET bottles are not biodegradable and are one of the hardest to destroy.\n This plastic leeches microplastics into the water, which is harmful to marine life. ",
     "materialKey": "PET",
     "volume": 1.3E-5,
     "imageScale" : 0.7
   },
   "Glass Bottle": {
     "name": "Glass Bottle",
-    "description": "Half litre glass bottle for beverages",
+    "description": "Glass bottles are not biodegradable, but glass particles can still leach\n into the water and enter the food chain. These particles are very harmful to organisms.",
     "materialKey": "Glass",
     "volume": 5.3E-5,
     "imageScale" : 1.0
   },
-  "ALU Can": {
-    "name": "ALU Can",
-    "description": "Aluminum can for beverages",
+  "Aluminium Can": {
+    "name": "Aluminium Can",
+    "description": "Even though this container isn't made from plastic, it releases about\n twice the amount of CO2 during production, compared to a plastic bottle.",
     "materialKey": "ALU",
     "volume": 5.0E-6,
     "imageScale" : 0.5
   },
-  "0.5 HDPE Bottle": {
-    "name": "0.5 HDPE Bottle",
-    "description": "Half litre HDPE Bottle for beverages",
+  "HDPE Bottle": {
+    "name": "HDPE Bottle",
+    "description": "Plastic bottles are very common in the ocean. Around 250 billion plastic\n bottles are not recycled and a large portion of that ends up in the oceans.",
     "materialKey": "HDPE",
     "volume": 1.3E-5,
     "imageScale" : 0.6
   },
   "Styrofoam": {
     "name": "Styrofoam",
-    "description": "Piece of styrofoam",
+    "description": "Plastic foam is not recyclable, compostable or biodegradable. These attributes\n make this material one of the worst to produce. It is not ECO friendly.",
     "materialKey": "PS",
     "volume": 6E-3,
     "imageScale" : 0.6
   },
-  "Bubble Wrap": {
-    "name": "Bubble Wrap",
-    "description": "Piece of bubble wrap, sadly all popped:(",
+  "Bubble-Wrap": {
+    "name": "Bubble-Wrap",
+    "description": "Some types of bubble-wrap are made to be biodegradable within 90 days, however they\n still leech harmful microplastics and hormone-disrupting chemicals.",
     "materialKey": "LDPE",
     "volume": 3E-5,
     "imageScale" : 0.8
   },
   "Diaper": {
     "name": "Diaper",
-    "description": "Disposable Diaper. It smells",
+    "description": "Disposable Diapers contain a lot of plastics that leech into the ocean. They also contain Tributyltin(TBT),\n which is a biocide that is poisonous to marine life.",
     "materialKey": "PP",
     "volume": 5E-4,
     "imageScale" : 0.8
   },
   "PVC Pipe": {
     "name": "PVC Pipe",
-    "description": "Pipe used for plumbing",
+    "description": "PVC plastic in the ocean, leeches microplastics into the water. They also release chlorine-based\n chemicals called dioxins, that are very toxic to marine life and humans(the most toxic for humans). ",
     "materialKey": "PVC",
     "volume": 5E-4,
     "imageScale" : 0.9

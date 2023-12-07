@@ -63,6 +63,8 @@ public class Game extends Application {
         stage.setTitle("Semesterprojekt");
         stage.setScene(scene);
         stage.show();
+
+
     }
 
     @Override
@@ -79,7 +81,6 @@ public class Game extends Application {
     {
         launch(args);
     }
-    World.Quiz quiz = new World.Quiz();
 
     /*public static void main(String[] args) {
         System.out.println("Welcome to our game!");

@@ -14,7 +14,7 @@ public class Globals {
     final public static double shopSpawnRate = 0.5;
 
     final public static int defaultItemStackSize = 16;
-    final public static double fuelConsumptionPerMove = 0.1;
+    final public static double fuelConsumptionPerMove = 10;
     final public static double fuelConsumptionPerPickUp = 0.5;
     final public static double oxygenConsumptionPerMove = 50;
 

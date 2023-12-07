@@ -2,6 +2,7 @@ package GameGraphics;
 
 import Buildings.Building;
 import Buildings.Shop;
+
 import Buildings.WorkShop;
 import Context.Context;
 import Entity.Entity;
@@ -15,6 +16,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
+import World.Space;
 
 import java.io.File;
 import java.util.HashMap;
@@ -39,6 +41,8 @@ public class DrawGame
     static Image waterImage;
 
     static Image workShopImage;
+
+    static Image animalTile;
 
     static Image shopImage;
 
@@ -82,10 +86,14 @@ public class DrawGame
         }
     }
     public static void drawGame() {
+        // for now, we are just drawing the basic layer image to the screen
+        canvas.getGraphicsContext2D().drawImage(currentLayerImage,0, 0, canvas.getWidth(), canvas.getHeight());
+        drawGrass();
         // clear screen
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.setGlobalAlpha(1.0);
         gc.drawImage(currentLayerImage,0, 0, canvas.getWidth(), canvas.getHeight());
+        drawAnimalTile(context.player.sub.z);
         if (DrawGame.context.player.sub.z == 0) {
             drawGrass();
         }
@@ -95,6 +103,9 @@ public class DrawGame
 
         drawEntities(DrawGame.context.player.sub.z);
         drawPlayer();
+
+
+
         if (DrawGame.context.player.sub.z != 0) {
             gc.setGlobalAlpha(0.4);
             gc.setFill(Color.BLUE);
@@ -254,6 +265,22 @@ public class DrawGame
         }
         gc.setGlobalAlpha(1.0);
 
+    }
+
+    static void drawAnimalTile(int layer){
+        // Get animal tile sprite
+        File file = new File(Globals.spritePath + "Animal/Fish.png");
+        animalTile = new Image(file.toURI().toString());
+        Screen currentScreen = context.world.currentScreen;
+        //Space[][][] map = currentScreen.map;
+        for (int i = 0; i < Globals.tilesPerScreen; i++){
+            for ( int j = 0; j < Globals.tilesPerScreen; j++){
+                // Currently only the first layer will create animals tiles.
+                if(currentScreen.map[j][i][layer].animalPresent){
+                    canvas.getGraphicsContext2D().drawImage(animalTile, j * pixelsPerTile - pixelsPerTile * 0.5, i * pixelsPerTile - pixelsPerTile * 0.5, pixelsPerTile, pixelsPerTile);
+                }
+            }
+        }
     }
     static void setLayerImage() {
         int xStart = context.world.currentScreen.x;
