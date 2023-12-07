@@ -1,5 +1,6 @@
 package World;
 
+import Globals.Globals;
 import javafx.geometry.Pos;
 
 import javax.swing.*;
@@ -266,8 +267,12 @@ import java.awt.event.ActionListener;
             buttonD.setEnabled(false);
 
             result = (int)((correct_guesses/(double)total_questions)*100);
-
-            textfield.setText("Game Over!");
+            // Decide whether you won or lost the game
+            if(AnimalIndeks.getAnimalIndeks() < Globals.victoryScore) {
+                textfield.setText("Game Over!");
+            }else{
+                textfield.setText("Victory");
+            }
             textarea.setText("");
             answer_labelA.setText("         Result");
             answer_labelB.setText("");

@@ -304,12 +304,11 @@ public class Controller
             DrawGame.setLayerImage();
             DrawGame.drawGame();
 
-            if(!gamerOver && DrawGame.context.isDone()){
+            if(!gamerOver && (DrawGame.context.isDone() || AnimalIndeks.getAnimalIndeks() >= Globals.victoryScore)){
                 gamerOver = true;
                 World.Quiz quiz = new World.Quiz();
 
             }
-
         }
     };
 
@@ -346,11 +345,11 @@ public class Controller
 
                 e.consume();
 
-                if(DrawGame.context.player.sub.getFuel() <= 0){
+                if(DrawGame.context.player.sub.getFuel() <= 0 || DrawGame.context.player.sub.getOxygen() <= 0){
                     DrawGame.context.makeDone();
-                } if(DrawGame.context.player.sub.getOxygen() <= 0){
-                    DrawGame.context.makeDone();
-            }
+                }
+
+
         }
     };
 

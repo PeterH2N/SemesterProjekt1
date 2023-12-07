@@ -43,4 +43,5 @@ public class Globals {
     final public static double[] pickupRadiusUpgrades = {2.0, 2.25, 2.5, 3.0, 3.5};
     final public static int[] hullStrengthUpgrades = {1, 2, 3, 4};
 
+    final public static int victoryScore = 500;
 }
