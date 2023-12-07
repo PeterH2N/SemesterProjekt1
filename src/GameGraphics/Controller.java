@@ -300,6 +300,7 @@ public class Controller
 
     public EventHandler<KeyEvent> anyKeyEvent = new EventHandler<KeyEvent>()
     {
+        boolean gamerOver = false;
         @Override
         public void handle(KeyEvent event)
         {
@@ -309,8 +310,10 @@ public class Controller
             DrawGame.setLayerImage();
             DrawGame.drawGame();
 
-            if(DrawGame.context.isDone()){
+            if(!gamerOver && DrawGame.context.isDone()){
+                gamerOver = true;
                 World.Quiz quiz = new World.Quiz();
+
             }
 
         }
@@ -351,7 +354,9 @@ public class Controller
 
                 if(DrawGame.context.player.sub.getFuel() <= 0){
                     DrawGame.context.makeDone();
-                }
+                } if(DrawGame.context.player.sub.getOxygen() <= 0){
+                    DrawGame.context.makeDone();
+            }
         }
     };
 
