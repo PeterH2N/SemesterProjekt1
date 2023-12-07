@@ -274,6 +274,9 @@ import java.awt.event.ActionListener;
                 textfield.setText("Victory");
             }
             textarea.setText("");
+
+            textfield.setText("Game Over!");
+            textarea.setText("Animal Score "+AnimalIndeks.getAnimalIndeks());
             answer_labelA.setText("         Result");
             answer_labelB.setText("");
             answer_labelC.setText("");
