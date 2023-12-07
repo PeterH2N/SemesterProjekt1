@@ -1,14 +1,14 @@
 package Player;
 
 import Items.Item;
-import Items.WasteItem;
+
 import java.util.ArrayList;
 
 public class Inventory {
     public InventorySlot[] slots;
 
-    Inventory(int capacity) {
-        slots = new InventorySlot[capacity];
+    Inventory(double capacity) {
+        slots = new InventorySlot[(int)capacity];
     }
 
     //increases capacity of the inventory

@@ -31,36 +31,7 @@ public class CommandUpgrade extends BaseCommand implements Command {
             return;
         }
 
-        if (parameters[0].equals("inventory")){
-            if (workShop.upgradeInventoryCapacity(context.player)) {
-                System.out.println("Upgraded inventory capacity");
-                return;
-        }
-
-        }
-
-        if (parameters[0].equals("fuel")){
-            if (workShop.upgradeFuelCapacity(context.player)) {
-                System.out.println("Upgraded fuel capacity");
-                return;
-            }
-        }
-        if (parameters[0].equals("oxygen")){
-            if (workShop.upgradeOxygenCapacity(context.player)) {
-                System.out.println("Upgraded oxygen capacity");
-                return;
-            }
-        }
-
-        if (parameters[0].equals("hull")){
-            if (workShop.upgradeHullStrength(context.player)) {
-                System.out.println("Upgraded hull strength");
-                return;
-            }
-        }
-
-
-        System.out.println("Not a valid upgrade");
+        workShop.upgrade(parameters[0], context.player);
     }
 
 }

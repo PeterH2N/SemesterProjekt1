@@ -107,30 +107,30 @@ public class Controller
 
         // buttons
         String level = String.valueOf(DrawGame.context.player.sub.getInventoryCapacityLevel());
-        if (DrawGame.context.player.sub.getInventoryCapacityLevel() == Globals.inventoryUpgrades.length - 1)
+        if (DrawGame.context.player.sub.getInventoryCapacityLevel() == Globals.upgrades.get(Globals.inventory).length - 1)
             level = "max";
         upgradeInventoryButton.setText("Upgrade Inventory Capacity |  " + level);
 
         level = String.valueOf(DrawGame.context.player.sub.getFuelCapacityLevel());
-        if (DrawGame.context.player.sub.getFuelCapacityLevel() == Globals.fuelUpgrades.length - 1)
+        if (DrawGame.context.player.sub.getFuelCapacityLevel() == Globals.upgrades.get(Globals.fuel).length - 1)
             level = "max";
 
         upgradeFuelButton.setText("Upgrade Fuel Capacity |  " + level);
 
         level = String.valueOf(DrawGame.context.player.sub.getPickupRadiusLevel());
-        if (DrawGame.context.player.sub.getPickupRadiusLevel() == Globals.pickupRadiusUpgrades.length - 1)
+        if (DrawGame.context.player.sub.getPickupRadiusLevel() == Globals.upgrades.get(Globals.pickup).length - 1)
             level = "max";
 
         upgradePickupButton.setText("Upgrade Pickup Radius |  " + level);
 
         level = String.valueOf(DrawGame.context.player.sub.getOxygenCapacityLevel());
-        if (DrawGame.context.player.sub.getOxygenCapacityLevel() == Globals.oxygenUpgrades.length - 1)
+        if (DrawGame.context.player.sub.getOxygenCapacityLevel() == Globals.upgrades.get(Globals.oxygen).length - 1)
             level = "max";
 
         upgradeOxygenButton.setText("Upgrade Oxygen Capacity |  " + level);
 
         level = String.valueOf(DrawGame.context.player.sub.getHullStrengthLevel());
-        if (DrawGame.context.player.sub.getHullStrengthLevel() == Globals.hullStrengthUpgrades.length - 1)
+        if (DrawGame.context.player.sub.getHullStrengthLevel() == Globals.upgrades.get(Globals.hull).length - 1)
             level = "max";
 
         upgradeHullButton.setText("Upgrade Hull Strength |  " + level);
@@ -241,7 +241,7 @@ public class Controller
         if (workShop == null)
             return;
 
-        workShop.upgradeInventoryCapacity(DrawGame.context.player);
+        workShop.upgrade(Globals.inventory, DrawGame.context.player);
         updateFields();
     }
 
@@ -251,7 +251,7 @@ public class Controller
         if (workShop == null)
             return;
 
-        workShop.upgradeFuelCapacity(DrawGame.context.player);
+        workShop.upgrade(Globals.fuel, DrawGame.context.player);
         updateFields();
     }
 
@@ -261,7 +261,7 @@ public class Controller
         if (workShop == null)
             return;
 
-        workShop.upgradeOxygenCapacity(DrawGame.context.player);
+        workShop.upgrade(Globals.oxygen, DrawGame.context.player);
         updateFields();
     }
 
@@ -271,7 +271,7 @@ public class Controller
         if (workShop == null)
             return;
 
-        workShop.upgradePickupRadius(DrawGame.context.player);
+        workShop.upgrade(Globals.pickup, DrawGame.context.player);
         updateFields();
     }
 
@@ -281,7 +281,7 @@ public class Controller
         if (workShop == null)
             return;
 
-        workShop.upgradeHullStrength(DrawGame.context.player);
+        workShop.upgrade(Globals.hull, DrawGame.context.player);
         updateFields();
     }
 
@@ -343,7 +343,10 @@ public class Controller
     };
 
     public ChangeListener<InventorySlot> selectionChangedListener = (observable, oldValue, newValue) -> {
-        Item item = ((InventorySlot)newValue).item;
+        if (newValue == null)
+            return;
+
+        Item item = (newValue).item;
         itemDescribtionLabel.setText(item.getDescription());
     };
 

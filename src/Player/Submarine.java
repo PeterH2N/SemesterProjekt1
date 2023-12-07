@@ -11,7 +11,7 @@ public class Submarine extends Entity {
     public Inventory inventory;
     double fuel;
     double oxygen;
-    int hull;
+    Double hull;
 
     int fuelCapacityLevel = 0;
     int oxygenCapacityLevel = 0;
@@ -26,17 +26,38 @@ public class Submarine extends Entity {
 
     Submarine() {
         super(new Point(0, 0));
-        fuel = Globals.fuelUpgrades[fuelCapacityLevel];
-        oxygen = Globals.oxygenUpgrades[oxygenCapacityLevel];
-        hull = Globals.hullStrengthUpgrades[hullStrengthLevel];
-        inventory = new Inventory(Globals.inventoryUpgrades[inventoryCapacityLevel]);
+        fuel = Globals.upgrades.get(Globals.fuel)[fuelCapacityLevel];
+        oxygen = Globals.upgrades.get(Globals.oxygen)[oxygenCapacityLevel];
+        hull = (Globals.upgrades.get(Globals.hull)[hullStrengthLevel]);
+        inventory = new Inventory(Globals.upgrades.get(Globals.inventory)[inventoryCapacityLevel]);
     }
 
     public void refuel(double amount) {
         fuel = Math.min(fuel + amount, getFuelCapacity());
     }
 
-    public int upgradeInventorylevel() {
+    public int upgrade(String upgrade) {
+        // just a bunch of if statements
+        if (upgrade.equals(Globals.inventory)) {
+            return upgradeInventoryLevel();
+        }
+        else if (upgrade.equals(Globals.fuel)) {
+            return upgradeFuelLevel();
+        }
+        else if (upgrade.equals(Globals.oxygen)) {
+            return upgradeOxygenLevel();
+        }
+        else if (upgrade.equals(Globals.pickup)) {
+            return upgradePickupLevel();
+        }
+        else if (upgrade.equals(Globals.hull)) {
+            return upgradeHullStrengthLevel();
+        }
+        Globals.globalMessage = "Not a valid upgrade!";
+        return -1;
+    }
+
+    public int upgradeInventoryLevel() {
         inventoryCapacityLevel++;
         inventory.increaseCapacity(getInventoryCapacity());
         return inventoryCapacityLevel;
@@ -54,20 +75,14 @@ public class Submarine extends Entity {
         return ++hullStrengthLevel;
     }
 
-    public int upgradePickupRadius() {
+    public int upgradePickupLevel() {
         return ++pickupRadiusLevel;
     }
 
-    public int getInventoryCapacity() {
-        return Globals.inventoryUpgrades[inventoryCapacityLevel];
-    }
+
     
     public int getInventoryCapacityLevel() {
         return inventoryCapacityLevel;
-    }
-
-    public double getFuelCapacity() {
-        return Globals.fuelUpgrades[fuelCapacityLevel];
     }
     
     public int getFuelCapacityLevel() {
@@ -83,13 +98,18 @@ public class Submarine extends Entity {
     public int getPickupRadiusLevel() {
         return pickupRadiusLevel;
     }
-
+    public int getInventoryCapacity() {
+        return Globals.upgrades.get(Globals.inventory)[inventoryCapacityLevel].intValue();
+    }
+    public double getFuelCapacity() {
+        return Globals.upgrades.get(Globals.fuel)[fuelCapacityLevel];
+    }
     public double getOxygenCapacity() {
-        return Globals.oxygenUpgrades[oxygenCapacityLevel];
+        return Globals.upgrades.get(Globals.oxygen)[oxygenCapacityLevel];
     }
 
     public double getPickUpRadius() {
-        return Globals.pickupRadiusUpgrades[pickupRadiusLevel];
+        return Globals.upgrades.get(Globals.pickup)[pickupRadiusLevel];
     }
 
     public double getFuel() {
