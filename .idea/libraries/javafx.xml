@@ -1,10 +1,17 @@
 <component name="libraryTable">
   <library name="javafx">
-    <CLASSES>
-      <root url="file://$PROJECT_DIR$/../../../../../Program Files/Java/javafx-sdk-21.0.1/lib" />
-    </CLASSES>
+    <CLASSES />
     <JAVADOC />
-    <SOURCES />
-    <jarDirectory url="file://$PROJECT_DIR$/../../../../../Program Files/Java/javafx-sdk-21.0.1/lib" recursive="false" />
+    <SOURCES>
+      <root url="file:///Library/Java/javafx-sdk-21.0.1/src/javafx.base" />
+      <root url="file:///Library/Java/javafx-sdk-21.0.1/src/javafx.controls" />
+      <root url="file:///Library/Java/javafx-sdk-21.0.1/src/javafx.fxml" />
+      <root url="file:///Library/Java/javafx-sdk-21.0.1/src/javafx.graphics" />
+      <root url="file:///Library/Java/javafx-sdk-21.0.1/src/javafx.media" />
+      <root url="file:///Library/Java/javafx-sdk-21.0.1/src/javafx.swing" />
+      <root url="file:///Library/Java/javafx-sdk-21.0.1/src/javafx.web" />
+      <root url="file:///Library/Java/javafx-sdk-21.0.1" />
+    </SOURCES>
+    <jarDirectory url="file:///Library/Java/javafx-sdk-21.0.1" recursive="false" type="SOURCES" />
   </library>
 </component>

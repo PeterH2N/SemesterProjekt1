@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+//JLabel is a class of java Swing
 
     public class Quiz implements ActionListener {
 
@@ -23,7 +23,7 @@ import java.awt.event.ActionListener;
                 {"In humans ","In the ocean","In the forrest","On Saturn"}
         };
         char[] answers = 		{
-                'A',
+                'B',
                 'D',
                 'C',
                 'A',
@@ -231,7 +231,7 @@ import java.awt.event.ActionListener;
         }
 
         private Timer getTimer() {
-            Timer pause = new Timer(2000, new ActionListener() {
+            Timer pause = new Timer(500, new ActionListener() {
 
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -277,6 +277,7 @@ import java.awt.event.ActionListener;
 
             frame.add(number_right);
             frame.add(percentage);
+
 
         }
     }

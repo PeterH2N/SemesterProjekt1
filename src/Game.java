@@ -8,7 +8,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 import javafx.event.*;
-
+import javax.swing.JOptionPane;
 import GameGraphics.Controller;
 import GameGraphics.DrawGame;
 import Globals.Globals;
@@ -18,6 +18,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import Globals.Messages;
 
 public class Game extends Application {
     static Context context = new Context();
@@ -64,7 +65,6 @@ public class Game extends Application {
         stage.setScene(scene);
         stage.show();
 
-
     }
 
     @Override
@@ -79,7 +79,10 @@ public class Game extends Application {
 
     public static void main(String[] args)
     {
+        JOptionPane.showMessageDialog(null, Messages.getIntroMessage());
         launch(args);
+
+
     }
 
     /*public static void main(String[] args) {
