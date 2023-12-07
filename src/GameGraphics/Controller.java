@@ -73,9 +73,6 @@ public class Controller
     Label oxygenLabel;
 
     @FXML
-    Label hulLStrengthLabel;
-
-    @FXML
     Label messageLabel;
 
     @FXML
@@ -99,9 +96,6 @@ public class Controller
         int oxygenLevel = (int) DrawGame.context.player.sub.getOxygen();
         int oxygenCapacity = (int) DrawGame.context.player.sub.getOxygenCapacity();
         oxygenLabel.setText("Oxygen: " + oxygenLevel + "/" + oxygenCapacity);
-
-        // hull strength
-        hulLStrengthLabel.setText("Hull strength: " + DrawGame.context.player.sub.getHullStrengthLevel());
 
         // messageLabel
         messageLabel.setText(Globals.globalMessage);

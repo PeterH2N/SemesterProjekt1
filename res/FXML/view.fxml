@@ -26,7 +26,6 @@
             <Label fx:id="fuelCapacityLabel"/>
             <Label fx:id="balanceLabel"/>
             <Label fx:id="oxygenLabel"/>
-            <Label fx:id="hulLStrengthLabel"/>
             <Label fx:id="scoreLabel"/>
         </HBox>
         <!-- Inventory view -->
