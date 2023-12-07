@@ -44,7 +44,7 @@ public class Screen
         }
         makeBuildings();
         //entities.add(new WorkShop(new Point(5,5)));
-        makeWorkshop();
+       // makeWorkshop();
         for(int i = 0; i < Globals.layers; i++){
             createAnimalTile(i);
         }

@@ -102,7 +102,7 @@ public class Controller
         messageLabel.setTextFill(Color.WHITE);
 
         // score label
-        scoreLabel.setText("Score: "+AnimalIndeks.getAnimalIndeks());
+        scoreLabel.setText("Animal Score: "+AnimalIndeks.getAnimalIndeks());
 
 
         // buttons

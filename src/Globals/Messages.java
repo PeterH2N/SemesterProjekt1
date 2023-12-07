@@ -7,6 +7,7 @@ public class Messages {
             "The marine life needs you to get better at cleaning up the ocean! \n"+
             "You can use the junk to upgrade the sub or sell it for money to buy fuel \n" +
             "You should try to find a 'Workshop' and a 'Shop' \n" +
+            "Hint: Pickup junk near the fish to save them and gain 'Animal Scare'\n" +
             "Hint: Press 'P' to pickup junk";
     public static String getIntroMessage() {
         return introMessage;
