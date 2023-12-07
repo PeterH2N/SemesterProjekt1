@@ -363,6 +363,8 @@ public class Controller
     public ChangeListener<InventorySlot> selectionChangedListener = (observable, oldValue, newValue) -> {
         Item item = ((InventorySlot)newValue).item;
         itemNameLabel.setText(item.getName());
+        itemNameLabel.setStyle("-fx-font-weight: bold");
+
         itemDescribtionLabel.setText(item.getDescription());
         itemDescribtionLabel.setWrapText(true);
         itemDescribtionLabel.setTextAlignment(TextAlignment.LEFT);
