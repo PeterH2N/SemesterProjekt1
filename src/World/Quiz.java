@@ -75,7 +75,7 @@ import java.awt.event.ActionListener;
             textarea.setWrapStyleWord(true);
             textarea.setBackground(new Color(145,178,255));
             textarea.setForeground(new Color(255,255,255));
-            textarea.setFont(new Font("Ink Free",Font.BOLD,15));
+            textarea.setFont(new Font("Ink Free",Font.BOLD,18));
             textarea.setBorder(BorderFactory.createBevelBorder(1));
             textarea.setEditable(false);
 
@@ -268,7 +268,7 @@ import java.awt.event.ActionListener;
             result = (int)((correct_guesses/(double)total_questions)*100);
 
             textfield.setText("Game Over!");
-            textarea.setText("");
+            textarea.setText("Score "+AnimalIndeks.getAnimalIndeks());
             answer_labelA.setText("         Result");
             answer_labelB.setText("");
             answer_labelC.setText("");
