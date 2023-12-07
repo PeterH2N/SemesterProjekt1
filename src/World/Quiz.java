@@ -268,7 +268,7 @@ import java.awt.event.ActionListener;
             result = (int)((correct_guesses/(double)total_questions)*100);
 
             textfield.setText("Game Over!");
-            textarea.setText("Score "+AnimalIndeks.getAnimalIndeks());
+            textarea.setText("Animal Score "+AnimalIndeks.getAnimalIndeks());
             answer_labelA.setText("         Result");
             answer_labelB.setText("");
             answer_labelC.setText("");
