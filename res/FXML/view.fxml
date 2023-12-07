@@ -23,10 +23,9 @@
     <VBox spacing="5" prefHeight="${hroot.height}" prefWidth="${hroot.width}" style="-fx-background-color: #b3b3b3; -fx-border-color: black; -fx-border-width: 3;">
         <!-- menu for info and settings? -->
         <HBox spacing="5">
-            <Label fx:id="fuelCapacityLabel"/>
-            <Label fx:id="balanceLabel"/>
-            <Label fx:id="oxygenLabel"/>
-            <Label fx:id="hulLStrengthLabel"/>
+            <Label fx:id="fuelCapacityLabel" alignment="TOP_LEFT"/>
+            <Label fx:id="balanceLabel" alignment="TOP_CENTER"/>
+            <Label fx:id="oxygenLabel" alignment="TOP_RIGHT"/>
         </HBox>
         <!-- Inventory view -->
         <ListView fx:id="inventoryList" maxHeight="${hroot.height*0.33}"/>
