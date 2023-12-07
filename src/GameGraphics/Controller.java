@@ -18,6 +18,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
+import javafx.scene.text.TextAlignment;
 
 public class Controller
 {
@@ -80,6 +81,12 @@ public class Controller
 
     @FXML
     Label itemDescribtionLabel;
+
+    @FXML
+    Label itemNameLabel;
+
+
+
 
     void updateLabels() {
         // fuel
@@ -287,6 +294,7 @@ public class Controller
 
     public EventHandler<KeyEvent> anyKeyEvent = new EventHandler<KeyEvent>()
     {
+        boolean gamerOver = false;
         @Override
         public void handle(KeyEvent event)
         {
@@ -296,8 +304,10 @@ public class Controller
             DrawGame.setLayerImage();
             DrawGame.drawGame();
 
-            if(DrawGame.context.isDone()){
+            if(!gamerOver && DrawGame.context.isDone()){
+                gamerOver = true;
                 World.Quiz quiz = new World.Quiz();
+
             }
 
         }
@@ -338,13 +348,20 @@ public class Controller
 
                 if(DrawGame.context.player.sub.getFuel() <= 0){
                     DrawGame.context.makeDone();
-                }
+                } if(DrawGame.context.player.sub.getOxygen() <= 0){
+                    DrawGame.context.makeDone();
+            }
         }
     };
 
     public ChangeListener<InventorySlot> selectionChangedListener = (observable, oldValue, newValue) -> {
         Item item = ((InventorySlot)newValue).item;
+        itemNameLabel.setText(item.getName());
+        itemNameLabel.setStyle("-fx-font-weight: bold");
+
         itemDescribtionLabel.setText(item.getDescription());
+        itemDescribtionLabel.setWrapText(true);
+        itemDescribtionLabel.setTextAlignment(TextAlignment.LEFT);
     };
 
     public ChangeListener<Number> stageSizeListener = (observable, oldValue, newValue) -> {

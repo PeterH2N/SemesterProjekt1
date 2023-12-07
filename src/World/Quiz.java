@@ -1,5 +1,7 @@
 package World;
 
+import javafx.geometry.Pos;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -73,7 +75,7 @@ import java.awt.event.ActionListener;
             textarea.setWrapStyleWord(true);
             textarea.setBackground(new Color(145,178,255));
             textarea.setForeground(new Color(255,255,255));
-            textarea.setFont(new Font("Ink Free",Font.BOLD,15));
+            textarea.setFont(new Font("Ink Free",Font.BOLD,18));
             textarea.setBorder(BorderFactory.createBevelBorder(1));
             textarea.setEditable(false);
 
@@ -265,12 +267,14 @@ import java.awt.event.ActionListener;
 
             result = (int)((correct_guesses/(double)total_questions)*100);
 
-            textfield.setText("RESULTS!");
-            textarea.setText("");
-            answer_labelA.setText("");
+            textfield.setText("Game Over!");
+            textarea.setText("Animal Score "+AnimalIndeks.getAnimalIndeks());
+            answer_labelA.setText("         Result");
             answer_labelB.setText("");
             answer_labelC.setText("");
             answer_labelD.setText("");
+            answer_labelA.setAlignmentX(frame.getAlignmentX()/2);
+
 
             number_right.setText("("+correct_guesses+"/"+total_questions+")");
             percentage.setText(result+"%");
